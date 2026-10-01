@@ -285,6 +285,11 @@ footer.site .muted{color:#C3BFB1}
 .fgrid a{display:block;text-decoration:none;color:#D9D5C8;padding:4px 0}
 .fgrid a:hover{color:#FFFFFF}
 .flogo{width:96px;border-radius:2px}
+.fcontact{margin-top:14px;padding-top:14px;border-top:1px solid rgba(241,237,226,.14);display:grid;gap:2px}
+.fgrid .fcontact a{display:flex;align-items:center;gap:10px;padding:5px 0;overflow-wrap:anywhere}
+.fcontact svg{width:17px;height:17px;flex:none;color:#B9C39A;transition:color .2s}
+.fgrid .fcontact a:hover svg{color:#FFFFFF}
+.fgrid .fcontact a:hover span{text-decoration:underline;text-underline-offset:3px}
 .fbot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(241,237,226,.18);margin-top:40px;padding-top:20px;color:#AEB09F;font-size:.82rem}
 .fbot a{color:#D9D5C8}
 footer.site :focus-visible{outline-color:#C9D2A6}
@@ -801,7 +806,7 @@ function chrome(){
   <div class="stack"><img class="flogo" src="${IMG('logo')}" alt="Niken Ecoprint logo"><p class="muted small">${UI.lang==='id'?'Niken Ecoprint adalah brand dari PT. Manna Borneo Persada, Balikpapan, Kalimantan Timur, Indonesia.':'Niken Ecoprint is a brand of PT. Manna Borneo Persada, Balikpapan, East Kalimantan, Indonesia.'}</p></div>
   <div><h5>${t('shop')}</h5>${DB.categories.filter(c=>!c.soon).map(c=>`<a href="#shop-${c.id}">${esc(Ltxt(c.name))}</a>`).join('')}<a href="#catalogue">${t('catalogue')}</a></div>
   <div><h5>${UI.lang==='id'?'Perusahaan':'Company'}</h5><a href="#story">${t('story')}</a><a href="#process">${t('process')}</a><a href="#wholesale">${t('wholesale')}</a><a href="#custom">Custom & Private Label</a><a href="#journal">${t('journal')}</a></div>
-  <div><h5>${UI.lang==='id'?'Bantuan':'Help'}</h5><a href="#order">${t('orderstatus')}</a><a href="#faq">${t('faq')}</a><a href="#contact">${t('contact')}</a><p class="small muted" style="margin-top:10px"><a href="${mailHref()}">${esc(DB.contact.email)}</a><br><a href="${igHref()}" target="_blank" rel="noopener">Instagram @${esc(DB.contact.instagram)}</a>${ph?`<br><a href="${waHref(waMsg())}" target="_blank" rel="noopener">WhatsApp ${esc(ph)}</a>`:''}</p></div>
+  <div><h5>${UI.lang==='id'?'Bantuan':'Help'}</h5><a href="#order">${t('orderstatus')}</a><a href="#faq">${t('faq')}</a><a href="#contact">${t('contact')}</a><div class="fcontact">${ph?`<a href="${waHref(waMsg())}" target="_blank" rel="noopener">${WA_ICON}<span>${esc(ph)}</span></a>`:''}<a href="${igHref()}" target="_blank" rel="noopener">${IG_ICON}<span>@${esc(DB.contact.instagram)}</span></a><a href="${mailHref()}">${MAIL_ICON}<span>${esc(DB.contact.email)}</span></a></div></div>
  </div><div class="fbot"><span>© 2026 Niken Ecoprint · PT. Manna Borneo Persada · Made in Indonesia</span><span><a href="#faq">${UI.lang==='id'?'Kebijakan':'Policies'}</a> · <a href="#admin">Admin CMS</a></span></div></div>`;
 }
 
