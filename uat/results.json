@@ -1,0 +1,429 @@
+[
+ {
+  "id": "A01",
+  "area": "Navigasi & konten",
+  "name": "Semua halaman blueprint dapat dibuka",
+  "ok": true,
+  "note": "24 route tampil dengan judul"
+ },
+ {
+  "id": "A02",
+  "area": "Navigasi & konten",
+  "name": "Tidak ada tautan internal mati",
+  "ok": true,
+  "note": "Semua tautan internal menuju halaman/produk yang ada"
+ },
+ {
+  "id": "A03",
+  "area": "Navigasi & konten",
+  "name": "Semua gambar termuat (tidak ada broken image)",
+  "ok": true,
+  "note": "Semua gambar termuat"
+ },
+ {
+  "id": "A04",
+  "area": "Navigasi & konten",
+  "name": "Homepage memuat 12 bagian blueprint §5",
+  "ok": true,
+  "note": "Hero, featured, koleksi, cerita, 6 USP, 6 langkah, B2B, impact, pameran, FAQ, CTA final, footer"
+ },
+ {
+  "id": "A05",
+  "area": "Navigasi & konten",
+  "name": "Pengalih bahasa EN/ID",
+  "ok": true,
+  "note": "Teks UI & produk berganti EN↔ID dan tersimpan"
+ },
+ {
+  "id": "A06",
+  "area": "Navigasi & konten",
+  "name": "Fallback terjemahan yang jelas (§14)",
+  "ok": true,
+  "note": "Terjemahan kosong tampil versi EN dengan penanda [EN]"
+ },
+ {
+  "id": "A07",
+  "area": "Navigasi & konten",
+  "name": "Harga FOB tidak tampil sebagai harga publik",
+  "ok": true,
+  "note": "Harga referensi FOB tidak tampil di halaman publik"
+ },
+ {
+  "id": "A08",
+  "area": "Navigasi & konten",
+  "name": "Data belum dikonfirmasi tidak dipublikasikan (§2)",
+  "ok": true,
+  "note": "Nomor, alamat lengkap & legalitas tersembunyi sampai dikonfirmasi owner"
+ },
+ {
+  "id": "B01",
+  "area": "Shop",
+  "name": "Filter kategori",
+  "ok": true,
+  "note": "Total 21; fabric 4, fashion 8, bags 3, accessories 2, footwear 4"
+ },
+ {
+  "id": "B02",
+  "area": "Shop",
+  "name": "Pencarian nama/SKU/material",
+  "ok": true,
+  "note": "SKU: 3 hasil; material \"leather\": 9; kosong → empty state + hapus pencarian"
+ },
+ {
+  "id": "B03",
+  "area": "Shop",
+  "name": "Sortir",
+  "ok": true,
+  "note": "Urut harga naik & turun benar"
+ },
+ {
+  "id": "B04",
+  "area": "Shop",
+  "name": "Kategori Home & Lifestyle coming soon",
+  "ok": true,
+  "note": "Coming soon, tanpa produk fiktif"
+ },
+ {
+  "id": "B05",
+  "area": "Shop",
+  "name": "Produk draft tidak publik",
+  "ok": true,
+  "note": "Draft tidak tampil & URL langsung ditolak"
+ },
+ {
+  "id": "C01",
+  "area": "Detail produk",
+  "name": "Exact piece: pilih & tambah sekali",
+  "ok": true,
+  "note": "Pilih piece → masuk keranjang; piece sama tidak bisa ditambah 2×"
+ },
+ {
+  "id": "C02",
+  "area": "Detail produk",
+  "name": "Pattern family: varian habis tidak bisa dipilih",
+  "ok": true,
+  "note": "Ukuran stok 0 dinonaktifkan; catatan variasi motif tampil"
+ },
+ {
+  "id": "C03",
+  "area": "Detail produk",
+  "name": "Jumlah tidak boleh melebihi stok",
+  "ok": true,
+  "note": "Qty 5 > stok 2 ditolak; qty 2 diterima"
+ },
+ {
+  "id": "C04",
+  "area": "Detail produk",
+  "name": "Produk tanpa harga retail → Request Price",
+  "ok": true,
+  "note": "Request Price → form inquiry dengan SKU terisi"
+ },
+ {
+  "id": "C05",
+  "area": "Detail produk",
+  "name": "Made to order mengikuti kesiapan lead time",
+  "ok": true,
+  "note": "MTO tanpa lead time → inquiry; dengan lead time → checkout + info lead time"
+ },
+ {
+  "id": "C06",
+  "area": "Detail produk",
+  "name": "Isi halaman detail sesuai §8",
+  "ok": true,
+  "note": "Galeri, spesifikasi, perawatan, pengiriman, retur, produk terkait"
+ },
+ {
+  "id": "D01",
+  "area": "Keranjang & checkout",
+  "name": "Ubah jumlah di keranjang",
+  "ok": true,
+  "note": "Ubah qty memperbarui subtotal; melebihi stok ditolak"
+ },
+ {
+  "id": "D02",
+  "area": "Keranjang & checkout",
+  "name": "Validasi form checkout",
+  "ok": true,
+  "note": "5 pesan error spesifik, fokus ke field pertama, tidak ada pesanan"
+ },
+ {
+  "id": "D03",
+  "area": "Keranjang & checkout",
+  "name": "Wilayah kirim tanpa layanan",
+  "ok": true,
+  "note": "Papua ditolak; isian tetap; total Jawa: Rp3.595.000"
+ },
+ {
+  "id": "D04",
+  "area": "Keranjang & checkout",
+  "name": "Pembeli internasional diarahkan ke inquiry",
+  "ok": true,
+  "note": "Negara non-ID: checkout nonaktif, keranjang dikirim sebagai inquiry ekspor (negara & SKU terisi)"
+ },
+ {
+  "id": "D05",
+  "area": "Keranjang & checkout",
+  "name": "Total dihitung server, manipulasi browser ditolak",
+  "ok": true,
+  "note": "Total dari browser Rp1.000 diabaikan; server menetapkan Rp3.575.000"
+ },
+ {
+  "id": "D06",
+  "area": "Keranjang & checkout",
+  "name": "Pesanan pending + reservasi stok",
+  "ok": true,
+  "note": "Order NE-2610-0001 pending/unfulfilled, timer 14:59, piece berstatus Reserved di toko"
+ },
+ {
+  "id": "D07",
+  "area": "Keranjang & checkout",
+  "name": "Pembayaran sukses & callback duplikat",
+  "ok": true,
+  "note": "Paid → piece sold, stok varian berkurang, keranjang kosong; callback ulang diabaikan"
+ },
+ {
+  "id": "D08",
+  "area": "Keranjang & checkout",
+  "name": "Cek status pesanan secara aman",
+  "ok": true,
+  "note": "Status tampil dengan nomor+email (tidak peka huruf besar); email lain ditolak"
+ },
+ {
+  "id": "D09",
+  "area": "Keranjang & checkout",
+  "name": "Pembayaran gagal melepas reservasi",
+  "ok": true,
+  "note": "Tersedia 3 → 2 → 3; status failed"
+ },
+ {
+  "id": "D10",
+  "area": "Keranjang & checkout",
+  "name": "Reservasi kedaluwarsa & pembayaran terlambat",
+  "ok": true,
+  "note": "Reservasi habis otomatis (sweep 5 dtk) → expired & stok kembali; pembayaran terlambat dengan stok tersedia → paid"
+ },
+ {
+  "id": "D11",
+  "area": "Keranjang & checkout",
+  "name": "Pembayaran terlambat untuk barang yang sudah terjual",
+  "ok": true,
+  "note": "NE-2610-0004: dibayar terlambat setelah piece terjual ke NE-2610-0005 → antrean rekonsiliasi + pesan ke pembeli"
+ },
+ {
+  "id": "D12",
+  "area": "Keranjang & checkout",
+  "name": "Keranjang kosong & barang tak tersedia",
+  "ok": true,
+  "note": "Keranjang kosong tampil; barang terjual ditandai & checkout ditolak"
+ },
+ {
+  "id": "E01",
+  "area": "Inquiry B2B",
+  "name": "Inquiry wholesale/ekspor: validasi & nomor",
+  "ok": true,
+  "note": "Validasi lengkap; INQ-2026-0001 tersimpan (status New, marketing consent terpisah = tidak)"
+ },
+ {
+  "id": "E02",
+  "area": "Inquiry B2B",
+  "name": "Proyek custom/private label",
+  "ok": true,
+  "note": "Private label + branding, kemasan, lampiran, marketing consent tersimpan"
+ },
+ {
+  "id": "E03",
+  "area": "Inquiry B2B",
+  "name": "Request Catalogue",
+  "ok": true,
+  "note": "Form singkat (4 field) → konfirmasi → katalog digital v1.0"
+ },
+ {
+  "id": "F01",
+  "area": "Admin CMS",
+  "name": "Menu admin sesuai role",
+  "ok": true,
+  "note": "owner: 9 menu, content: 4 menu, sales: 4 menu, fulfillment: 2 menu"
+ },
+ {
+  "id": "F02",
+  "area": "Admin CMS",
+  "name": "Izin diperiksa di backend, bukan hanya UI",
+  "ok": true,
+  "note": "Field harga terkunci; panggilan API langsung ditolak 403 (harga, edit produk, pengaturan)"
+ },
+ {
+  "id": "F03",
+  "area": "Admin CMS",
+  "name": "Alur edit → draft → preview → publish",
+  "ok": true,
+  "note": "Edit → draft (toko tetap) → preview → publish (toko berubah)"
+ },
+ {
+  "id": "F04",
+  "area": "Admin CMS",
+  "name": "Tambah produk baru hingga tampil di toko",
+  "ok": true,
+  "note": "SKU duplikat ditolak; tanpa foto tidak bisa publish; produk baru tampil dan tersimpan setelah reload"
+ },
+ {
+  "id": "F05",
+  "area": "Admin CMS",
+  "name": "Archive, restore & hapus aman",
+  "ok": true,
+  "note": "Archive menyembunyikan; restore → draft; hapus permanen perlu konfirmasi & hanya untuk draft tanpa transaksi"
+ },
+ {
+  "id": "F06",
+  "area": "Admin CMS",
+  "name": "Snapshot pesanan tidak berubah saat produk diedit",
+  "ok": true,
+  "note": "Snapshot \"Men's Ecoprint Shirt\" tetap; mode motif terkunci setelah ada pesanan"
+ },
+ {
+  "id": "F07",
+  "area": "Admin CMS",
+  "name": "Stok, mutasi & pembatalan",
+  "ok": true,
+  "note": "Stok < reservasi ditolak; penyesuaian tercatat di mutasi; Owner batalkan pending → stok dilepas"
+ },
+ {
+  "id": "F08",
+  "area": "Admin CMS",
+  "name": "Pemenuhan pesanan oleh Fulfillment",
+  "ok": true,
+  "note": "NE-2610-0005: processing → shipped (wajib resi) → delivered → returned → restok setelah diperiksa; pembeli melihat status"
+ },
+ {
+  "id": "F09",
+  "area": "Admin CMS",
+  "name": "Rekonsiliasi & refund oleh Owner",
+  "ok": true,
+  "note": "Order rekonsiliasi NE-2610-0004 di-refund; dashboard pendapatan terverifikasi = Rp4.415.000"
+ },
+ {
+  "id": "F10",
+  "area": "Admin CMS",
+  "name": "Pipeline inquiry & versi quotation (Sales)",
+  "ok": true,
+  "note": "INQ-2026-0001: Assigned → quotation QUO-2026-0001 v1, QUO-2026-0001 v2 (USD FOB Balikpapan) → Sent → Approved; harga retail tidak berubah"
+ },
+ {
+  "id": "F11",
+  "area": "Admin CMS",
+  "name": "Inquiry tetap tersimpan saat notifikasi gagal",
+  "ok": true,
+  "note": "INQ-2026-0004 tersimpan saat email gagal; peringatan di dashboard; kirim ulang berhasil"
+ },
+ {
+  "id": "F12",
+  "area": "Admin CMS",
+  "name": "Kelola konten homepage",
+  "ok": true,
+  "note": "Hero EN/ID & produk unggulan berubah di homepage; kontak terkunci untuk Content Admin"
+ },
+ {
+  "id": "F13",
+  "area": "Admin CMS",
+  "name": "Owner menetapkan kontak resmi",
+  "ok": true,
+  "note": "Nomor yang dipilih Owner & alamat terkonfirmasi tampil di Contact dan footer"
+ },
+ {
+  "id": "F14",
+  "area": "Admin CMS",
+  "name": "Versi katalog dari database produk",
+  "ok": true,
+  "note": "Versi naik ke 1.1 dengan tanggal; produk yang dikeluarkan tidak tampil"
+ },
+ {
+  "id": "F15",
+  "area": "Admin CMS",
+  "name": "Laporan & ekspor CSV",
+  "ok": true,
+  "note": "Laporan per produk & per jenis inquiry; CSV 4 baris"
+ },
+ {
+  "id": "F16",
+  "area": "Admin CMS",
+  "name": "Pengaturan pengiriman & audit log",
+  "ok": true,
+  "note": "Tarif & wilayah baru langsung dipakai checkout; audit log mencatat role, waktu & aksi"
+ },
+ {
+  "id": "F17",
+  "area": "Admin CMS",
+  "name": "Uji penerimaan otomatis bawaan (§17)",
+  "ok": true,
+  "note": "13/13 lulus"
+ },
+ {
+  "id": "F18",
+  "area": "Admin CMS",
+  "name": "Data tersimpan & reset demo",
+  "ok": true,
+  "note": "6 pesanan tetap setelah reload; reset demo perlu konfirmasi"
+ },
+ {
+  "id": "G01",
+  "area": "Responsif & aksesibilitas",
+  "name": "Mobile 390 px tanpa scroll horizontal",
+  "ok": true,
+  "note": "30 layar tanpa scroll horizontal di 390 px"
+ },
+ {
+  "id": "G02",
+  "area": "Responsif & aksesibilitas",
+  "name": "Navigasi & pembelian di mobile",
+  "ok": true,
+  "note": "Menu ringkas bekerja; tombol beli menempel & berfungsi; badge keranjang"
+ },
+ {
+  "id": "G03",
+  "area": "Responsif & aksesibilitas",
+  "name": "Tema gelap & kontras teks",
+  "ok": true,
+  "note": "Tema gelap aktif; kontras teks terendah home 6.89:1, shop 5.24:1, p-leather-clutch-bag 5.24:1, checkout 8.68:1, admin 7.55:1"
+ },
+ {
+  "id": "G04",
+  "area": "Responsif & aksesibilitas",
+  "name": "Label form & teks alternatif",
+  "ok": true,
+  "note": "Semua input berlabel; semua gambar punya alt"
+ },
+ {
+  "id": "G05",
+  "area": "Responsif & aksesibilitas",
+  "name": "Navigasi keyboard",
+  "ok": true,
+  "note": "Fokus terlihat; navigasi & beli produk bisa dengan keyboard"
+ },
+ {
+  "id": "G06",
+  "area": "Responsif & aksesibilitas",
+  "name": "Reduced motion",
+  "ok": true,
+  "note": "Animasi dimatikan saat prefers-reduced-motion"
+ },
+ {
+  "id": "G07",
+  "area": "Responsif & aksesibilitas",
+  "name": "Performa & lazy loading",
+  "ok": true,
+  "note": "Load lokal 0.01 dtk; HTML 191 KB; gambar awal 1075 KB; 17 gambar lazy"
+ },
+ {
+  "id": "G09",
+  "area": "Responsif & aksesibilitas",
+  "name": "Pesan error mengikuti bahasa (ID)",
+  "ok": true,
+  "note": "Pesan validasi checkout & inquiry tampil dalam Bahasa Indonesia"
+ },
+ {
+  "id": "G08",
+  "area": "Responsif & aksesibilitas",
+  "name": "Tanpa error JavaScript/console",
+  "ok": true,
+  "note": "Tidak ada error JavaScript di seluruh sesi"
+ }
+]

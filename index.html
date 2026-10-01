@@ -1,0 +1,1432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Niken Ecoprint by PT. Manna Borneo Persada — botanical ecoprint textiles and products from Balikpapan, East Kalimantan.">
+</head>
+<body>
+<title>Niken Ecoprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: a herbarium sheet. Wide ivory margins, photographs pinned like specimens,
+   every product carries a specimen label (SKU, mode, material) set in mono. One dark forest band per page. */
+:root{
+  --paper:#F7F4EC; --paper-2:#EEE9DC; --card:#FBF9F4; --ink:#282B25; --ink-2:#5A5D52; --ink-3:#8A8B7E;
+  --forest:#203024; --on-forest:#F1EDE2; --olive:#68734A; --bark:#805E43; --line:#DCD5C4; --line-2:#C9C0AA;
+  --btn:#203024; --btn-ink:#F7F4EC; --chip:#E6E0CF;
+  --ok:#476633; --ok-bg:#E3EAD6; --warn:#8E5F1C; --warn-bg:#F3E6CC; --bad:#9C3524; --bad-bg:#F3DAD3; --info:#3C5A6E; --info-bg:#DCE6EB;
+  --f-display:"Fraunces", "Iowan Old Style", Georgia, serif;
+  --f-body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --w:1240px; --r:3px; --gut:clamp(16px,4vw,40px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141914; --paper-2:#1B221C; --card:#192019; --ink:#ECE7DA; --ink-2:#B9B5A7; --ink-3:#8C8C80;
+  --forest:#0D130E; --on-forest:#ECE7DA; --olive:#A3AE7C; --bark:#C99E79; --line:#2C352D; --line-2:#3B463C;
+  --btn:#C9D2A6; --btn-ink:#141914; --chip:#252E26;
+  --ok:#9CC17F; --ok-bg:#223022; --warn:#E0B36A; --warn-bg:#352B19; --bad:#EC9481; --bad-bg:#3A221D; --info:#9EC0D4; --info-bg:#1E2B33;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#141914; --paper-2:#1B221C; --card:#192019; --ink:#ECE7DA; --ink-2:#B9B5A7; --ink-3:#8C8C80;
+  --forest:#0D130E; --on-forest:#ECE7DA; --olive:#A3AE7C; --bark:#C99E79; --line:#2C352D; --line-2:#3B463C;
+  --btn:#C9D2A6; --btn-ink:#141914; --chip:#252E26;
+  --ok:#9CC17F; --ok-bg:#223022; --warn:#E0B36A; --warn-bg:#352B19; --bad:#EC9481; --bad-bg:#3A221D; --info:#9EC0D4; --info-bg:#1E2B33;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+a{color:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2.6rem,6vw,4.6rem);font-variation-settings:"opsz" 144}
+h2{font-size:clamp(1.9rem,3.6vw,2.9rem);font-variation-settings:"opsz" 120}
+h3{font-size:1.45rem;font-variation-settings:"opsz" 48}
+h4{font-size:1.15rem}
+p{margin:0}
+.wrap{max-width:var(--w);margin-inline:auto;padding-inline:var(--gut)}
+.eyebrow{font:500 .74rem/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--olive)}
+.lead{font-size:1.12rem;color:var(--ink-2);max-width:60ch}
+.muted{color:var(--ink-2)}
+.small{font-size:.88rem}
+.mono{font-family:var(--f-mono);font-size:.82rem;letter-spacing:.02em}
+.num{font-variant-numeric:tabular-nums}
+.stack{display:grid;gap:14px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.sec{padding-block:clamp(56px,8vw,104px)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.sec-head .stack{max-width:62ch}
+hr.rule{border:0;border-top:1px solid var(--line);margin:0}
+:focus-visible{outline:2px solid var(--olive);outline-offset:3px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 .92rem/1 var(--f-body);letter-spacing:.02em;padding:15px 22px;border-radius:var(--r);border:1px solid var(--btn);background:var(--btn);color:var(--btn-ink);cursor:pointer;text-decoration:none;transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn.light{background:var(--on-forest);color:#203024;border-color:var(--on-forest)}
+.btn.light:hover{background:transparent;color:var(--on-forest)}
+.btn.line-light{background:transparent;color:var(--on-forest);border-color:rgba(241,237,226,.55)}
+.btn.line-light:hover{border-color:var(--on-forest)}
+.btn.sm{padding:9px 14px;font-size:.84rem}
+.btn.xs{padding:6px 10px;font-size:.78rem}
+.btn.danger{background:transparent;color:var(--bad);border-color:var(--bad)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.link{background:none;border:0;padding:0;font:inherit;color:var(--ink);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2);cursor:pointer}
+.link:hover{text-decoration-color:var(--ink)}
+.arrow::after{content:"→";font-family:var(--f-body)}
+
+/* proto ribbon + header */
+.skip{position:absolute;left:12px;top:-60px;z-index:80;background:var(--btn);color:var(--btn-ink);border:0;padding:10px 14px;border-radius:var(--r);font:600 .9rem var(--f-body);cursor:pointer}
+.skip:focus{top:12px}
+#view:focus{outline:none}
+.ribbon{background:var(--paper-2);border-bottom:1px solid var(--line);font:500 .74rem/1.4 var(--f-mono);color:var(--ink-2);padding:7px var(--gut);text-align:center;letter-spacing:.04em}
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hdr{display:flex;align-items:center;gap:24px;min-height:74px}
+.brand{display:flex;flex-direction:column;text-decoration:none;line-height:1;margin-right:auto}
+.brand b{font:400 1.7rem/1 var(--f-display);color:var(--bark);letter-spacing:-.01em;font-variation-settings:"opsz" 72}
+.brand b i{font-style:italic}
+.brand small{font:500 .58rem/1 var(--f-mono);letter-spacing:.2em;color:var(--ink-2);margin-top:6px}
+nav.main{display:flex;gap:22px}
+nav.main a{text-decoration:none;font-size:.92rem;color:var(--ink-2);padding-block:6px;border-bottom:1px solid transparent}
+nav.main a:hover,nav.main a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--olive)}
+.tools{display:flex;gap:10px;align-items:center}
+.icon-btn{position:relative;display:inline-grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:var(--r);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none}
+.icon-btn:hover{border-color:var(--ink)}
+.icon-btn svg{width:19px;height:19px}
+.badge-n{position:absolute;top:-6px;right:-6px;min-width:19px;height:19px;border-radius:10px;background:var(--bark);color:#fff;font:600 .7rem/19px var(--f-body);text-align:center;padding-inline:5px}
+.lang{display:flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.lang button{background:transparent;border:0;padding:0 10px;height:40px;font:500 .74rem var(--f-mono);color:var(--ink-3);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--chip);color:var(--ink)}
+.menu-btn{display:none}
+.mnav{display:none;border-top:1px solid var(--line);padding-block:12px 18px}
+.mnav a{display:block;padding:10px 0;text-decoration:none;font-size:1.05rem;border-bottom:1px solid var(--line)}
+@media (max-width: 1060px){nav.main,.hide-m{display:none}.menu-btn{display:inline-grid}.mnav.open{display:block}}
+
+/* hero */
+.hero{position:relative;color:#F4F0E6;background:#16201a;overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:-5%;z-index:0;transform:translate3d(var(--px,0px),calc(var(--py,0px) + var(--sy,0px)),0);transition:transform .9s cubic-bezier(.2,.7,.2,1);will-change:transform}
+.hero .bg img{width:100%;height:100%;object-fit:cover;object-position:70% 40%;transform-origin:72% 30%;animation:kb 34s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.03)}to{transform:scale(1.15) translate(-1.6%,-1%)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(14,20,13,.86) 0%,rgba(14,20,13,.62) 40%,rgba(14,20,13,.05) 72%);pointer-events:none}
+.hero .rays{position:absolute;inset:-30% -20% 10% 25%;z-index:2;pointer-events:none;mix-blend-mode:screen;
+  background:repeating-conic-gradient(from 196deg at 80% 0%,rgba(255,236,186,0) 0deg,rgba(255,236,186,.13) 2.2deg,rgba(255,236,186,0) 5deg,rgba(255,236,186,0) 9deg);
+  -webkit-mask-image:radial-gradient(120% 90% at 80% 0%,#000 10%,transparent 70%);mask-image:radial-gradient(120% 90% at 80% 0%,#000 10%,transparent 70%);
+  animation:rays 11s ease-in-out infinite alternate;transform-origin:80% 0%}
+@keyframes rays{0%{opacity:.35;transform:rotate(-1.5deg)}50%{opacity:.85}100%{opacity:.5;transform:rotate(1.8deg)}}
+.hero canvas.fx{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.hero .wrap{position:relative;z-index:3;padding-block:clamp(84px,12vw,150px) clamp(72px,9vw,118px)}
+.hero .stack{max-width:620px;gap:22px}
+.hero h1{color:#F7F3E8}
+.hero h1 .w{display:inline-block;white-space:pre;animation:rise 1.1s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.2s + var(--i) * .09s)}
+.hero .rv{animation:rise .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d) * 1s)}
+@keyframes rise{from{opacity:0;transform:translateY(22px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.hero .eyebrow{color:#CFD6B0}
+.hero p.sub{font-size:1.15rem;color:#E7E2D3;max-width:46ch}
+.snd{position:absolute;z-index:4;right:var(--gut);bottom:28px;display:flex;align-items:center;gap:12px;background:rgba(14,20,13,.42);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(241,237,226,.28);color:#F1EDE2;border-radius:40px;padding:9px 16px 9px 12px;font:500 .78rem/1.2 var(--f-mono);letter-spacing:.06em;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}
+.snd:hover{border-color:rgba(241,237,226,.7);background:rgba(14,20,13,.6)}
+.snd .bars{display:flex;align-items:flex-end;gap:2.5px;height:16px;width:20px}
+.snd .bars i{display:block;width:3px;height:4px;border-radius:2px;background:#CFD6B0;transition:height .3s}
+.snd[aria-pressed="true"] .bars i{animation:eq 1.2s ease-in-out infinite}
+.snd[aria-pressed="true"] .bars i:nth-child(2){animation-delay:-.4s}.snd[aria-pressed="true"] .bars i:nth-child(3){animation-delay:-.8s}.snd[aria-pressed="true"] .bars i:nth-child(4){animation-delay:-.2s}
+@keyframes eq{0%,100%{height:4px}50%{height:15px}}
+.snd small{display:block;color:#C8C3B4;font-size:.68rem;letter-spacing:.04em;margin-top:2px}
+.cue{position:absolute;z-index:3;left:50%;bottom:22px;width:1px;height:46px;background:rgba(241,237,226,.25);overflow:hidden}
+.cue::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:#F1EDE2;animation:cue 2.4s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes cue{to{top:110%}}
+@media (prefers-reduced-motion: reduce){.hero .bg img,.hero .rays,.hero h1 .w,.hero .rv,.cue::after{animation:none!important}.hero canvas.fx{display:none}.hero .bg{transition:none}}
+@media (max-width:700px){.hero::after{background:linear-gradient(180deg,rgba(14,20,13,.3) 0%,rgba(14,20,13,.85) 70%)}.hero .wrap{padding-top:220px;padding-bottom:104px}.snd{left:var(--gut);right:auto;bottom:24px}.cue{display:none}}
+
+.specimen-strip{border-bottom:1px solid var(--line);background:var(--card)}
+.specimen-strip .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.specimen-strip div{padding:22px 20px;border-left:1px solid var(--line)}
+.specimen-strip div:first-child{border-left:0;padding-left:0}
+.specimen-strip b{display:block;font:500 .72rem/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--olive);margin-bottom:6px}
+.specimen-strip span{font-size:.93rem;color:var(--ink-2)}
+@media (max-width:820px){.specimen-strip .wrap{grid-template-columns:1fr 1fr}.specimen-strip div:nth-child(3){border-left:0;padding-left:0}.specimen-strip div{border-top:1px solid var(--line)}.specimen-strip div:nth-child(-n+2){border-top:0}}
+
+/* product card = specimen label */
+.grid{display:grid;gap:clamp(18px,2.4vw,30px)}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:1000px){.g4{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}.g2{grid-template-columns:1fr}}
+@media (max-width:440px){.g4.tight1{grid-template-columns:1fr}}
+.pcard{display:flex;flex-direction:column;text-decoration:none;color:inherit;min-width:0}
+.pcard .ph{aspect-ratio:4/5;background:var(--paper-2);overflow:hidden;position:relative;border-radius:2px}
+.pcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.pcard:hover .ph img{transform:scale(1.035)}
+.tag{display:inline-block;font:500 .66rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;padding:6px 8px;border-radius:2px;background:var(--card);color:var(--ink)}
+.ph .tag{position:absolute;left:10px;top:10px}
+.label{border-top:1px solid var(--ink);margin-top:12px;padding-top:10px;display:grid;gap:4px}
+.label .sku{font:400 .7rem/1.2 var(--f-mono);color:var(--ink-3);letter-spacing:.06em;display:flex;justify-content:space-between;gap:8px}
+.label h4{font-size:1.12rem;line-height:1.2}
+.label .meta{display:flex;justify-content:space-between;gap:8px;font-size:.88rem;color:var(--ink-2);flex-wrap:wrap}
+.price{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
+
+.chip{display:inline-flex;align-items:center;gap:6px;font:500 .72rem/1 var(--f-mono);letter-spacing:.04em;padding:6px 9px;border-radius:20px;background:var(--chip);color:var(--ink-2);white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--ok)} .chip.warn{background:var(--warn-bg);color:var(--warn)} .chip.bad{background:var(--bad-bg);color:var(--bad)} .chip.info{background:var(--info-bg);color:var(--info)}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.8}
+.chip.plain::before{display:none}
+
+/* collections */
+.cat{display:grid;text-decoration:none;color:inherit;gap:12px;min-width:0}
+.cat .ph{aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);border-radius:2px}
+.cat .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.cat:hover .ph img{transform:scale(1.04)}
+.cat .cap{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:10px;gap:8px}
+.cat .cap span{font:400 1.2rem/1.2 var(--f-display)}
+.cat .cap small{font:.7rem var(--f-mono);color:var(--ink-3)}
+.cat.soon .ph{display:grid;place-items:center;border:1px dashed var(--line-2);background:transparent}
+.cat-scroll{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media (max-width:1000px){.cat-scroll{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.cat-scroll{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* split */
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.split.rev{grid-template-columns:1fr 1.1fr}
+.split > *{min-width:0}
+.split .ph{aspect-ratio:5/4;overflow:hidden;border-radius:2px}
+.split .ph img{width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){.split,.split.rev{grid-template-columns:1fr}}
+.featured .ph{aspect-ratio:auto;background:#fff}
+.featured .ph img{object-fit:contain}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:10px 22px;font-size:.95rem;margin:0}
+.spec dt{font:500 .72rem/1.6 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.spec dd{margin:0}
+
+/* usp */
+.usp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.usp > div{padding:28px 26px 30px 0;border-bottom:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.usp > div:not(:nth-child(3n+1)){padding-left:26px;border-left:1px solid var(--line)}
+.usp h4{font-size:1.25rem}
+.usp p{color:var(--ink-2);font-size:.97rem}
+@media (max-width:820px){.usp{grid-template-columns:1fr}.usp > div:not(:nth-child(3n+1)){padding-left:0;border-left:0}}
+
+/* process steps */
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;counter-reset:s}
+.steps.eight{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 22px}
+.step{display:grid;gap:10px;align-content:start;min-width:0}
+.step .ph{aspect-ratio:1;overflow:hidden;border-radius:2px;background:var(--paper-2)}
+.step .ph img{width:100%;height:100%;object-fit:cover}
+.step .n{font:500 .74rem var(--f-mono);color:var(--olive);letter-spacing:.1em}
+.step h4{font-size:1.12rem}
+.step p{font-size:.9rem;color:var(--ink-2)}
+@media (max-width:1000px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.steps,.steps.eight{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* forest band */
+.band{background:var(--forest);color:var(--on-forest)}
+.band .eyebrow{color:#C6CFA4}
+.band .lead,.band .muted{color:#CFCBBE}
+.b2b{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
+.b2b ul{list-style:none;margin:0;padding:0;border-top:1px solid rgba(241,237,226,.2)}
+.b2b li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(241,237,226,.2);font-size:1rem}
+.b2b li span:last-child{font:.74rem var(--f-mono);color:#C6CFA4;letter-spacing:.06em;text-align:right}
+@media (max-width:860px){.b2b{grid-template-columns:1fr}}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.gal figure{margin:0;display:grid;gap:10px;min-width:0}
+.gal .ph{aspect-ratio:4/3;overflow:hidden;border-radius:2px;background:var(--paper-2)}
+.gal img{width:100%;height:100%;object-fit:cover}
+.gal figcaption{display:grid;gap:3px;font-size:.9rem;color:var(--ink-2)}
+.gal figcaption b{font:400 1.08rem/1.25 var(--f-display);color:var(--ink)}
+.gal figcaption .mono{color:var(--olive)}
+@media (max-width:860px){.gal{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.gal{grid-template-columns:1fr}}
+
+/* faq */
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:20px 0;font:400 1.2rem/1.3 var(--f-display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:300 1.5rem/1 var(--f-body);color:var(--olive)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 22px;color:var(--ink-2);max-width:68ch}
+
+/* final cta */
+.cta-final{text-align:left;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
+@media (max-width:760px){.cta-final{grid-template-columns:1fr}}
+
+/* footer */
+footer.site{background:var(--forest);color:#D9D5C8;padding-block:64px 28px;font-size:.92rem}
+footer.site .muted{color:#C3BFB1}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:36px}
+.fgrid h5{font:500 .72rem/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#B9C39A;margin:0 0 14px}
+.fgrid a{display:block;text-decoration:none;color:#D9D5C8;padding:4px 0}
+.fgrid a:hover{color:#FFFFFF}
+.flogo{width:96px;border-radius:2px}
+.fbot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(241,237,226,.18);margin-top:40px;padding-top:20px;color:#AEB09F;font-size:.82rem}
+.fbot a{color:#D9D5C8}
+footer.site :focus-visible{outline-color:#C9D2A6}
+@media (max-width:860px){.fgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.fgrid{grid-template-columns:1fr}}
+
+/* page head */
+.phead{padding-block:clamp(44px,6vw,80px) clamp(28px,4vw,44px);border-bottom:1px solid var(--line)}
+.phead .stack{max-width:70ch;gap:16px}
+.crumb{font:.78rem var(--f-mono);color:var(--ink-3);display:flex;gap:8px;flex-wrap:wrap}
+.crumb a{text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+
+/* shop */
+.shopbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-block:20px;border-bottom:1px solid var(--line);margin-bottom:32px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:transparent;color:var(--ink-2);padding:9px 14px;border-radius:30px;font:500 .86rem var(--f-body);cursor:pointer}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+input,select,textarea{font:inherit;font-size:.97rem;color:var(--ink);background:var(--card);border:1px solid var(--line-2);border-radius:var(--r);padding:11px 12px;width:100%;min-width:0}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--olive);outline-offset:0;border-color:transparent}
+.fld{display:grid;gap:6px;min-width:0}
+.fld > label,.lbl{font:500 .74rem/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.fld .hint{font-size:.82rem;color:var(--ink-3)}
+.fld .err{font-size:.84rem;color:var(--bad)}
+.fgrid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fgrid2 .full{grid-column:1/-1}
+@media (max-width:620px){.fgrid2{grid-template-columns:1fr}}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--ink-2)}
+.check input{width:auto;margin-top:4px}
+.search{max-width:300px}
+
+/* product detail */
+.pd{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(28px,5vw,64px);padding-block:36px 72px;align-items:start}
+.pd > *{min-width:0}
+.gallery{display:grid;gap:12px}
+.gallery .main{aspect-ratio:4/5;background:var(--paper-2);overflow:hidden;border-radius:2px}
+.gallery .main{background:var(--card)}
+.gallery .main img{width:100%;height:100%;object-fit:contain}
+.thumbs{display:flex;gap:10px;flex-wrap:wrap}
+.thumbs button{width:76px;height:92px;padding:0;border:1px solid var(--line);background:var(--paper-2);border-radius:2px;overflow:hidden;cursor:pointer}
+.thumbs button[aria-pressed="true"]{border-color:var(--ink);outline:1px solid var(--ink)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.buy{position:sticky;top:96px;display:grid;gap:22px}
+.buy h1{font-size:clamp(2rem,3.6vw,2.8rem)}
+.opt{display:flex;gap:8px;flex-wrap:wrap}
+.opt button{min-width:52px;padding:10px 12px;border:1px solid var(--line-2);background:transparent;color:var(--ink);border-radius:var(--r);font:500 .88rem var(--f-body);cursor:pointer}
+.opt button[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.opt button:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.piece{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.piece button{display:grid;gap:6px;padding:6px;border:1px solid var(--line-2);background:transparent;border-radius:var(--r);cursor:pointer;color:var(--ink);text-align:left}
+.piece button[aria-pressed="true"]{border-color:var(--ink);outline:1px solid var(--ink)}
+.piece button:disabled{opacity:.45;cursor:not-allowed}
+.piece img{aspect-ratio:1;object-fit:cover;width:100%}
+.note{border-left:2px solid var(--olive);padding:12px 16px;background:var(--card);font-size:.92rem;color:var(--ink-2)}
+.note.warn{border-left-color:var(--warn)}
+.qty{display:inline-flex;border:1px solid var(--line-2);border-radius:var(--r)}
+.qty button{width:40px;background:transparent;border:0;color:var(--ink);font-size:1.1rem;cursor:pointer}
+.qty input{width:52px;border:0;text-align:center;background:transparent;padding:10px 0}
+.tabs-d details{border-top:1px solid var(--line)}
+.tabs-d summary{cursor:pointer;padding:16px 0;font:500 .78rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;list-style:none;display:flex;justify-content:space-between}
+.tabs-d summary::after{content:"+"} .tabs-d details[open] summary::after{content:"–"}
+.tabs-d summary::-webkit-details-marker{display:none}
+.tabs-d .body{padding-bottom:18px;color:var(--ink-2);font-size:.95rem}
+.buybar{display:none}
+@media (max-width:860px){.pd{grid-template-columns:1fr}.buy{position:static}
+  .buybar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:35;gap:12px;align-items:center;justify-content:space-between;background:var(--paper);border-top:1px solid var(--line);padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom,0px))}
+  body.has-buybar footer.site{padding-bottom:110px}}
+
+/* cart / checkout */
+.co{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;padding-block:36px 80px;align-items:start}
+.co > *{min-width:0}
+@media (max-width:900px){.co{grid-template-columns:1fr}}
+.line{display:grid;grid-template-columns:84px 1fr auto;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+.line img{width:84px;height:104px;object-fit:cover;border-radius:2px;background:var(--paper-2)}
+.line > div{min-width:0}
+.summary{background:var(--card);border:1px solid var(--line);padding:24px;display:grid;gap:12px;border-radius:var(--r)}
+.summary .r{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}
+.summary .r.t{border-top:1px solid var(--line);padding-top:12px;font-weight:600;font-size:1.08rem}
+.panel{border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,28px);background:var(--card);display:grid;gap:18px}
+.timer{font:500 1.6rem var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .7rem/1.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);background:var(--paper-2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.mono{white-space:nowrap}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.click{cursor:pointer} tr.click:hover td{background:var(--paper-2)}
+tr.sel td{background:var(--chip)}
+
+/* admin */
+.admin{display:grid;grid-template-columns:230px 1fr;min-height:70vh;border-top:1px solid var(--line)}
+.admin > *{min-width:0}
+.aside{border-right:1px solid var(--line);padding:24px 18px;display:grid;gap:4px;align-content:start;background:var(--paper-2)}
+.aside button{display:flex;justify-content:space-between;width:100%;text-align:left;background:transparent;border:0;padding:10px 12px;border-radius:var(--r);font:500 .92rem var(--f-body);color:var(--ink-2);cursor:pointer}
+.aside button[aria-current="true"]{background:var(--card);color:var(--ink);box-shadow:inset 2px 0 0 var(--olive)}
+.aside .who{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:10px;display:grid;gap:8px}
+.amain{padding:28px clamp(16px,3vw,36px) 64px;display:grid;gap:24px;align-content:start}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kpi{border:1px solid var(--line);background:var(--card);padding:16px 18px;border-radius:var(--r);display:grid;gap:4px}
+.kpi b{font:400 2rem/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.kpi span{font:.72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.kpi.alert{border-color:var(--warn)}
+@media (max-width:900px){.admin{grid-template-columns:1fr}.aside{border-right:0;border-bottom:1px solid var(--line);grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;align-items:center}.aside .who{display:none}.kpis{grid-template-columns:1fr 1fr}}
+.two{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:1100px){.two{grid-template-columns:1fr}}
+.vtbl input{padding:7px 8px}
+.audit{font:.8rem/1.5 var(--f-mono);color:var(--ink-2);max-height:360px;overflow:auto;border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;background:var(--card)}
+.audit div{padding:5px 0;border-bottom:1px dashed var(--line)}
+.test{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.roles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.roles{grid-template-columns:1fr 1fr}}
+.role{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:18px;text-align:left;cursor:pointer;display:grid;gap:8px;color:var(--ink);font:inherit}
+.role:hover{border-color:var(--ink)}
+.role b{font:400 1.25rem var(--f-display)}
+.role span{font-size:.86rem;color:var(--ink-2)}
+.preview-bar{background:var(--warn-bg);color:var(--warn);padding:10px var(--gut);font:500 .82rem var(--f-mono);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);padding:13px 18px;border-radius:var(--r);font-size:.92rem;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:min(92vw,520px)}
+.toast.show{opacity:1;transform:translateX(-50%)}
+
+.catalogue .cpage{border:1px solid var(--line);background:var(--card);padding:clamp(20px,4vw,44px);border-radius:var(--r);display:grid;gap:22px}
+.cprod{display:grid;grid-template-columns:150px 1fr;gap:22px;padding-block:18px;border-top:1px solid var(--line)}
+.cprod img{width:150px;height:180px;object-fit:cover;border-radius:2px}
+@media (max-width:520px){.cprod{grid-template-columns:1fr}.cprod img{width:100%;height:240px}}
+.empty{border:1px dashed var(--line-2);border-radius:var(--r);padding:36px;text-align:center;color:var(--ink-2);display:grid;gap:12px;justify-items:center}
+</style>
+
+<button class="skip" type="button" data-act="skip">Skip to content</button>
+<div class="ribbon" id="ribbon"></div>
+<header class="site">
+  <div class="wrap hdr">
+    <a class="brand" href="#home" aria-label="Niken Ecoprint home"><b>Niken <i>Ecoprint</i></b><small>BY PT. MANNA BORNEO PERSADA</small></a>
+    <nav class="main" id="nav"></nav>
+    <div class="tools">
+      <div class="lang hide-m" role="group" aria-label="Language">
+        <button type="button" data-act="lang" data-v="en" id="lang-en">EN</button><button type="button" data-act="lang" data-v="id" id="lang-id">ID</button>
+      </div>
+      <a class="btn ghost sm hide-m" href="#catalogue" id="hdr-cat"></a>
+      <a class="icon-btn" href="#cart" aria-label="Cart" id="cartbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h2l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.7a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6.2"/><circle cx="9.5" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg><span class="badge-n" id="cartn" hidden>0</span></a>
+      <button class="icon-btn menu-btn" type="button" data-act="menu" aria-label="Menu" aria-expanded="false" id="menubtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <div class="wrap mnav" id="mnav"></div>
+</header>
+<main id="view" tabindex="-1"></main>
+<footer class="site" id="footer"></footer>
+<div class="buybar" id="buybar" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   Niken Ecoprint — website prototype following Blueprint v1
+   Layers: DATA (seed) → API (simulated backend: validation,
+   permissions, stock, payments) → VIEWS (storefront + CMS).
+   ========================================================= */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rp=n=>'Rp'+Math.round(n||0).toLocaleString('id-ID');
+const now=()=>Date.now();
+const IMG=n=>n&&n.startsWith('data:')?n:`img/${n}.jpg`;
+const fmtD=t=>new Date(t).toLocaleString('id-ID',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+const fmtDay=t=>new Date(t).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
+const clone=o=>JSON.parse(JSON.stringify(o));
+const uid=p=>p+Math.random().toString(36).slice(2,8);
+
+/* ---------------- i18n ---------------- */
+const T={
+ shop:['Shop','Belanja'],story:['Our Story','Cerita Kami'],process:['Process','Proses'],wholesale:['Wholesale & Export','Grosir & Ekspor'],custom:['Custom','Custom'],contact:['Contact','Kontak'],
+ reqcat:['Request Catalogue','Minta Katalog'],explore:['Explore Collection','Lihat Koleksi'],tagline:['Leaves tell the story of Borneo','Daun bercerita tentang Borneo'],
+ support:['Nature-inspired. Handcrafted in Indonesia. Made for the world.','Terinspirasi alam. Dibuat tangan di Indonesia. Untuk dunia.'],
+ addcart:['Add to Cart','Tambah ke Keranjang'],buynow:['Buy Now','Beli Sekarang'],reqquote:['Request a Quote','Minta Penawaran'],reqprice:['Request Price','Tanyakan Harga'],mto:['Order Made to Order','Pesan Made to Order'],
+ view:['View product','Lihat produk'],allprod:['All products','Semua produk'],soldout:['Sold','Terjual'],reserved:['Reserved','Dipesan'],instock:['In stock','Tersedia'],madeorder:['Made to order','Dibuat sesuai pesanan'],quoteonly:['Price on request','Harga atas permintaan'],
+ exact:['Exact piece','Barang persis'],pattern:['Pattern family','Keluarga motif'],
+ cart:['Cart','Keranjang'],checkout:['Checkout','Checkout'],subtotal:['Subtotal','Subtotal'],shipping:['Shipping','Ongkir'],total:['Total','Total'],
+ empty:['Your cart is empty.','Keranjang Anda kosong.'],orderstatus:['Order status','Status pesanan'],faq:['FAQ & Policies','FAQ & Kebijakan'],journal:['Journal','Jurnal'],catalogue:['Catalogue','Katalog'],
+ send:['Send inquiry','Kirim inquiry'],size:['Size','Ukuran'],choosepiece:['Choose the exact piece','Pilih barang persis'],qty:['Quantity','Jumlah'],
+};
+function t(k){const v=T[k];return v?(UI.lang==='id'?v[1]:v[0]):k}
+function L(o){if(!o)return'';if(typeof o==='string')return esc(o);if(UI.lang==='id'){return o.id?esc(o.id):`${esc(o.en)} <span class="mono" title="Terjemahan belum tersedia">[EN]</span>`}return esc(o.en||o.id||'')}
+function Ltxt(o){if(!o)return'';if(typeof o==='string')return o;return (UI.lang==='id'?o.id:o.en)||o.en||o.id||''}
+
+/* ---------------- DATA: seed from company profile + catalogue ---------------- */
+const CARE={
+ textile:{en:'Hand wash cold with mild, pH-neutral soap. Do not soak or bleach. Dry in the shade and iron on the reverse side. Natural dyes soften gently over time.',id:'Cuci tangan dengan air dingin dan sabun lembut pH netral. Jangan direndam atau diberi pemutih. Jemur di tempat teduh, setrika bagian dalam. Warna alami melembut perlahan seiring waktu.'},
+ leather:{en:'Wipe with a soft dry cloth. Keep away from water and direct sun. Store in the dust bag provided.',id:'Lap dengan kain kering yang lembut. Hindari air dan sinar matahari langsung. Simpan di dust bag.'},
+};
+function prod(o){return Object.assign({status:'published',featured:false,variants:[],pieces:[],images:[],lead:null,care:'textile',hasOrders:false,fob:null,price:null,legacySku:'',catalogue:true,rev:null,pkg:{w:400,dim:'30×25×4 cm'}},o)}
+const V=(labels,stocks)=>labels.map((l,i)=>({id:'v-'+l.toLowerCase().replace(/[^a-z0-9]/g,''),label:l,stock:stocks[i]??0,reserved:0}));
+function seed(){
+ const products=[
+  prod({id:'p1',slug:'ecoprint-utility-vest',sku:'NE-FSH-VST-001',cat:'fashion',featured:true,
+   name:{en:'Ecoprint Utility Vest',id:'Rompi Utility Ecoprint'},
+   story:{en:'The vest from our company profile: a unisex utility cut in cotton linen, printed with Borneo leaves and coloured with Ulin wood. Two patch pockets, a full zip, and a leaf pattern that is never quite the same twice.',id:'Rompi dari profil perusahaan kami: potongan utility unisex dari katun linen, dicetak dengan daun Borneo dan diwarnai kayu Ulin. Dua saku tempel, ritsleting penuh, dan motif daun yang tak pernah persis sama.'},
+   material:{en:'Cotton linen. Ulin wood & Borneo leaves (per profile)',id:'Katun linen. Kayu Ulin & daun Borneo (sesuai profil)'},size:{en:'S, M, L, XL. Custom size on request',id:'S, M, L, XL. Ukuran custom atas permintaan'},
+   mode:'pattern',sale:'retail',price:685000,variants:V(['S','M','L','XL'],[2,4,3,1]),images:['vest-red-feature','vest-unisex']}),
+  prod({id:'p2',slug:'lurik-wrap-vest',sku:'NE-FSH-VST-002',legacySku:'NE-RTW-TN-001',cat:'fashion',
+   name:{en:'Lurik Wrap Vest',id:'Rompi Lilit Lurik'},
+   story:{en:'From our unisex Vest & Outer Collection: a striped lurik panel paired with an eco-printed front, with side ties and a button closure. Handcrafted from natural fibres and printed with real leaves using organic dyes. A single piece: what you see is what ships.',id:'Dari Koleksi Vest & Outer unisex kami: panel lurik bergaris dipadukan bagian depan ecoprint, dengan tali samping dan kancing. Dibuat tangan dari serat alami dan dicetak dengan daun asli menggunakan pewarna organik. Satu-satunya: barang di foto adalah yang dikirim.'},
+   material:{en:'Natural fibres: lurik and eco-printed fabric; organic dyes',id:'Serat alami: lurik dan kain ecoprint; pewarna organik'},size:{en:'All size',id:'All size'},
+   mode:'exact',sale:'retail',price:750000,pieces:[{id:'pc-201',code:'NE-FSH-VST-002-P01',label:'All size',img:'vest-lurik',status:'available'}],images:['vest-lurik','vest-lurik-hanger']}),
+  prod({id:'p3',slug:'botanical-shirt-jacket',sku:'NE-FSH-WSH-001',legacySku:'NE-RTW-MS-001',cat:'fashion',fob:{usd:75,unit:'pc',label:'Blouse/Tunik'},
+   name:{en:'Botanical Panel Shirt',id:'Kemeja Panel Botanical'},
+   story:{en:'A relaxed long-sleeve shirt: plain front, eco-printed panel and sleeves. Easy to layer and modest-wear friendly.',id:'Kemeja lengan panjang santai: depan polos, panel dan lengan ecoprint. Mudah dipadukan dan ramah busana muslim.'},
+   material:{en:'Cotton and rayon',id:'Katun dan rayon'},size:{en:'All size',id:'All size'},
+   mode:'pattern',sale:'retail',price:595000,variants:V(['All size'],[5]),images:['shirt-hijab']}),
+  prod({id:'p4',slug:'leaf-tunic-dress',sku:'NE-FSH-TUN-001',legacySku:'NE-RTW-TN-001',cat:'fashion',fob:{usd:75,unit:'pc',label:'Blouse/Tunik'},
+   name:{en:'Fern Tunic Dress',id:'Tunik Pakis'},
+   story:{en:'A sleeveless shirt-collar tunic in deep grey, printed with fern and leaf silhouettes. Worn over trousers or on its own.',id:'Tunik tanpa lengan berkerah kemeja warna abu tua, motif siluet pakis dan daun. Dipakai dengan celana atau sendiri.'},
+   material:{en:'Rayon',id:'Rayon'},size:{en:'M, L, XL',id:'M, L, XL'},
+   mode:'pattern',sale:'retail',price:725000,variants:V(['M','L','XL'],[2,2,0]),images:['tunic']}),
+  prod({id:'p5',slug:'sleeveless-leaf-top',sku:'NE-FSH-TUN-002',legacySku:'NE-RTW-TN-001',cat:'fashion',fob:{usd:75,unit:'pc',label:'Blouse/Tunik'},
+   name:{en:'Sleeveless Leaf Wrap Top',id:'Atasan Lilit Daun Tanpa Lengan'},
+   story:{en:'Peach and rose leaf prints on a soft wrap silhouette with a notched lapel.',id:'Cetakan daun peach dan merah muda pada siluet lilit lembut dengan kerah notch.'},
+   material:{en:'Silk blend (to be confirmed)',id:'Campuran sutra (menunggu konfirmasi)'},size:{en:'All size',id:'All size'},
+   mode:'exact',sale:'retail',price:695000,pieces:[{id:'pc-501',code:'NE-FSH-TUN-002-P01',label:'All size',img:'women-sleeveless',status:'available'}],images:['women-sleeveless']}),
+  prod({id:'p6',slug:'mens-ecoprint-shirt',sku:'NE-FSH-MSH-001',legacySku:'NE-RTW-MS-001',cat:'fashion',fob:{usd:80,unit:'pc',label:'Shirt'},
+   name:{en:"Men's Ecoprint Shirt",id:'Kemeja Pria Ecoprint'},
+   story:{en:'Short-sleeve camp-collar shirt in 100% premium cotton, warm Ulin tones with leaf prints across the body.',id:'Kemeja kerah camp lengan pendek, 100% katun premium, nuansa hangat Ulin dengan motif daun.'},
+   material:{en:'100% premium cotton',id:'100% katun premium'},size:{en:'M, L, XL. Custom on request',id:'M, L, XL. Custom atas permintaan'},
+   mode:'pattern',sale:'retail',price:625000,variants:V(['M','L','XL'],[3,3,2]),images:['shirt-orange']}),
+  prod({id:'p7',slug:'botanical-tee',sku:'NE-FSH-TEE-001',legacySku:'NE-RTW-MS-001',cat:'fashion',
+   name:{en:'Botanical Tee',id:'Kaos Botanical'},
+   story:{en:'An everyday crew-neck tee covered in soft green and ochre leaf prints.',id:'Kaos kerah bulat harian dengan cetakan daun hijau lembut dan oker.'},
+   material:{en:'Cotton',id:'Katun'},size:{en:'M, L, XL',id:'M, L, XL'},
+   mode:'pattern',sale:'retail',price:395000,variants:V(['M','L','XL'],[4,5,3]),images:['tee']}),
+  prod({id:'p8',slug:'ecoprint-bomber',sku:'NE-FSH-BMB-001',legacySku:'NE-RTW-BM-001',cat:'fashion',fob:{usd:125,unit:'pc',label:'Bomber'},
+   name:{en:'Ecoprint Bomber Jacket',id:'Jaket Bomber Ecoprint'},
+   story:{en:'From our premium outerwear collection: a unisex bomber with striped ribbed trims and an all-over botanical print. Available in a wide variety of patterns and colours. Semi-formal ecoprint blazers are also available on request.',id:'Dari koleksi outerwear premium kami: bomber unisex dengan rib bergaris dan motif botanical penuh. Tersedia dalam beragam motif dan warna. Blazer ecoprint semi-formal juga tersedia atas permintaan.'},
+   material:{en:'Cotton shell (lining to be confirmed)',id:'Katun (lapisan dalam menunggu konfirmasi)'},size:{en:'S, M, L, XL',id:'S, M, L, XL'},
+   mode:'pattern',sale:'retail',price:1150000,variants:V(['S','M','L','XL'],[1,1,2,1]),images:['bomber','bomber-mannequin'],pkg:{w:900,dim:'35×30×8 cm'}}),
+  prod({id:'p9',slug:'ochre-silk-ecoprint-fabric',sku:'NE-FAB-SLK-001',legacySku:'NE-FAB-EC-001',cat:'fabric',fob:{usd:40,unit:'meter',label:'Fabric'},
+   name:{en:'Ochre Silk Ecoprint Fabric',id:'Kain Sutra Ecoprint Oker'},
+   story:{en:'Silk printed with natural leaves on an ochre ground. Sold as fabric for tailoring, scarves or interior use.',id:'Sutra dicetak daun alami di atas dasar oker. Dijual sebagai kain untuk jahit, syal atau interior.'},
+   material:{en:'Silk',id:'Sutra'},size:{en:'Width and length to be confirmed',id:'Lebar dan panjang menunggu konfirmasi'},
+   mode:'pattern',sale:'quote',images:['fabric-yellow']}),
+  prod({id:'p10',slug:'rust-cotton-ecoprint-fabric',sku:'NE-FAB-CTN-001',legacySku:'NE-FAB-EC-001',cat:'fabric',fob:{usd:40,unit:'meter',label:'Fabric'},
+   name:{en:'Rust Cotton Ecoprint Fabric',id:'Kain Katun Ecoprint Karat'},
+   story:{en:'Fern and leaf prints in pale green over a rust ground.',id:'Cetakan pakis dan daun hijau pucat di atas dasar karat.'},
+   material:{en:'Cotton',id:'Katun'},size:{en:'Width and length to be confirmed',id:'Lebar dan panjang menunggu konfirmasi'},
+   mode:'pattern',sale:'quote',images:['fabric-brown']}),
+  prod({id:'p11',slug:'mauve-silk-yardage',sku:'NE-FAB-SLK-002',legacySku:'NE-FAB-EC-001',cat:'fabric',fob:{usd:40,unit:'meter',label:'Fabric'},
+   name:{en:'Mauve Silk Yardage',id:'Kain Sutra Mauve'},
+   story:{en:'Long silk yardage in mauve with golden and coral leaf prints, shown draped on a dress form.',id:'Kain sutra panjang warna mauve dengan cetakan daun emas dan koral, diperagakan pada manekin.'},
+   material:{en:'Silk',id:'Sutra'},size:{en:'Width and length to be confirmed',id:'Lebar dan panjang menunggu konfirmasi'},
+   mode:'pattern',sale:'quote',images:['fabric-mannequin-2','fabric-mannequin-1']}),
+  prod({id:'p12',slug:'leather-clutch-bag',sku:'NE-BAG-EC-001',cat:'bags',care:'leather',
+   name:{en:'Ecoprint Leather Clutch Bag',id:'Tas Clutch Kulit Ecoprint'},
+   story:{en:'Genuine cow leather, eco-printed in sage and peach leaves, with a detachable shoulder strap.',id:'Kulit sapi asli, dicetak ecoprint daun sage dan peach, dengan tali bahu yang dapat dilepas.'},
+   material:{en:'Genuine cow leather',id:'Kulit sapi asli'},size:{en:'22 × 8 × 13 cm',id:'22 × 8 × 13 cm'},
+   mode:'exact',sale:'retail',price:1250000,pieces:[{id:'pc-1201',code:'NE-BAG-EC-001-P01',label:'22×8×13',img:'bag-clutch',status:'available'}],images:['bag-clutch'],pkg:{w:700,dim:'30×20×15 cm'}}),
+  prod({id:'p13',slug:'leather-boston-bag',sku:'NE-BAG-EC-002',cat:'bags',care:'leather',
+   name:{en:'Leather Boston Bag',id:'Tas Boston Kulit'},
+   story:{en:'A compact Boston bag in 100% genuine cow leather with hand-pressed autumn leaf prints.',id:'Tas Boston ringkas dari 100% kulit sapi asli dengan cetakan daun bernuansa musim gugur.'},
+   material:{en:'100% genuine cow leather',id:'100% kulit sapi asli'},size:{en:'Length 29 cm (full dimensions pending)',id:'Panjang 29 cm (dimensi lengkap menunggu)'},
+   mode:'exact',sale:'retail',price:1650000,pieces:[{id:'pc-1301',code:'NE-BAG-EC-002-P01',label:'L 29 cm',img:'bag-duffel',status:'available'}],images:['bag-duffel'],pkg:{w:1100,dim:'35×25×20 cm'}}),
+  prod({id:'p14',slug:'cotton-ecoprint-tote',sku:'NE-BAG-EC-003',cat:'bags',fob:{usd:65,unit:'pc',label:'Tote'},
+   name:{en:'Cotton Ecoprint Tote',id:'Tote Katun Ecoprint'},
+   story:{en:'A small structured handcrafted bag in ecoprint cotton with natural botanical patterns, blended with rustic jute and braided woven handles. Available in several designs; every bag carries its own leaf arrangement.',id:'Tas buatan tangan berstruktur dari katun ecoprint bermotif botanical alami, dipadukan goni (jute) dan pegangan anyam. Tersedia dalam beberapa desain; setiap tas memiliki susunan daun sendiri.'},
+   material:{en:'Ecoprint cotton, jute, braided woven handles, synthetic leather trim',id:'Katun ecoprint, goni (jute), pegangan anyam, list kulit sintetis'},size:{en:'Length 29 cm (full dimensions pending)',id:'Panjang 29 cm (dimensi lengkap menunggu)'},
+   mode:'pattern',sale:'retail',price:485000,variants:V(['One size'],[6]),images:['bag-totes','bag-totes-2']}),
+  prod({id:'p15',slug:'card-holder-wallet',sku:'NE-ACC-WLS-001',legacySku:'NE-ACC-WL-001',cat:'accessories',care:'leather',fob:{usd:28,unit:'pc',label:'Wallet'},
+   name:{en:'Zip Card Holder Wallet',id:'Dompet Kartu Ritsleting'},
+   story:{en:'Women\'s short wallet in cowhide. 1 cash slot, 8 card slots, 1 photo slot and a YKK metal zip compartment.',id:'Dompet pendek wanita dari kulit sapi. 1 slot uang, 8 slot kartu, 1 slot foto dan kompartemen ritsleting YKK.'},
+   material:{en:'Cowhide leather',id:'Kulit sapi'},size:{en:'11.5 × 9.5 × 1.5 cm',id:'11,5 × 9,5 × 1,5 cm'},
+   mode:'pattern',sale:'retail',price:325000,variants:V(['One size'],[5]),images:['wallet-short'],pkg:{w:200,dim:'15×12×4 cm'}}),
+  prod({id:'p16',slug:'long-leather-wallet',sku:'NE-ACC-WLL-001',legacySku:'NE-ACC-WL-001',cat:'accessories',care:'leather',fob:{usd:28,unit:'pc',label:'Wallet'},
+   name:{en:'Long Leather Wallet',id:'Dompet Panjang Kulit'},
+   story:{en:'Long wallet in genuine cow leather with more than 10 card slots and a snap tab.',id:'Dompet panjang kulit sapi asli dengan lebih dari 10 slot kartu dan tab kancing.'},
+   material:{en:'Genuine cow leather',id:'Kulit sapi asli'},size:{en:'19 × 10 cm',id:'19 × 10 cm'},
+   mode:'exact',sale:'retail',price:395000,pieces:[{id:'pc-1601',code:'NE-ACC-WLL-001-P01',label:'19×10',img:'wallet-long',status:'available'}],images:['wallet-long'],pkg:{w:250,dim:'22×13×4 cm'}}),
+  prod({id:'p17',slug:'womens-leather-shoes',sku:'NE-FTW-FS-001',cat:'footwear',care:'leather',fob:{usd:75,unit:'pair',label:"Women's shoes"},
+   name:{en:"Women's Ecoprint Leather Flats · Amber",id:'Sepatu Flat Kulit Wanita Ecoprint · Amber'},
+   story:{en:'Handcrafted women\'s flats in genuine leather with a botanical ecoprint finish. Designed for all-day wear with a cushioned, anti-slip rubber outsole. This model: pointed toe with a bow, printed in gold and amber leaves.',id:'Sepatu flat wanita buatan tangan dari kulit asli dengan motif ecoprint botanical. Nyaman dipakai seharian dengan sol karet empuk dan anti-slip. Model ini: ujung lancip dengan pita, motif daun emas dan amber.'},
+   material:{en:'Genuine leather upper; cushioned anti-slip rubber outsole',id:'Kulit asli; sol karet empuk anti-slip'},size:{en:'EU 37–41',id:'EU 37–41'},
+   mode:'pattern',sale:'mto',price:895000,lead:{en:'Example: 21 working days from payment',id:'Contoh: 21 hari kerja sejak pembayaran'},variants:V(['37','38','39','40','41'],[3,3,3,3,2]),images:['shoes-women'],pkg:{w:900,dim:'32×20×12 cm'}}),
+  prod({id:'p18',slug:'ecoprint-sneakers-umber',sku:'NE-FTW-SNK-001',cat:'footwear',fob:{usd:70,unit:'pair',label:'Canvas shoes'},
+   name:{en:'Ecoprint Runner Sneakers',id:'Sneakers Runner Ecoprint'},
+   story:{en:'Versatile runner sneakers in premium canvas mixed with durable leather accents and umber leaf prints. The anti-slip rubber outsole keeps them comfortable and stable for daily wear. Available in a wide selection of models.',id:'Sneakers runner serbaguna dari kanvas premium dengan aksen kulit yang awet dan motif daun warna umber. Sol karet anti-slip membuatnya nyaman dan stabil untuk dipakai sehari-hari. Tersedia dalam banyak model.'},
+   material:{en:'Premium canvas with leather accents; anti-slip rubber outsole',id:'Kanvas premium dengan aksen kulit; sol karet anti-slip'},size:{en:'EU 37–43',id:'EU 37–43'},
+   mode:'pattern',sale:'mto',price:975000,lead:null,variants:V(['37','38','39','40','41','42','43'],[2,2,2,2,2,2,2]),images:['sneakers-canvas','sneakers-brown'],pkg:{w:1000,dim:'33×22×12 cm'}}),
+  prod({id:'p19',slug:'ecoprint-court-sneakers',sku:'NE-FTW-SNK-002',cat:'footwear',fob:{usd:70,unit:'pair',label:'Canvas shoes'},
+   name:{en:'Ecoprint Court Sneakers',id:'Sneakers Court Ecoprint'},
+   story:{en:'Low court sneakers in canvas with leather accents, olive leaf-printed panels and a cream anti-slip rubber platform sole.',id:'Sneakers court rendah dari kanvas dengan aksen kulit, panel bermotif daun zaitun dan sol platform karet krem anti-slip.'},
+   material:{en:'Premium canvas with leather accents; anti-slip rubber outsole',id:'Kanvas premium dengan aksen kulit; sol karet anti-slip'},size:{en:'EU 37–43',id:'EU 37–43'},
+   mode:'pattern',sale:'mto',price:975000,lead:null,variants:V(['37','38','39','40','41','42','43'],[2,2,2,2,2,2,2]),images:['sneakers-olive'],pkg:{w:1000,dim:'33×22×12 cm'}}),
+  prod({id:'p21',slug:'ecoprint-fabric-collection',sku:'NE-FAB-MIX-001',legacySku:'NE-FAB-EC-001',cat:'fabric',fob:{usd:40,unit:'meter',label:'Fabric'},
+   name:{en:'Ecoprint Fabric Collection',id:'Koleksi Kain Ecoprint'},
+   story:{en:'An exclusive fabric collection in soft rayon, luxurious silk and comfortable cotton, each length hand-printed with natural dyes. Every piece is one of a kind, with botanical patterns transferred directly onto the textile. Tell us the base fabric, colour family and length you need.',id:'Koleksi kain eksklusif dari rayon lembut, sutra mewah dan katun yang nyaman, setiap potong dicetak tangan dengan pewarna alami. Setiap kain unik, dengan motif botanical yang berpindah langsung ke tekstil. Sebutkan bahan dasar, nuansa warna dan panjang yang Anda butuhkan.'},
+   material:{en:'Rayon, silk or cotton; natural dyes',id:'Rayon, sutra atau katun; pewarna alami'},size:{en:'Width and length per piece to be confirmed',id:'Lebar dan panjang per potong menunggu konfirmasi'},
+   mode:'pattern',sale:'quote',images:['fabric-rack']}),
+  prod({id:'p22',slug:'womens-leather-flats-rose',sku:'NE-FTW-FS-002',cat:'footwear',care:'leather',fob:{usd:75,unit:'pair',label:"Women's shoes"},
+   name:{en:"Women's Ecoprint Leather Flats · Rose & Moss",id:'Sepatu Flat Kulit Wanita Ecoprint · Rose & Moss'},
+   story:{en:'Handcrafted women\'s flats in genuine leather with a botanical ecoprint finish. Designed for all-day wear with a cushioned, anti-slip rubber outsole. This model: a pointed slip-on with a bow, printed in moss-green and rose leaves over a deep red ground.',id:'Sepatu flat wanita buatan tangan dari kulit asli dengan motif ecoprint botanical. Nyaman dipakai seharian dengan sol karet empuk dan anti-slip. Model ini: slip-on ujung lancip dengan pita, motif daun hijau lumut dan merah muda di atas dasar merah tua.'},
+   material:{en:'Genuine leather upper; cushioned anti-slip rubber outsole',id:'Kulit asli; sol karet empuk anti-slip'},size:{en:'EU 37–41',id:'EU 37–41'},
+   mode:'pattern',sale:'mto',price:895000,lead:{en:'Example: 21 working days from payment',id:'Contoh: 21 hari kerja sejak pembayaran'},variants:V(['37','38','39','40','41'],[2,3,3,2,1]),images:['flats-rose'],pkg:{w:900,dim:'32×20×12 cm'}}),
+  prod({id:'p23',slug:'ecoprint-semi-formal-blazer',sku:'NE-FSH-BLZ-001',cat:'fashion',status:'draft',
+   name:{en:'Ecoprint Semi-formal Blazer',id:'Blazer Semi-formal Ecoprint'},
+   story:{en:'Draft: tailored semi-formal blazer mentioned on the bomber jacket card. Photo, material and price still to be supplied by the owner.',id:'Draft: blazer semi-formal yang disebut di kartu produk bomber. Foto, bahan dan harga menunggu dari owner.'},
+   material:{en:'To be confirmed',id:'Menunggu konfirmasi'},size:{en:'S, M, L, XL',id:'S, M, L, XL'},mode:'pattern',sale:'quote',images:[]}),
+  prod({id:'p20',slug:'ecoprint-scarf',sku:'NE-ACC-SCF-001',cat:'accessories',status:'draft',fob:{usd:35,unit:'pc',label:'Scarf/Pashmina'},
+   name:{en:'Ecoprint Scarf / Pashmina',id:'Syal / Pashmina Ecoprint'},
+   story:{en:'Draft: photo, material and size still to be supplied by the owner.',id:''},
+   material:{en:'To be confirmed',id:''},size:{en:'To be confirmed',id:''},mode:'pattern',sale:'quote',images:[]}),
+ ];
+ return {
+  v:2,cart:[],products,
+  categories:[
+   {id:'fabric',name:{en:'Ecoprint Fabric',id:'Kain Ecoprint'},cover:'fabric-rack',visible:true},
+   {id:'fashion',name:{en:'Fashion & Vests',id:'Fashion & Rompi'},cover:'vest-unisex',visible:true},
+   {id:'bags',name:{en:'Bags',id:'Tas'},cover:'bag-clutch',visible:true},
+   {id:'accessories',name:{en:'Wallets & Accessories',id:'Dompet & Aksesori'},cover:'wallet-short',visible:true},
+   {id:'footwear',name:{en:'Footwear',id:'Alas Kaki'},cover:'sneakers-olive',visible:true},
+   {id:'home',name:{en:'Home & Lifestyle',id:'Home & Lifestyle'},cover:null,visible:true,soon:true},
+  ],
+  content:{
+   heroTitle:{en:'Leaves tell the story of Borneo',id:'Daun bercerita tentang Borneo'},
+   heroSub:{en:'Botanical prints from Kalimantan, coloured with Ulin wood and finished by hand in Balikpapan. Shop ready pieces, or work with us on wholesale and private label.',id:'Cetakan botanical dari Kalimantan, diwarnai kayu Ulin dan diselesaikan dengan tangan di Balikpapan. Belanja produk siap kirim, atau bekerja sama untuk grosir dan private label.'},
+   heroImg:'hero-forest',heroImgIsConcept:true,featured:'p1',
+  },
+  contact:{
+   email:'mannaborneopersada@gmail.com',instagram:'nikenecoprint',
+   phones:[{n:'+62 815-4545-7999',src:'Catalogue (2026-08)'},{n:'+62 819-5239-3330',src:'Company profile'}],activePhone:null,
+   address:'De Green Azaria C7 No. 15, Batakan, Balikpapan, East Kalimantan, Indonesia',addressConfirmed:false,
+   legal:[{k:'NIB',note:'Business Registration Number',verified:false},{k:'HKI',note:'Intellectual property (registered)',verified:false},{k:'Business certificates',note:'Legal & operational documents',verified:false}],
+  },
+  settings:{reserveMin:15,notifyOk:true,intlCheckout:false,
+   zones:[{id:'kal',name:'Kalimantan',rate:25000,on:true},{id:'jawa',name:'Jawa & Bali',rate:45000,on:true},{id:'sum',name:'Sumatra',rate:55000,on:true},{id:'sul',name:'Sulawesi',rate:50000,on:true},{id:'nus',name:'NTB, NTT & Maluku',rate:75000,on:true},{id:'pap',name:'Papua',rate:0,on:false}],
+   pay:['Virtual Account (simulasi)','QRIS (simulasi)']},
+  catalogueMeta:{version:'1.0',date:'2026-10-01',lang:'EN'},
+  orders:[],inquiries:[],quotes:[],movements:[],events:[],audit:[],counters:{o:0,i:0,q:0},
+ };
+}
+
+/* ---------------- STORAGE (browser-only in this prototype) ---------------- */
+const KEY='niken-ecoprint-proto-v1';
+function loadDB(){try{const s=localStorage.getItem(KEY);if(s){const d=JSON.parse(s);if(d&&d.v===2)return d}}catch(e){}return null}
+let SANDBOX=false; // true while acceptance tests run on a copy: nothing is written to storage
+function save(){if(SANDBOX)return;try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
+let DB=loadDB()||seed();
+let UI={lang:'en',route:'home',shopCat:'all',q:'',sort:'featured',sel:{},role:null,tab:'dash',editId:null,orderSel:null,inqSel:null,preview:null,last:null};
+try{const l=localStorage.getItem(KEY+'-lang');if(l)UI.lang=l}catch(e){}
+
+/* ---------------- API: simulated backend ----------------
+   Every rule the blueprint assigns to the server lives here:
+   prices from catalogue, stock reservation, idempotent payment
+   callbacks, role permissions, audit, order snapshots.          */
+const API={};
+const PERMS={owner:['*'],content:['product','content','catalogue'],sales:['inquiry','quote','order.view','report'],fulfillment:['order.view','order.fulfill']};
+const ROLES={owner:{n:'Owner',d:'Akses penuh: harga, role, pengaturan, uji penerimaan.'},content:{n:'Content Admin',d:'Produk, media, konten & katalog. Tidak dapat mengubah harga atau melihat data pembeli.'},sales:{n:'Sales',d:'Inquiry, quotation dan laporan. Melihat pesanan.'},fulfillment:{n:'Fulfillment',d:'Packing, pengiriman & tracking.'}};
+function can(role,perm){const p=PERMS[role]||[];return p.includes('*')||p.includes(perm)||p.some(x=>perm.startsWith(x+'.'))}
+API.admin=(role,perm,desc,fn)=>{if(!can(role,perm)){const e=new Error(`403 · Role "${ROLES[role]?.n||role}" tidak memiliki izin "${perm}"`);e.code=403;throw e}const r=fn();DB.audit.unshift({at:now(),role,perm,desc});if(DB.audit.length>300)DB.audit.length=300;save();return r};
+const isPublic=p=>p&&p.status==='published';
+const purchasable=p=>isPublic(p)&&p.price>0&&(p.sale==='retail'||(p.sale==='mto'&&!!p.lead));
+const avail=p=>p.mode==='exact'?p.pieces.filter(x=>x.status==='available').length:p.variants.reduce((a,v)=>a+Math.max(0,v.stock-v.reserved),0);
+function lineInfo(l){
+ const p=DB.products.find(x=>x.id===l.pid);const r={pid:l.pid,ref:l.ref,qty:Math.max(1,parseInt(l.qty)||1),p,ok:true,why:'',unit:0,label:''};
+ if(!p||!isPublic(p)){r.ok=false;r.why='unavailable';return r}
+ if(!purchasable(p)){r.ok=false;r.why='quote';return r}
+ r.unit=p.price;
+ if(p.mode==='exact'){r.qty=1;const pc=p.pieces.find(x=>x.id===l.ref);r.label=pc?pc.code:'';if(!pc||pc.status!=='available'){r.ok=false;r.why=pc&&pc.status==='reserved'?'reserved':'sold'}}
+ else{const v=p.variants.find(x=>x.id===l.ref);r.label=v?v.label:'';if(!v){r.ok=false;r.why='unavailable'}else if(v.stock-v.reserved<r.qty){r.ok=false;r.why='stock'}}
+ return r;
+}
+API.quote=(lines,zoneId)=>{const items=lines.map(lineInfo);const sub=items.filter(i=>i.ok).reduce((a,i)=>a+i.unit*i.qty,0);const z=DB.settings.zones.find(z=>z.id===zoneId);const ship=z&&z.on?z.rate:0;return{items,sub,ship,total:sub+(items.some(i=>i.ok)?ship:0),zone:z}};
+function move(p,ref,delta,reason,refNo){DB.movements.unshift({at:now(),sku:p.sku,ref,delta,reason,refNo});if(DB.movements.length>400)DB.movements.length=400}
+function reserve(o){for(const r of o.res){const p=DB.products.find(x=>x.id===r.pid);if(p.mode==='exact'){const pc=p.pieces.find(x=>x.id===r.ref);pc.status='reserved';pc.heldBy=o.no;move(p,pc.code,-1,'reserve',o.no)}else{const v=p.variants.find(x=>x.id===r.ref);v.reserved+=r.qty;move(p,v.label,-r.qty,'reserve',o.no)}}}
+function canReserve(o){return o.res.every(r=>{const p=DB.products.find(x=>x.id===r.pid);if(!p)return false;if(p.mode==='exact'){const pc=p.pieces.find(x=>x.id===r.ref);return pc&&pc.status==='available'}const v=p.variants.find(x=>x.id===r.ref);return v&&v.stock-v.reserved>=r.qty})}
+function release(o){for(const r of o.res){const p=DB.products.find(x=>x.id===r.pid);if(!p)continue;if(p.mode==='exact'){const pc=p.pieces.find(x=>x.id===r.ref);if(pc&&pc.status==='reserved'&&pc.heldBy===o.no){pc.status='available';delete pc.heldBy;move(p,pc.code,+1,'release',o.no)}}else{const v=p.variants.find(x=>x.id===r.ref);if(v){v.reserved=Math.max(0,v.reserved-r.qty);move(p,v.label,+r.qty,'release',o.no)}}}o.held=false}
+function finalize(o){for(const r of o.res){const p=DB.products.find(x=>x.id===r.pid);p.hasOrders=true;if(p.mode==='exact'){const pc=p.pieces.find(x=>x.id===r.ref);pc.status='sold';pc.heldBy=o.no;move(p,pc.code,0,'sold',o.no)}else{const v=p.variants.find(x=>x.id===r.ref);v.reserved=Math.max(0,v.reserved-r.qty);v.stock=Math.max(0,v.stock-r.qty);move(p,v.label,0,'sold',o.no)}}o.held=false}
+API.createOrder=(input)=>{
+ const errs={};const c=input.customer||{};
+ if(!c.name||c.name.trim().length<2)errs.name={en:'Enter the recipient name.',id:'Isi nama penerima.'};
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.email||''))errs.email={en:'Enter a valid email address.',id:'Isi alamat email yang valid.'};
+ if(!/^[+0-9 ()-]{8,}$/.test(c.phone||''))errs.phone={en:'Enter a phone number with at least 8 digits.',id:'Isi nomor telepon minimal 8 digit.'};
+ if(!c.address||c.address.trim().length<8)errs.address={en:'Enter the full street address.',id:'Isi alamat lengkap.'};
+ if(input.country!=='ID')errs.country={en:'International checkout is not active yet. Send an export inquiry instead.',id:'Checkout internasional belum aktif. Kirim inquiry ekspor.'};
+ const z=DB.settings.zones.find(z=>z.id===input.zone);if(!z)errs.zone={en:'Choose a shipping region.',id:'Pilih wilayah pengiriman.'};else if(!z.on)errs.zone={en:`We don't ship to ${z.name} yet. Contact us for alternatives.`,id:`Kami belum mengirim ke ${z.name}. Hubungi kami untuk alternatif.`};
+ if(!input.pay)errs.pay={en:'Choose a payment method.',id:'Pilih metode pembayaran.'};
+ if(Object.keys(errs).length)return{ok:false,errs};
+ const q=API.quote(input.lines,input.zone);
+ if(!q.items.length)return{ok:false,errs:{cart:{en:'Your cart is empty.',id:'Keranjang Anda kosong.'}}};
+ const bad=q.items.filter(i=>!i.ok);if(bad.length)return{ok:false,errs:{cart:{en:'Some items are no longer available. Review your cart.',id:'Beberapa barang sudah tidak tersedia. Periksa keranjang Anda.'}},bad};
+ const no='NE-'+new Date().toISOString().slice(2,7).replace('-','')+'-'+String(++DB.counters.o).padStart(4,'0');
+ const o={no,at:now(),customer:{name:c.name.trim(),email:c.email.trim().toLowerCase(),phone:c.phone.trim(),address:c.address.trim(),city:(c.city||'').trim()},zone:z.name,pay:'pending',ful:'unfulfilled',method:input.pay,
+  items:q.items.map(i=>({sku:i.p.sku,name:Ltxt(i.p.name),variant:i.label,unit:i.unit,qty:i.qty,img:i.p.images[0]||'',mode:i.p.mode,sale:i.p.sale,lead:i.p.lead?Ltxt(i.p.lead):''})),
+  sub:q.sub,ship:q.ship,total:q.total,clientTotal:input.clientTotal,priceTampered:input.clientTotal!=null&&Number(input.clientTotal)!==q.total,
+  res:q.items.map(i=>({pid:i.pid,ref:i.ref,qty:i.qty})),held:true,expiresAt:now()+DB.settings.reserveMin*60000,log:[{at:now(),m:'Order created, stock reserved'}],tracking:'',recon:false,notes:''};
+ reserve(o);q.items.forEach(i=>{i.p.hasOrders=true}); // any order attempt is a transaction record: lock mode, block hard delete
+ DB.orders.unshift(o);save();return{ok:true,order:o};
+};
+API.payment=(no,type,eventId)=>{ // provider callback (signed in production)
+ if(DB.events.includes(eventId))return{dup:true,msg:'Duplicate callback ignored'};
+ DB.events.push(eventId);const o=DB.orders.find(x=>x.no===no);if(!o){save();return{err:'Order not found'}}
+ if(type==='paid'){
+  if(o.pay==='paid'){save();return{dup:true,msg:'Order already paid'}}
+  if(o.pay==='pending'){finalize(o);o.pay='paid';o.log.push({at:now(),m:'Payment confirmed by provider'})}
+  else if(['expired','failed'].includes(o.pay)){
+   if(canReserve(o)){reserve(o);finalize(o);o.pay='paid';o.log.push({at:now(),m:'Late payment received; stock still available, sale completed'})}
+   else{o.pay='paid';o.recon=true;o.log.push({at:now(),m:'Late payment received but item no longer available: reconciliation queue'})}
+  }
+ }else if(type==='failed'&&o.pay==='pending'){o.pay='failed';release(o);o.log.push({at:now(),m:'Payment failed; reservation released'})}
+ else if(type==='expired'&&o.pay==='pending'){o.pay='expired';release(o);o.log.push({at:now(),m:'Reservation expired; stock released'})}
+ save();return{ok:true,order:o};
+};
+API.sweep=()=>{let ch=false;for(const o of DB.orders){if(o.pay==='pending'&&o.held&&now()>o.expiresAt){o.pay='expired';release(o);o.log.push({at:now(),m:'Reservation expired; stock released'});ch=true}}if(ch)save();return ch};
+API.inquiry=(f)=>{
+ const errs={};
+ if(!f.name||f.name.trim().length<2)errs.name={en:'Enter your name.',id:'Isi nama Anda.'};
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email||''))errs.email={en:'Enter a valid email address.',id:'Isi alamat email yang valid.'};
+ if(f.type!=='catalogue'){if(!f.country)errs.country={en:'Choose a country.',id:'Pilih negara.'};if(!f.privacy)errs.privacy={en:'Please agree to the privacy notice so we can reply.',id:'Setujui pemberitahuan privasi agar kami dapat membalas.'}}
+ if(Object.keys(errs).length)return{ok:false,errs};
+ const no='INQ-2026-'+String(++DB.counters.i).padStart(4,'0');
+ const inq=Object.assign({no,at:now(),status:'New',pic:'',notes:'',notify:'pending'},f);
+ DB.inquiries.unshift(inq);
+ inq.notify=DB.settings.notifyOk?'sent':'failed'; // inquiry is stored first; notification can fail independently
+ save();return{ok:true,inq};
+};
+function sweepTick(){if(API.sweep())render()}
+setInterval(sweepTick,5000);
+
+/* ---------------- helpers for views ---------------- */
+const catName=id=>{const c=DB.categories.find(c=>c.id===id);return c?Ltxt(c.name):id};
+const pub=()=>DB.products.filter(isPublic);
+function view(p){return UI.preview===p.id&&p.rev?Object.assign({},p,p.rev):p}
+function stockChip(p){
+ if(p.sale==='quote')return`<span class="chip info">${t('quoteonly')}</span>`;
+ if(p.sale==='mto')return`<span class="chip info">${t('madeorder')}</span>`;
+ const a=avail(p);if(a<=0){const r=p.mode==='exact'&&p.pieces.some(x=>x.status==='reserved');return`<span class="chip ${r?'warn':'bad'}">${r?t('reserved'):t('soldout')}</span>`}
+ return`<span class="chip ok">${t('instock')}${p.mode==='pattern'&&a<=2?(UI.lang==='id'?' · sisa '+a:' · '+a+' left'):''}</span>`;
+}
+function priceTxt(p){if(p.sale==='quote'||!(p.price>0))return`<span class="muted">${t('quoteonly')}</span>`;return`<span class="price">${rp(p.price)}</span>`}
+function card(p){p=view(p);return`<a class="pcard" href="#p-${p.slug}">
+ <div class="ph">${p.images[0]?`<img src="${IMG(p.images[0])}" alt="${esc(Ltxt(p.name))}" loading="lazy">`:''}<span class="tag">${p.mode==='exact'?t('exact'):t('pattern')}</span></div>
+ <div class="label"><div class="sku"><span>${esc(p.sku)}</span><span>${esc(catName(p.cat))}</span></div><h4>${esc(Ltxt(p.name))}</h4><div class="meta">${priceTxt(p)}${stockChip(p)}</div></div></a>`}
+function fld(id,label,input,err,hint){return`<div class="fld"><label for="${id}">${label}</label>${input}${hint?`<span class="hint">${hint}</span>`:''}${err?`<span class="err" id="${id}-err">${esc(Ltxt(err))}</span>`:''}</div>`}
+function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove('show'),3200)}
+const COUNTRIES=['Indonesia','Singapore','Japan','Australia','Malaysia','United States','United Kingdom','Germany','Netherlands','France','Other'];
+const phoneTxt=()=>DB.contact.activePhone!=null?DB.contact.phones[DB.contact.activePhone].n:null;
+
+/* ---------------- chrome: nav, footer ---------------- */
+const NAV=[['shop','shop'],['story','story'],['process','process'],['wholesale','wholesale'],['custom','custom'],['contact','contact']];
+function chrome(){
+ const top=UI.route.split('-')[0];
+ $('#nav').innerHTML=NAV.map(([r,k])=>`<a href="#${r}" ${top===r||(r==='shop'&&top==='p')?'aria-current="page"':''}>${t(k)}</a>`).join('');
+ $('#mnav').innerHTML=NAV.map(([r,k])=>`<a href="#${r}">${t(k)}</a>`).join('')+`<a href="#catalogue">${t('reqcat')}</a><a href="#order">${t('orderstatus')}</a><a href="#admin">Admin CMS</a><div class="row" style="padding-top:14px"><div class="lang"><button type="button" data-act="lang" data-v="en" aria-pressed="${UI.lang==='en'}">EN</button><button type="button" data-act="lang" data-v="id" aria-pressed="${UI.lang==='id'}">ID</button></div></div>`;
+ $('#hdr-cat').textContent=t('reqcat');
+ $('#lang-en').setAttribute('aria-pressed',UI.lang==='en');$('#lang-id').setAttribute('aria-pressed',UI.lang==='id');
+ const n=DB.cart.reduce((a,l)=>a+(l.qty||1),0);const b=$('#cartn');b.hidden=!n;b.textContent=n;
+ $('#ribbon').textContent=UI.lang==='id'?'PROTOTYPE · Data produk dari katalog; harga retail adalah contoh dan pembayaran disimulasikan sampai owner menyetujui':'PROTOTYPE · Product data from the catalogue; retail prices are examples and payments are simulated until owner approval';
+ document.documentElement.lang=UI.lang;
+ const ph=phoneTxt();
+ $('#footer').innerHTML=`<div class="wrap"><div class="fgrid">
+  <div class="stack"><img class="flogo" src="${IMG('logo')}" alt="Niken Ecoprint logo"><p class="muted small">${UI.lang==='id'?'Niken Ecoprint adalah brand dari PT. Manna Borneo Persada, Balikpapan, Kalimantan Timur, Indonesia.':'Niken Ecoprint is a brand of PT. Manna Borneo Persada, Balikpapan, East Kalimantan, Indonesia.'}</p></div>
+  <div><h5>${t('shop')}</h5>${DB.categories.filter(c=>!c.soon).map(c=>`<a href="#shop-${c.id}">${esc(Ltxt(c.name))}</a>`).join('')}<a href="#catalogue">${t('catalogue')}</a></div>
+  <div><h5>${UI.lang==='id'?'Perusahaan':'Company'}</h5><a href="#story">${t('story')}</a><a href="#process">${t('process')}</a><a href="#wholesale">${t('wholesale')}</a><a href="#custom">Custom & Private Label</a><a href="#journal">${t('journal')}</a></div>
+  <div><h5>${UI.lang==='id'?'Bantuan':'Help'}</h5><a href="#order">${t('orderstatus')}</a><a href="#faq">${t('faq')}</a><a href="#contact">${t('contact')}</a><p class="small muted" style="margin-top:10px">${esc(DB.contact.email)}<br>Instagram @${esc(DB.contact.instagram)}${ph?'<br>WhatsApp '+esc(ph):''}</p></div>
+ </div><div class="fbot"><span>© 2026 Niken Ecoprint · PT. Manna Borneo Persada · Made in Indonesia</span><span><a href="#faq">${UI.lang==='id'?'Kebijakan':'Policies'}</a> · <a href="#admin">Admin CMS</a></span></div></div>`;
+}
+
+/* ---------------- HOME ---------------- */
+function vHome(){
+ const C=DB.content;const f=DB.products.find(p=>p.id===C.featured&&isPublic(p))||pub()[0];
+ const id=UI.lang==='id';
+ const usp=[
+  [id?'Cerita botanical Borneo':'A Borneo botanical story',id?'Daun dan bunga dari hutan Kalimantan menjadi motif, diwarnai kayu Ulin dengan nada tanah yang hangat.':'Leaves and flowers from Kalimantan become the print, coloured with Ulin wood in warm earth tones.'],
+  [id?'Motif alami yang unik':'Natural, unrepeatable motifs',id?'Setiap daun mencetak bentuk berbeda bergantung usia, musim dan kandungan taninnya.':'Each leaf prints differently depending on its age, the season and its tannin.'],
+  [id?'Kerajinan Indonesia':'Indonesian craftsmanship',id?'Dibuat tangan oleh perajin di Balikpapan, dari seleksi daun hingga finishing.':'Made by hand in Balikpapan, from leaf selection to finishing.'],
+  [id?'Dari kain menjadi produk':'From textile to product',id?'Kami mencetak kain, lalu mengolahnya menjadi pakaian, tas, dompet dan alas kaki.':'We print the cloth, then make it into garments, bags, wallets and footwear.'],
+  [id?'Custom & private label':'Custom & private label',id?'Kembangkan motif, warna, label dan kemasan untuk brand Anda.':'Develop motifs, colours, labels and packaging for your own brand.'],
+  [id?'Dibuat oleh perajin perempuan':'Made by women artisans',id?'Pemberdayaan perajin perempuan adalah bagian dari misi perusahaan.':'Empowering women artisans is part of the company mission.'],
+ ];
+ const steps=[['proc-1','Select',id?'Memilih daun dan bunga.':'Leaves and flowers are chosen.'],['proc-4','Arrange',id?'Daun disusun di atas kain.':'Leaves are laid on the cloth.'],['proc-6','Transfer',id?'Kain digulung lalu dikukus.':'The cloth is rolled and steamed.'],['proc-7','Reveal',id?'Gulungan dibuka, motif muncul.':'Bundles open; the print appears.'],['proc-8','Finish',id?'Dikeringkan dan diperiksa.':'Dried and checked.'],['identity-rack','Create',id?'Dijahit menjadi produk.':'Sewn into finished pieces.']];
+ const exh=EXH.slice(0,3);
+ return`
+ <section class="hero" id="hero"><div class="bg"><img src="${IMG(C.heroImg)}" alt="${id?'Kain ecoprint dikenakan di hutan tropis':'Ecoprint fabric worn in a tropical forest'}" fetchpriority="high"></div><div class="rays" aria-hidden="true"></div><canvas class="fx" aria-hidden="true"></canvas>
+  <div class="wrap"><div class="stack"><span class="eyebrow rv" style="--d:0">Niken Ecoprint · Balikpapan, Kalimantan</span><h1 aria-label="${esc(Ltxt(C.heroTitle))}">${Ltxt(C.heroTitle).split(/(\s+)/).filter(x=>x).map((w,i)=>/^\s+$/.test(w)?' ':`<span class="w" aria-hidden="true" style="--i:${i/2|0}">${esc(w)}</span>`).join('')}</h1><p class="sub rv" style="--d:.75">${esc(Ltxt(C.heroSub))}</p>
+  <div class="row rv" style="margin-top:8px;--d:.95"><a class="btn light arrow" href="#shop">${t('explore')}</a><a class="btn line-light" href="#wholesale">${t('wholesale')}</a></div></div></div>
+  <button class="snd rv" style="--d:1.3" type="button" data-act="sound" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><span class="snd-l"></span><small class="snd-h"></small></span></button>
+  <span class="cue" aria-hidden="true"></span></section>
+ <div class="specimen-strip"><div class="wrap">
+  <div><b>${id?'Pewarna':'Dye'}</b><span>${id?'Kayu Ulin & tanaman':'Ulin wood & plants'}</span></div>
+  <div><b>${id?'Teknik':'Technique'}</b><span>${id?'Ecoprint botanical, dikukus':'Steamed botanical ecoprint'}</span></div>
+  <div><b>${id?'Asal':'Origin'}</b><span>Balikpapan, East Kalimantan</span></div>
+  <div><b>${id?'Untuk bisnis':'For business'}</b><span>Wholesale · Export · Private label</span></div>
+ </div></div>
+
+ ${f?`<section class="sec"><div class="wrap split featured"><div class="ph"><img src="${IMG(f.images[0])}" alt="${esc(Ltxt(f.name))}" loading="lazy"></div>
+  <div class="stack" style="gap:20px"><span class="eyebrow">${id?'Produk unggulan':'Featured product'}</span><h2>${esc(Ltxt(f.name))}</h2><p class="lead">${esc(Ltxt(f.story))}</p>
+  <dl class="spec"><dt>SKU</dt><dd class="mono">${esc(f.sku)}</dd><dt>${id?'Bahan':'Material'}</dt><dd>${esc(Ltxt(f.material))}</dd><dt>${t('size')}</dt><dd>${esc(Ltxt(f.size))}</dd><dt>${id?'Harga':'Price'}</dt><dd>${priceTxt(f)}</dd></dl>
+  <div class="row"><a class="btn arrow" href="#p-${f.slug}">${t('view')}</a><button class="btn ghost" type="button" data-act="quote-for" data-v="${f.sku}">${id?'Minta penawaran produk ini':'Request a quote for this item'}</button></div></div></div></section>`:''}
+
+ <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><div class="stack"><span class="eyebrow">${id?'Belanja per koleksi':'Shop by collection'}</span><h2>${id?'Dari kain hingga alas kaki':'From cloth to footwear'}</h2></div><a class="link arrow" href="#shop">${t('allprod')} </a></div>
+  <div class="grid cat-scroll">${DB.categories.filter(c=>c.visible).map(c=>c.soon?`<div class="cat soon"><div class="ph"><span class="mono muted">${id?'Segera hadir':'Coming soon'}</span></div><div class="cap"><span>${esc(Ltxt(c.name))}</span><small>—</small></div></div>`:`<a class="cat" href="#shop-${c.id}"><div class="ph"><img src="${IMG(c.cover)}" alt="" loading="lazy"></div><div class="cap"><span>${esc(Ltxt(c.name))}</span><small>${pub().filter(p=>p.cat===c.id).length}</small></div></a>`).join('')}</div></div></section>
+
+ <section class="sec" style="background:var(--paper-2)"><div class="wrap split"><div class="ph"><img src="${IMG('story-arranging')}" alt="${id?'Dua perajin menyusun daun di atas kain panjang':'Two artisans arranging leaves along a length of cloth'}" loading="lazy"></div>
+  <div class="stack" style="gap:20px"><span class="eyebrow">${id?'Proses kami':'Our process'}</span><h2>${id?'Saat alam menjadi karya':'Where nature becomes art'}</h2><p class="lead">${id?'Kami bekerja dengan daun dan bunga asli. Setiap daun diletakkan satu per satu di atas kain, lalu dikukus sampai bentuk, urat dan warnanya berpindah. Hasilnya tidak bisa diulang persis.':'We work with real leaves and flowers. Each one is placed by hand on the cloth, then steamed until its shape, veins and colour transfer. The result cannot be repeated exactly.'}</p>
+  <div class="row"><a class="btn ghost arrow" href="#story">${t('story')}</a></div></div></div></section>
+
+ <section class="sec"><div class="wrap"><div class="sec-head"><div class="stack"><span class="eyebrow">${id?'Yang membedakan kami':'What makes us different'}</span><h2>${id?'Enam alasan memilih Niken Ecoprint':'Six reasons to choose Niken Ecoprint'}</h2></div></div>
+  <div class="usp">${usp.map(u=>`<div><h4>${u[0]}</h4><p>${u[1]}</p></div>`).join('')}</div></div></section>
+
+ <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><div class="stack"><span class="eyebrow">From leaf to story</span><h2>${id?'Enam langkah, dari daun ke produk':'Six steps from leaf to product'}</h2></div><a class="link arrow" href="#process">${id?'Proses lengkap ':'Full process '}</a></div>
+  <div class="steps">${steps.map((s,i)=>`<div class="step"><div class="ph"><img src="${IMG(s[0])}" alt="${s[1]}" loading="lazy"></div><span class="n">${String(i+1).padStart(2,'0')}</span><h4>${s[1]}</h4><p>${s[2]}</p></div>`).join('')}</div></div></section>
+
+ <section class="sec band"><div class="wrap b2b"><div class="stack" style="gap:20px"><span class="eyebrow">${id?'Untuk retailer, butik dan brand':'For retailers, boutiques and design brands'}</span><h2>${id?'Dibuat untuk brand Anda':'Crafted for your brand'}</h2><p class="lead">${id?'Kami menerima pesanan grosir, ekspor, desain custom, private label dan sampel. Setiap permintaan dijawab dengan penawaran tertulis: spesifikasi, MOQ, waktu produksi, termin dan pengiriman.':'We take wholesale, export, custom design, private label and sample orders. Every request gets a written quotation covering specification, MOQ, lead time, terms and shipping.'}</p>
+  <div class="row"><a class="btn light arrow" href="#wholesale">${t('reqquote')}</a><a class="btn line-light" href="#custom">${id?'Mulai proyek custom':'Start a custom project'}</a></div></div>
+  <ul>${[['Wholesale','Retail & boutiques'],['Export','SG · JP · AU · EU · US'],['Custom design','Motif & colour'],['Private label','Your label & packaging'],['Sample order','Before bulk']].map(x=>`<li><span>${x[0]}</span><span>${x[1]}</span></li>`).join('')}</ul></div></section>
+
+ <section class="sec"><div class="wrap split rev"><div class="stack" style="gap:20px"><span class="eyebrow">${id?'Kerajinan & dampak sosial':'Craftsmanship & social impact'}</span><h2>${id?'Dari alam Borneo, lewat tangan perempuan':"From Borneo's nature, through women's hands"}</h2><p class="lead">${id?'Misi perusahaan: melestarikan warisan budaya Indonesia, mengembangkan fesyen ramah lingkungan, memberdayakan perajin perempuan, dan menjangkau pasar internasional.':'The company mission: preserve Indonesian cultural heritage, develop eco-friendly fashion, empower women artisans, and reach international markets.'}</p><p class="muted small">${id?'Angka dampak akan dipublikasikan setelah datanya tersedia.':'Impact figures will be published once the data is available.'}</p></div>
+  <div class="ph"><img src="${IMG('proc-5')}" alt="${id?'Perajin meratakan kain sebelum digulung':'Artisans smoothing cloth before rolling'}" loading="lazy"></div></div></section>
+
+ <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><div class="stack"><span class="eyebrow">${id?'Pameran':'Exhibitions'}</span><h2>${id?'Jejak dari Borneo':'Our journey from Borneo'}</h2></div><a class="link arrow" href="#journal">${t('journal')} </a></div>${gal(exh)}</div></section>
+
+ <section class="sec" style="padding-top:0"><div class="wrap split" style="align-items:start"><div class="stack"><span class="eyebrow">FAQ</span><h2>${id?'Pertanyaan umum':'Common questions'}</h2><a class="link arrow" href="#faq">${id?'Semua kebijakan ':'All policies '}</a></div><div class="faq">${FAQ().slice(0,6).map(q=>`<details><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join('')}</div></div></section>
+
+ <section class="sec" style="background:var(--paper-2)"><div class="wrap cta-final"><div class="stack" style="gap:14px"><span class="eyebrow">Niken Ecoprint</span><h2>${esc(Ltxt(C.heroTitle))}.</h2><p class="lead">${id?'Kirimkan produk, jumlah dan negara tujuan. Kami balas dengan penawaran, waktu produksi dan opsi pengiriman.':'Send the products, quantities and destination. We reply with a quotation, lead time and shipping options.'}</p></div>
+  <div class="row"><a class="btn" href="#catalogue">${t('reqcat')}</a><a class="btn ghost" href="#wholesale">${t('reqquote')}</a><a class="btn ghost" href="#contact">${t('contact')}</a></div></div></section>`;
+}
+const EXH=[
+ {img:'exh-tei2023',t:'Trade Expo Indonesia 2023',p:'Jakarta',d:'2023',c:{en:"Introduced Niken Ecoprint to buyers at Indonesia's international trade exhibition.",id:'Memperkenalkan Niken Ecoprint kepada buyer di pameran dagang internasional Indonesia.'}},
+ {img:'exh-tei2025',t:'Trade Expo Indonesia 2025',p:'Jakarta',d:'2025',c:{en:'Showcased to a national and international audience while exploring export opportunities.',id:'Tampil di hadapan pengunjung nasional dan internasional sambil menjajaki peluang ekspor.'}},
+ {img:'exh-mahakam2025',t:'Mahakam Investment Forum 2025',p:'Balikpapan',d:'2025',c:{en:'Took part in a forum on regional economic growth and the creative industry.',id:'Berpartisipasi dalam forum pertumbuhan ekonomi daerah dan industri kreatif.'}},
+ {img:'exh-yogya2024',t:'Ecoprint Fashion Trend 2024',p:'Yogyakarta',d:'2024',c:{en:'Presented a collection inspired by nature and Indonesian heritage.',id:'Menampilkan koleksi yang terinspirasi alam dan warisan budaya Indonesia.'}},
+ {img:'exh-integritas2025',t:'Yogya Integritas Exhibition 2025',p:'Yogyakarta · with Dinas Perdagangan Kota Balikpapan',d:'2025',c:{en:'Represented the creative products of Balikpapan.',id:'Mewakili produk kreatif Kota Balikpapan.'}},
+ {img:'exh-balikpapan',t:'Exhibitions in Balikpapan',p:'Balikpapan',d:'2023 – present',c:{en:'Local exhibitions and UMKM events across East Kalimantan.',id:'Pameran lokal dan acara UMKM di Kalimantan Timur.'}},
+];
+function gal(list){return`<div class="gal">${list.map(e=>`<figure><div class="ph"><img src="${IMG(e.img)}" alt="${esc(e.t)}" loading="lazy"></div><figcaption><span class="mono">${esc(e.d)} · ${esc(e.p)}</span><b>${esc(e.t)}</b><span>${esc(Ltxt(e.c))}</span></figcaption></figure>`).join('')}</div>`}
+function FAQ(){const id=UI.lang==='id';return[
+ [id?'Apakah motif di foto sama dengan yang saya terima?':'Will my piece look exactly like the photo?',id?'Tergantung mode produk. "Barang persis" berarti foto adalah barang yang dikirim. "Keluarga motif" berarti foto adalah contoh; susunan daun dan warna akan sedikit berbeda karena setiap cetakan unik.':'It depends on the product mode. "Exact piece" means the photo shows the item that ships. "Pattern family" means the photo is an example; leaf placement and colour will vary slightly because every print is unique.'],
+ [id?'Berapa minimum order (MOQ)?':'What is the minimum order (MOQ)?',id?'Pembelian retail mulai 1 pcs. MOQ grosir dan ekspor ditetapkan per produk dalam penawaran.':'Retail orders start at 1 piece. Wholesale and export MOQs are set per product in the quotation.'],
+ [id?'Berapa lama waktu produksi?':'How long does production take?',id?'Produk siap stok dikirim setelah pembayaran terverifikasi. Untuk made-to-order dan pesanan bisnis, waktu produksi dicantumkan per produk atau dalam penawaran.':'Ready-stock items ship once payment is verified. For made-to-order and business orders, lead time is stated per product or in the quotation.'],
+ [id?'Bisakah saya memesan desain custom?':'Can I order a custom design?',id?'Bisa. Kirim brief melalui halaman Custom; kami evaluasi, membuat sampel bila perlu, lalu mengirim penawaran.':'Yes. Send a brief through the Custom page; we review it, make a sample if needed, then send a quotation.'],
+ [id?'Bagaimana merawat produk ecoprint?':'How do I care for ecoprint pieces?',Ltxt(CARE.textile)],
+ [id?'Apakah bisa kirim ke luar negeri?':'Do you ship internationally?',id?'Checkout online saat ini untuk alamat di Indonesia. Untuk luar negeri, kirim inquiry dengan negara tujuan; kami menghitung ongkir dan ketentuan impor dalam penawaran.':'Online checkout currently covers addresses in Indonesia. For other countries, send an inquiry with your destination; we include shipping and import terms in the quotation.'],
+ [id?'Bagaimana dengan retur?':'What is the return policy?',id?'Draft kebijakan: produk siap stok dapat diretur dalam 7 hari bila rusak atau tidak sesuai deskripsi; produk custom dan made-to-order tidak dapat diretur kecuali cacat. Variasi motif alami bukan cacat. Kebijakan final menunggu persetujuan owner.':'Draft policy: ready-stock items may be returned within 7 days if damaged or not as described; custom and made-to-order items cannot be returned unless defective. Natural motif variation is not a defect. Final policy pending owner approval.'],
+ [id?'Data saya digunakan untuk apa?':'How is my data used?',id?'Data pesanan dan inquiry hanya dipakai untuk memproses permintaan Anda dan tidak dipublikasikan. Email pemasaran hanya dikirim bila Anda menyetujuinya terpisah.':'Order and inquiry data is used only to process your request and is never published. Marketing email is sent only if you opt in separately.'],
+]}
+
+/* ---------------- SHOP ---------------- */
+function vShop(){
+ const id=UI.lang==='id';let list=pub().map(view);
+ if(UI.shopCat!=='all')list=list.filter(p=>p.cat===UI.shopCat);
+ if(UI.q){const q=UI.q.toLowerCase();list=list.filter(p=>(Ltxt(p.name)+' '+p.sku+' '+Ltxt(p.material)).toLowerCase().includes(q))}
+ const s=UI.sort;
+ if(s==='plh')list.sort((a,b)=>(a.price||9e12)-(b.price||9e12));else if(s==='phl')list.sort((a,b)=>(b.price||0)-(a.price||0));else if(s==='avail')list.sort((a,b)=>(purchasable(b)&&avail(b)>0)-(purchasable(a)&&avail(a)>0));else list.sort((a,b)=>(b.featured-a.featured));
+ const cats=DB.categories.filter(c=>c.visible);const curC=cats.find(c=>c.id===UI.shopCat);
+ return`<section class="phead"><div class="wrap stack"><div class="crumb"><a href="#home">Home</a>/<span>${t('shop')}</span>${curC?`/<span>${esc(Ltxt(curC.name))}</span>`:''}</div><h1>${curC?esc(Ltxt(curC.name)):(id?'Semua koleksi':'All collections')}</h1><p class="lead">${id?'Setiap produk diberi label mode: barang persis (foto = barang yang dikirim) atau keluarga motif (foto = contoh, motif bervariasi).':'Every product is labelled by mode: exact piece (the photo is what ships) or pattern family (the photo is an example; the motif varies).'}</p></div></section>
+ <div class="wrap"><div class="shopbar"><div class="pills" role="group" aria-label="Category"><button class="pill" type="button" data-act="cat" data-v="all" aria-pressed="${UI.shopCat==='all'}">${id?'Semua':'All'}</button>${cats.map(c=>`<button class="pill" type="button" data-act="cat" data-v="${c.id}" aria-pressed="${UI.shopCat===c.id}">${esc(Ltxt(c.name))}</button>`).join('')}</div>
+  <div class="row"><input class="search" id="q" type="search" placeholder="${id?'Cari nama, SKU, bahan':'Search name, SKU, material'}" value="${esc(UI.q)}" aria-label="Search"><select id="sort" aria-label="Sort" style="width:auto"><option value="featured" ${s==='featured'?'selected':''}>${id?'Unggulan':'Featured'}</option><option value="avail" ${s==='avail'?'selected':''}>${id?'Bisa dibeli dulu':'Buyable first'}</option><option value="plh" ${s==='plh'?'selected':''}>${id?'Harga terendah':'Price: low to high'}</option><option value="phl" ${s==='phl'?'selected':''}>${id?'Harga tertinggi':'Price: high to low'}</option></select></div></div>
+ ${curC&&curC.soon?`<div class="empty"><h3>${id?'Home & Lifestyle segera hadir':'Home & Lifestyle is coming soon'}</h3><p>${id?'Produk akan ditampilkan setelah spesifikasi dan foto asli tersedia.':'Products will appear once specifications and real photographs are ready.'}</p><button class="btn ghost" data-act="quote-for" data-v="Home & Lifestyle" type="button">${id?'Tanyakan proyek interior':'Ask about interior projects'}</button></div>`:
+  list.length?`<div class="grid g4 tight1" style="padding-bottom:80px">${list.map(card).join('')}</div>`:`<div class="empty" style="margin-bottom:80px"><p>${id?'Tidak ada produk yang cocok.':'No products match.'}</p><button class="btn ghost sm" type="button" data-act="clearq">${id?'Hapus pencarian':'Clear search'}</button></div>`}
+ </div>`;
+}
+
+/* ---------------- PRODUCT DETAIL ---------------- */
+function vProduct(slug){
+ const raw=DB.products.find(p=>p.slug===slug);
+ const id=UI.lang==='id';
+ if(!raw||(!isPublic(raw)&&UI.preview!==raw.id))return`<section class="phead"><div class="wrap stack"><h1>${id?'Produk tidak ditemukan':'Product not found'}</h1><p class="lead">${id?'Produk ini tidak tersedia atau sudah diarsipkan.':'This product is unavailable or has been archived.'}</p><a class="btn" href="#shop">${t('allprod')}</a></div></section>`;
+ const p=view(raw);const S=UI.sel[p.id]||(UI.sel[p.id]={img:0,ref:null,qty:1});
+ if(S.img>=p.images.length)S.img=0;
+ const exact=p.mode==='exact',buy=purchasable(raw);
+ let opts='';
+ if(exact){const pcs=p.pieces;if(!S.ref){const f=pcs.find(x=>x.status==='available');S.ref=f?f.id:null}
+  opts=`<div class="stack" style="gap:10px"><span class="lbl">${t('choosepiece')}</span><div class="piece">${pcs.map(pc=>`<button type="button" data-act="ref" data-v="${pc.id}" aria-pressed="${S.ref===pc.id}" ${pc.status!=='available'?'disabled':''}><img src="${IMG(pc.img)}" alt=""><span class="mono">${esc(pc.code.split('-').pop())} · ${pc.status==='available'?t('instock'):pc.status==='reserved'?t('reserved'):t('soldout')}</span></button>`).join('')}</div><p class="small muted">${id?'Foto adalah barang yang akan Anda terima. Stok 1 per piece.':'The photo is the item you receive. One in stock per piece.'}</p></div>`}
+ else if(p.variants.length){if(!S.ref||!p.variants.find(v=>v.id===S.ref)){const f=p.variants.find(v=>v.stock-v.reserved>0)||p.variants[0];S.ref=f.id}
+  const multi=p.variants.length>1||p.variants[0].label!=='One size';
+  opts=multi?`<div class="stack" style="gap:10px"><span class="lbl">${t('size')}</span><div class="opt">${p.variants.map(v=>`<button type="button" data-act="ref" data-v="${v.id}" aria-pressed="${S.ref===v.id}" ${buy&&v.stock-v.reserved<=0?'disabled':''}>${esc(v.label)}</button>`).join('')}</div></div>`:'';}
+ const v=!exact&&p.variants.find(v=>v.id===S.ref);const left=v?v.stock-v.reserved:0;
+ const canAdd=buy&&(exact?!!(S.ref&&p.pieces.find(x=>x.id===S.ref&&x.status==='available')):left>0);
+ let action;
+ if(p.sale==='quote'||!(p.price>0))action=`<button class="btn arrow" type="button" data-act="quote-for" data-v="${p.sku}">${t('reqprice')}</button>`;
+ else if(p.sale==='mto'&&!p.lead)action=`<button class="btn arrow" type="button" data-act="quote-for" data-v="${p.sku}">${t('mto')}</button><p class="small muted">${id?'Waktu produksi belum ditetapkan, jadi pesanan ini diproses lewat inquiry.':'Lead time is not set yet, so this order goes through an inquiry.'}</p>`;
+ else action=`<div class="row">${exact?'':`<div class="qty"><button type="button" data-act="qty" data-v="-1" aria-label="Decrease">−</button><input id="qty" inputmode="numeric" value="${S.qty}" aria-label="${t('qty')}"><button type="button" data-act="qty" data-v="1" aria-label="Increase">+</button></div>`}<button class="btn" type="button" data-act="add" ${canAdd?'':'disabled'}>${p.sale==='mto'?t('mto'):t('addcart')}</button><button class="btn ghost" type="button" data-act="buynow" ${canAdd?'':'disabled'}>${t('buynow')}</button></div>`;
+ const related=pub().filter(x=>x.cat===p.cat&&x.id!==p.id).slice(0,4);
+ document.body.classList.add('has-buybar');
+ const bb=$('#buybar');bb.hidden=false;bb.innerHTML=`<div><div class="mono small">${esc(p.sku)}</div>${priceTxt(p)}</div>${(p.sale==='quote'||(p.sale==='mto'&&!p.lead))?`<button class="btn sm" type="button" data-act="quote-for" data-v="${p.sku}">${p.sale==='quote'?t('reqprice'):t('mto')}</button>`:`<button class="btn sm" type="button" data-act="add" ${canAdd?'':'disabled'}>${t('addcart')}</button>`}`;
+ return`${UI.preview===raw.id?`<div class="preview-bar"><span>PREVIEW · ${raw.rev?'perubahan draft belum dipublikasi':'produk berstatus '+raw.status}</span><button class="link" type="button" data-act="endpreview">Kembali ke CMS</button></div>`:''}
+ <div class="wrap"><div class="crumb" style="padding-top:24px"><a href="#home">Home</a>/<a href="#shop">${t('shop')}</a>/<a href="#shop-${p.cat}">${esc(catName(p.cat))}</a>/<span>${esc(Ltxt(p.name))}</span></div>
+ <div class="pd"><div class="gallery"><div class="main">${p.images.length?`<img src="${IMG(p.images[S.img])}" alt="${esc(Ltxt(p.name))}">`:''}</div>${p.images.length>1?`<div class="thumbs">${p.images.map((im,i)=>`<button type="button" data-act="img" data-v="${i}" aria-pressed="${S.img===i}" aria-label="Photo ${i+1}"><img src="${IMG(im)}" alt=""></button>`).join('')}</div>`:''}</div>
+ <div class="buy"><div class="stack" style="gap:12px"><span class="eyebrow">${esc(catName(p.cat))} · ${exact?t('exact'):t('pattern')}</span><h1>${L(p.name)}</h1><div class="row">${priceTxt(p)}${stockChip(raw)}</div></div>
+  <p class="muted">${L(p.story)}</p>
+  ${opts}
+  ${!exact&&buy&&v&&left>0&&left<=2?`<p class="small" style="color:var(--warn)">${id?`Sisa ${left} untuk ukuran ${v.label}.`:`Only ${left} left in ${v.label}.`}</p>`:''}
+  ${p.sale==='mto'&&p.lead?`<div class="note warn"><b>${t('madeorder')}.</b> ${L(p.lead)}</div>`:''}
+  ${!exact?`<div class="note">${id?'Foto adalah contoh keluarga motif. Susunan daun dan warna pada barang Anda akan sedikit berbeda.':'Photos show the pattern family. Leaf placement and colour on your piece will vary slightly.'}</div>`:''}
+  ${action}
+  <p class="small muted">${id?'Untuk grosir atau ekspor':'For wholesale or export'}: <button class="link" type="button" data-act="quote-for" data-v="${p.sku}">${t('reqquote')}</button></p>
+  <div class="tabs-d">
+   <details open><summary>${id?'Spesifikasi':'Specifications'}</summary><div class="body"><dl class="spec"><dt>SKU</dt><dd class="mono">${esc(p.sku)}</dd>${p.legacySku?`<dt>${id?'Kode lama':'Former code'}</dt><dd class="mono">${esc(p.legacySku)}</dd>`:''}<dt>${id?'Bahan':'Material'}</dt><dd>${L(p.material)}</dd><dt>${t('size')}</dt><dd>${L(p.size)}</dd><dt>${id?'Paket':'Package'}</dt><dd>${(p.pkg.w/1000).toLocaleString(id?'id-ID':'en')} kg · ${esc(p.pkg.dim)}</dd><dt>${id?'Asal':'Made in'}</dt><dd>Balikpapan, Indonesia</dd></dl></div></details>
+   <details><summary>${id?'Perawatan':'Care'}</summary><div class="body">${L(CARE[p.care])}</div></details>
+   <details><summary>${t('shipping')}</summary><div class="body">${id?'Dikirim dari Balikpapan ke seluruh Indonesia (kecuali wilayah yang belum dilayani). Ongkir dihitung saat checkout berdasarkan wilayah. Pembeli luar negeri: kirim inquiry.':'Ships from Balikpapan across Indonesia (except regions not yet served). Shipping is calculated at checkout by region. International buyers: send an inquiry.'}</div></details>
+   <details><summary>${id?'Motif & retur':'Motif & returns'}</summary><div class="body">${FAQ()[6][1]}</div></details>
+  </div></div></div>
+ ${related.length?`<div class="sec-head" style="margin-top:8px"><h3>${id?'Produk terkait':'Related products'}</h3></div><div class="grid g4" style="padding-bottom:80px">${related.map(card).join('')}</div>`:''}</div>`;
+}
+
+/* ---------------- CART & CHECKOUT ---------------- */
+function vCart(){
+ const id=UI.lang==='id';const q=API.quote(DB.cart,null);
+ if(!DB.cart.length)return`<section class="phead"><div class="wrap stack"><h1>${t('cart')}</h1></div></section><div class="wrap" style="padding-block:40px 90px"><div class="empty"><p>${t('empty')}</p><a class="btn" href="#shop">${t('explore')}</a></div></div>`;
+ return`<section class="phead"><div class="wrap stack"><h1>${t('cart')}</h1></div></section><div class="wrap co"><div>${q.items.map((i,ix)=>`<div class="line"><img src="${IMG(i.p?.images[0])}" alt=""><div class="stack" style="gap:4px"><span class="mono small muted">${esc(i.p?.sku)}${i.label?' · '+esc(i.label):''}</span><b style="font-family:var(--f-display);font-weight:400;font-size:1.15rem">${esc(Ltxt(i.p?.name))}</b>
+ ${i.ok?'':`<span class="chip bad plain" style="width:max-content">${i.why==='reserved'?(id?'Sedang dipesan pembeli lain':'Held in another checkout'):i.why==='stock'?(id?'Stok tidak cukup':'Not enough stock'):(id?'Tidak tersedia':'No longer available')}</span>`}
+ ${i.p&&i.p.mode!=='exact'?`<div class="row" style="margin-top:6px"><div class="qty"><button type="button" data-act="cqty" data-i="${ix}" data-v="-1" aria-label="Decrease">−</button><input value="${i.qty}" readonly aria-label="${t('qty')}"><button type="button" data-act="cqty" data-i="${ix}" data-v="1" aria-label="Increase">+</button></div></div>`:''}
+ <button class="link small" type="button" data-act="rm" data-i="${ix}" style="width:max-content;margin-top:4px">${id?'Hapus':'Remove'}</button></div><span class="price">${rp(i.unit*i.qty)}</span></div>`).join('')}</div>
+ <aside class="summary"><div class="r"><span>${t('subtotal')}</span><span>${rp(q.sub)}</span></div><div class="r muted"><span>${t('shipping')}</span><span>${id?'dihitung saat checkout':'calculated at checkout'}</span></div><div class="r t"><span>${t('total')}</span><span>${rp(q.sub)}</span></div>
+ <a class="btn" href="#checkout" style="justify-content:center" ${q.items.some(i=>!i.ok)?'aria-disabled="true"':''}>${t('checkout')}</a>${q.items.some(i=>!i.ok)?`<p class="small" style="color:var(--bad)">${id?'Hapus barang yang tidak tersedia untuk melanjutkan.':'Remove unavailable items to continue.'}</p>`:''}<p class="small muted">${id?'Harga dihitung ulang oleh server saat checkout.':'Prices are recalculated by the server at checkout.'}</p></aside></div>`;
+}
+let CO={country:'ID',zone:'kal',pay:'',errs:{},c:{}};
+function vCheckout(){
+ const id=UI.lang==='id';if(!DB.cart.length)return vCart();
+ const q=API.quote(DB.cart,CO.zone);const E=CO.errs,c=CO.c;
+ const zones=DB.settings.zones;
+ return`<section class="phead"><div class="wrap stack"><div class="crumb"><a href="#cart">${t('cart')}</a>/<span>${t('checkout')}</span></div><h1>${t('checkout')}</h1><p class="lead">${id?'Checkout tamu. Stok dipesan selama '+DB.settings.reserveMin+' menit setelah pesanan dibuat.':'Guest checkout. Stock is held for '+DB.settings.reserveMin+' minutes after you place the order.'}</p></div></section>
+ <form class="wrap co" id="coform" novalidate><div class="stack" style="gap:28px">
+  ${E.cart?`<div class="note warn">${esc(Ltxt(E.cart))} <a href="#cart">${t('cart')}</a></div>`:''}
+  <div class="panel"><h3>${id?'Kontak':'Contact'}</h3><div class="fgrid2">${fld('c-name',id?'Nama penerima':'Recipient name',`<input id="c-name" name="name" autocomplete="name" value="${esc(c.name)}">`,E.name)}${fld('c-email','Email',`<input id="c-email" name="email" type="email" autocomplete="email" value="${esc(c.email)}">`,E.email,id?'Untuk konfirmasi dan status pesanan.':'For confirmation and order status.')}${fld('c-phone',id?'Telepon / WhatsApp':'Phone / WhatsApp',`<input id="c-phone" name="phone" autocomplete="tel" value="${esc(c.phone)}">`,E.phone)}</div></div>
+  <div class="panel"><h3>${id?'Alamat pengiriman':'Shipping address'}</h3><div class="fgrid2">
+   ${fld('c-country',id?'Negara':'Country',`<select id="c-country" name="country"><option value="ID" ${CO.country==='ID'?'selected':''}>Indonesia</option>${COUNTRIES.filter(x=>x!=='Indonesia').map(x=>`<option value="${x}" ${CO.country===x?'selected':''}>${x}</option>`).join('')}</select>`,E.country)}
+   ${CO.country==='ID'?fld('c-zone',id?'Wilayah':'Region',`<select id="c-zone" name="zone">${zones.map(z=>`<option value="${z.id}" ${CO.zone===z.id?'selected':''}>${esc(z.name)}${z.on?' · '+rp(z.rate):(id?' · belum dilayani':' · not served yet')}</option>`).join('')}</select>`,E.zone):''}
+   ${CO.country!=='ID'?`<div class="full note warn">${id?'Checkout internasional belum aktif. Anda tetap bisa memesan: kirim inquiry ekspor dengan negara tujuan dan kami hitungkan ongkir serta ketentuan impornya.':'International checkout is not active yet. You can still order: send an export inquiry with your destination and we will quote shipping and import terms.'} <button class="link" type="button" data-act="cart-to-inq">${id?'Kirim isi keranjang sebagai inquiry':'Send this cart as an inquiry'}</button></div>`:`
+   <div class="full">${fld('c-address',id?'Alamat lengkap':'Street address',`<textarea id="c-address" name="address" autocomplete="street-address" style="min-height:80px">${esc(c.address)}</textarea>`,E.address)}</div>${fld('c-city',id?'Kota & kode pos':'City & postcode',`<input id="c-city" name="city" value="${esc(c.city)}">`)}`}
+  </div></div>
+  ${CO.country==='ID'?`<div class="panel"><h3>${id?'Pembayaran':'Payment'}</h3><div class="stack">${DB.settings.pay.map((m,i)=>`<label class="check"><input type="radio" name="pay" value="${esc(m)}" ${CO.pay===m?'checked':''}> ${esc(m)}</label>`).join('')}${E.pay?`<span class="err small" style="color:var(--bad)">${esc(Ltxt(E.pay))}</span>`:''}<p class="small muted">${id?'Pada versi live, pembayaran dikonfirmasi oleh penyedia lewat callback bertanda tangan.':'In the live version, payment is confirmed by the provider through a signed callback.'}</p></div></div>`:''}
+ </div>
+ <aside class="summary"><h3 style="font-size:1.2rem">${id?'Ringkasan':'Summary'}</h3>${q.items.map(i=>`<div class="r small"><span>${esc(Ltxt(i.p?.name))}${i.label?' · '+esc(i.label):''} × ${i.qty}</span><span>${rp(i.unit*i.qty)}</span></div>`).join('')}
+  <div class="r"><span>${t('subtotal')}</span><span>${rp(q.sub)}</span></div><div class="r"><span>${t('shipping')}${q.zone?' · '+esc(q.zone.name):''}</span><span>${q.zone&&q.zone.on?rp(q.ship):'—'}</span></div><div class="r t"><span>${t('total')}</span><span>${rp(q.total)}</span></div>
+  <input type="hidden" id="c-total" value="${q.total}">
+  <button class="btn" type="submit" style="justify-content:center" ${CO.country!=='ID'?'disabled':''}>${id?'Buat pesanan & bayar':'Place order & pay'}</button>
+  <p class="small muted">${id?'Dengan memesan, Anda menyetujui syarat pembelian dan variasi motif alami.':'By ordering you accept the purchase terms and natural motif variation.'}</p></aside></form>`;
+}
+function vPay(no){
+ const id=UI.lang==='id';const o=DB.orders.find(x=>x.no===no);if(!o)return vOrder();
+ const left=Math.max(0,o.expiresAt-now());const mm=String(Math.floor(left/60000)).padStart(2,'0'),ss=String(Math.floor(left%60000/1000)).padStart(2,'0');
+ const st={pending:['warn',id?'Menunggu pembayaran':'Awaiting payment'],paid:['ok',id?'Dibayar':'Paid'],failed:['bad',id?'Gagal':'Failed'],expired:['bad',id?'Kedaluwarsa':'Expired']}[o.pay]||['',o.pay];
+ return`<section class="phead"><div class="wrap stack"><span class="eyebrow">${id?'Pesanan':'Order'} ${esc(o.no)}</span><h1>${o.pay==='paid'?(id?'Terima kasih.':'Thank you.'):(id?'Selesaikan pembayaran':'Complete your payment')}</h1></div></section>
+ <div class="wrap co"><div class="stack" style="gap:22px">
+  <div class="panel"><div class="row" style="justify-content:space-between"><span class="chip ${st[0]}">${st[1]}</span>${o.pay==='pending'?`<span class="timer" id="timer" data-exp="${o.expiresAt}">${mm}:${ss}</span>`:''}</div>
+  ${o.pay==='pending'?`<p>${id?'Barang Anda dipesan sampai waktu habis. Metode':'Your items are held until the timer runs out. Method'}: <b>${esc(o.method)}</b>.</p>
+   <div class="note"><b>${id?'Simulasi penyedia pembayaran':'Payment provider simulator'}</b><br>${id?'Tombol ini meniru callback dari penyedia pembayaran untuk menguji status dan stok.':'These buttons mimic provider callbacks so you can test status and stock handling.'}</div>
+   <div class="row"><button class="btn" type="button" data-act="pay" data-v="paid" data-no="${o.no}">${id?'Bayar (sukses)':'Pay (success)'}</button><button class="btn ghost" type="button" data-act="pay" data-v="failed" data-no="${o.no}">${id?'Gagal':'Fail'}</button><button class="btn ghost" type="button" data-act="pay" data-v="expired" data-no="${o.no}">${id?'Kedaluwarsa':'Expire'}</button></div>`:
+   o.pay==='paid'?`<p>${id?'Pembayaran terverifikasi. Konfirmasi dikirim ke':'Payment verified. A confirmation was sent to'} <b>${esc(o.customer.email)}</b>. ${id?'Kami akan memproses dan mengirimkan nomor resi.':'We will pack your order and send tracking.'}</p><div class="row"><button class="btn ghost sm" type="button" data-act="pay" data-v="paid" data-no="${o.no}" data-dup="1">${id?'Uji: kirim ulang callback yang sama':'Test: resend the same callback'}</button></div>`:
+   `<p>${id?'Reservasi dilepas. Barang kembali tersedia untuk pembeli lain.':'The reservation was released and the items are available to others again.'}</p><div class="row"><a class="btn" href="#cart">${id?'Kembali ke keranjang':'Back to cart'}</a><button class="btn ghost sm" type="button" data-act="pay" data-v="paid" data-no="${o.no}">${id?'Uji: pembayaran terlambat masuk':'Test: late payment arrives'}</button></div>`}
+  ${o.recon?`<div class="note warn">${id?'Pembayaran terlambat diterima tetapi barang sudah tidak tersedia. Tim kami akan menghubungi Anda untuk penggantian atau refund.':'A late payment was received but the item is no longer available. Our team will contact you about a replacement or refund.'}</div>`:''}
+  </div>
+  <div class="panel"><h3 style="font-size:1.2rem">${id?'Riwayat':'History'}</h3>${o.log.map(l=>`<div class="row small" style="justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:8px"><span>${esc(l.m)}</span><span class="mono muted">${fmtD(l.at)}</span></div>`).join('')}</div>
+ </div>${orderSummary(o)}</div>`;
+}
+function orderSummary(o){const id=UI.lang==='id';return`<aside class="summary"><span class="mono small muted">${esc(o.no)} · ${fmtDay(o.at)}</span>${o.items.map(i=>`<div class="r small"><span>${esc(i.name)}${i.variant?' · '+esc(i.variant):''} × ${i.qty}</span><span>${rp(i.unit*i.qty)}</span></div>`).join('')}<div class="r"><span>${t('subtotal')}</span><span>${rp(o.sub)}</span></div><div class="r"><span>${t('shipping')} · ${esc(o.zone)}</span><span>${rp(o.ship)}</span></div><div class="r t"><span>${t('total')}</span><span>${rp(o.total)}</span></div>${o.priceTampered?`<p class="small muted">${id?'Total dari browser berbeda dan diabaikan; total server dipakai.':'The browser total differed and was ignored; the server total was used.'}</p>`:''}</aside>`}
+let OS={no:'',email:'',err:'',found:null};
+function vOrder(){
+ const id=UI.lang==='id';const o=OS.found&&DB.orders.find(x=>x.no===OS.found);
+ const ful={unfulfilled:id?'Belum diproses':'Not yet processed',processing:id?'Diproses':'Processing',shipped:id?'Dikirim':'Shipped',delivered:id?'Diterima':'Delivered',cancelled:id?'Dibatalkan':'Cancelled',returned:id?'Diretur':'Returned'};
+ return`<section class="phead"><div class="wrap stack"><h1>${t('orderstatus')}</h1><p class="lead">${id?'Masukkan nomor pesanan dan email yang dipakai saat checkout.':'Enter your order number and the email used at checkout.'}</p></div></section>
+ <div class="wrap" style="padding-block:36px 90px;max-width:820px"><form class="panel" id="osform" novalidate><div class="fgrid2">${fld('os-no',id?'Nomor pesanan':'Order number',`<input id="os-no" value="${esc(OS.no)}" placeholder="NE-2610-0001">`)}${fld('os-email','Email',`<input id="os-email" type="email" value="${esc(OS.email)}">`)}</div>${OS.err?`<p class="small" style="color:var(--bad)">${esc(OS.err)}</p>`:''}<button class="btn" type="submit" style="width:max-content">${id?'Cek status':'Check status'}</button></form>
+ ${o?`<div class="panel" style="margin-top:22px"><div class="row" style="justify-content:space-between"><h3>${esc(o.no)}</h3><div class="row"><span class="chip ${o.pay==='paid'?'ok':o.pay==='pending'?'warn':'bad'}">${esc(o.pay)}</span><span class="chip info">${ful[o.ful]}</span></div></div>${o.tracking?`<p>${id?'Nomor resi':'Tracking'}: <span class="mono">${esc(o.tracking)}</span></p>`:''}${o.items.map(i=>`<div class="row small" style="justify-content:space-between"><span>${esc(i.name)} · ${esc(i.variant)} × ${i.qty}</span><span>${rp(i.unit*i.qty)}</span></div>`).join('')}${o.pay==='pending'?`<a class="btn sm" href="#pay-${o.no}" style="width:max-content">${id?'Lanjutkan pembayaran':'Continue payment'}</a>`:''}</div>`:''}</div>`;
+}
+
+/* ---------------- INQUIRY FORMS ---------------- */
+let INQ={pre:{},errs:{},done:null};
+function inquiryForm(kind){
+ const id=UI.lang==='id';const E=INQ.errs,P=INQ.pre;
+ const types=kind==='custom'?[['custom','Custom design'],['private','Private label'],['sample','Sample order']]:[['wholesale','Wholesale'],['export','Export'],['sample','Sample order'],['custom','Custom design'],['private','Private label']];
+ return`<form class="panel" id="inqform" data-kind="${kind}" novalidate><h3>${kind==='custom'?(id?'Ceritakan proyek Anda':'Tell us about your project'):(id?'Minta penawaran':'Request a quote')}</h3>
+ <div class="fgrid2">
+  ${fld('i-name',id?'Nama':'Name',`<input id="i-name" autocomplete="name" value="${esc(P.name)}">`,E.name)}${fld('i-company',id?'Perusahaan / brand':'Company / brand',`<input id="i-company" autocomplete="organization" value="${esc(P.company)}">`)}
+  ${fld('i-email','Email',`<input id="i-email" type="email" autocomplete="email" value="${esc(P.email)}">`,E.email)}${fld('i-wa',id?'WhatsApp (opsional)':'WhatsApp (optional)',`<input id="i-wa" autocomplete="tel" value="${esc(P.wa)}">`)}
+  ${fld('i-country',id?'Negara':'Country',`<select id="i-country"><option value="">${id?'Pilih negara':'Choose a country'}</option>${COUNTRIES.map(x=>`<option ${P.country===x?'selected':''}>${x}</option>`).join('')}</select>`,E.country)}
+  ${fld('i-btype',id?'Tipe bisnis':'Business type',`<select id="i-btype">${['Boutique / retailer','Distributor / importer','Design brand','Hotel / interior','Corporate gifts','Other'].map(x=>`<option ${P.btype===x?'selected':''}>${x}</option>`).join('')}</select>`)}
+  ${fld('i-type',id?'Jenis inquiry':'Inquiry type',`<select id="i-type">${types.map(x=>`<option value="${x[0]}" ${P.type===x[0]?'selected':''}>${x[1]}</option>`).join('')}</select>`)}
+  ${fld('i-sku',id?'Produk / SKU':'Product / SKU',`<input id="i-sku" list="skus" value="${esc(P.sku)}" placeholder="NE-FSH-VST-001"><datalist id="skus">${pub().map(p=>`<option value="${p.sku}">${esc(Ltxt(p.name))}</option>`).join('')}</datalist>`)}
+  ${fld('i-qty',id?'Jumlah & unit':'Quantity & unit',`<input id="i-qty" value="${esc(P.qty)}" placeholder="${id?'mis. 50 pcs / 30 meter':'e.g. 50 pcs / 30 metres'}">`)}
+  ${fld('i-spec',id?'Ukuran / bahan':'Sizes / material',`<input id="i-spec" value="${esc(P.spec)}">`)}
+  ${fld('i-when',id?'Target waktu':'Target date',`<input id="i-when" type="month" value="${esc(P.when)}">`)}
+  ${fld('i-dest',id?'Tujuan pengiriman (kota/kode pos)':'Ship-to (city/postcode)',`<input id="i-dest" value="${esc(P.dest)}">`)}
+  ${kind==='custom'?fld('i-brand',id?'Branding & label':'Branding & label',`<input id="i-brand" value="${esc(P.brand)}" placeholder="${id?'Label tenun, hangtag, logo cetak…':'Woven label, hangtag, printed logo…'}">`)+fld('i-pack',id?'Kemasan':'Packaging',`<select id="i-pack">${['Standard','Gift box','Bulk / export carton','Custom branded'].map(x=>`<option>${x}</option>`).join('')}</select>`):''}
+  <div class="full">${fld('i-notes',id?'Catatan':'Notes',`<textarea id="i-notes">${esc(P.notes)}</textarea>`)}</div>
+  <div class="full">${fld('i-file',id?'Lampiran referensi (opsional)':'Reference attachment (optional)',`<input id="i-file" type="file" accept="image/*,.pdf">`,null,id?'Gambar atau PDF, maks. 10 MB.':'Image or PDF, max 10 MB.')}</div>
+  <label class="check full"><input type="checkbox" id="i-privacy" ${P.privacy?'checked':''}> <span>${id?'Saya setuju data ini dipakai untuk menjawab inquiry saya.':'I agree that this data is used to answer my inquiry.'}${E.privacy?`<br><span style="color:var(--bad)">${esc(Ltxt(E.privacy))}</span>`:''}</span></label>
+  <label class="check full"><input type="checkbox" id="i-mkt"> <span>${id?'Kirimi saya kabar koleksi baru (opsional).':'Send me news about new collections (optional).'}</span></label>
+ </div><button class="btn" type="submit" style="width:max-content">${t('send')}</button></form>`;
+}
+function vInqDone(){const id=UI.lang==='id';const q=INQ.done;if(!q)return vWholesale();
+ return`<section class="phead"><div class="wrap stack"><span class="eyebrow">${esc(q.no)}</span><h1>${id?'Inquiry diterima.':'Inquiry received.'}</h1><p class="lead">${id?`Nomor inquiry Anda ${q.no}. Tim kami membalas ke ${q.email} dengan pertanyaan lanjutan atau penawaran.`:`Your inquiry number is ${q.no}. We will reply to ${q.email} with follow-up questions or a quotation.`}</p>
+ ${q.type==='catalogue'?`<a class="btn arrow" href="#catalogue-view">${id?'Buka katalog digital':'Open the digital catalogue'}</a>`:`<div class="row"><a class="btn" href="#shop">${t('explore')}</a><a class="btn ghost" href="#home">Home</a></div>`}</div></section>`}
+
+/* ---------------- CONTENT PAGES ---------------- */
+function phead(eb,h,lead){return`<section class="phead"><div class="wrap stack"><span class="eyebrow">${eb}</span><h1>${h}</h1>${lead?`<p class="lead">${lead}</p>`:''}</div></section>`}
+function vStory(){const id=UI.lang==='id';return phead(t('story'),id?'Lebih dari sekadar pakaian':'More than a garment',id?'PT. Manna Borneo Persada adalah perusahaan kreatif di Balikpapan, Kalimantan Timur. Lewat brand Niken Ecoprint, kami membuat fesyen berkelanjutan yang terinspirasi alam Borneo.':'PT. Manna Borneo Persada is a creative company in Balikpapan, East Kalimantan. Through its brand Niken Ecoprint, it makes sustainable fashion inspired by the nature of Borneo.')+
+ `<section class="sec"><div class="wrap split"><div class="ph"><img src="${IMG('story-arranging')}" alt="${id?'Perajin menyusun daun':'Artisans arranging leaves'}" loading="lazy"></div><div class="stack" style="gap:18px"><span class="eyebrow">Brand DNA</span><h2>${id?'Setiap daun punya cerita':'Every leaf has a story'}</h2><p class="lead">${id?'Niken Ecoprint lahir dari kecintaan pada alam dan warisan budaya Borneo. Setiap warna punya makna, dan setiap karya buatan tangan membawa jiwa pembuatnya.':'Niken Ecoprint grew from a love of the nature and cultural heritage of Borneo. Every colour has a meaning, and every handmade piece carries something of its maker.'}</p></div></div></section>
+ <section class="sec" style="padding-top:0"><div class="wrap"><div class="usp">${[[id?'Pewarna kayu Ulin':'Ulin wood dye',id?'Pewarna alami dari kayu Ulin, dikenal awet dan menghasilkan nada tanah yang indah.':'Natural dye from Ulin (ironwood), known for its durability and earthy tones.'],[id?'Daun hutan Borneo':'Borneo forest leaves',id?'Daun dan bunga yang dipilih tangan menghasilkan motif yang tidak terulang.':'Hand-picked leaves and flowers produce patterns that never repeat.'],[id?'Bordir khas Kalimantan':'Kalimantan embroidery',id?'Sentuhan bordir tradisional Kalimantan sebagai identitas budaya.':'Traditional Kalimantan embroidery as a mark of cultural identity.']].map(u=>`<div><h4>${u[0]}</h4><p>${u[1]}</p></div>`).join('')}</div></div></section>
+ <section class="sec band"><div class="wrap split rev"><div class="stack" style="gap:18px"><span class="eyebrow">${id?'Visi & misi':'Vision & mission'}</span><h2>${id?'Menjadi brand fesyen berkelanjutan yang dikenal dunia, membawa keindahan Borneo.':'To become a globally recognised sustainable fashion brand representing the beauty of Borneo.'}</h2><ul style="margin:0;padding-left:18px;display:grid;gap:8px;color:#D9D5C8">${(id?['Melestarikan warisan budaya Indonesia','Mengembangkan fesyen ramah lingkungan','Memberdayakan perajin perempuan','Menjangkau pasar internasional']:['Preserve Indonesian cultural heritage','Develop eco-friendly fashion','Empower women artisans','Expand into international markets']).map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="ph" style="aspect-ratio:4/5"><img src="${IMG('identity-rack')}" alt="${id?'Rak koleksi ecoprint':'A rack of the ecoprint collection'}" loading="lazy"></div></div></section>
+ <section class="sec"><div class="wrap"><div class="sec-head"><div class="stack"><span class="eyebrow">${id?'Nilai kami':'Our values'}</span><h2>${id?'Alam, warisan, kerajinan, pemberdayaan':'Nature, heritage, craft, empowerment'}</h2></div></div><div class="usp">${[[id?'Alam':'Nature',id?'Menghormati lingkungan dan sumber daya alam.':'Respect for the environment and natural resources.'],[id?'Warisan':'Heritage',id?'Bangga pada budaya dan kearifan lokal.':'Pride in our culture and local wisdom.'],[id?'Kerajinan':'Craftsmanship',id?'Dibuat tangan dengan teliti.':'Handmade with attention to detail.'],[id?'Pemberdayaan':'Empowerment',id?'Memberdayakan perajin perempuan dan komunitas lokal.':'Empowering women artisans and local communities.'],[id?'Komunitas lokal':'Local community',id?'Bekerja sama dengan pemasok dan komunitas setempat.':'Working with local suppliers and communities.'],[id?'Pasar global':'Global markets',id?'Target pasar: Singapura, Jepang, Australia, Eropa, AS.':'Target markets: Singapore, Japan, Australia, Europe, USA.']].map(u=>`<div><h4>${u[0]}</h4><p>${u[1]}</p></div>`).join('')}</div></div></section>`}
+const PROC=[['proc-1','Leaf collection','Pengumpulan daun','Leaves and flowers are gathered and sorted by shape and tannin.','Daun dan bunga dikumpulkan lalu dipilah menurut bentuk dan taninnya.'],['proc-2','Natural dye (Ulin wood)','Pewarna alami (kayu Ulin)','Ulin wood shavings are prepared as the colour bath.','Serutan kayu Ulin disiapkan sebagai larutan pewarna.'],['proc-3','Mordant process','Proses mordan','Cloth is treated so the plant colour binds to the fibre.','Kain diolah agar warna tanaman mengikat ke serat.'],['proc-4','Arranging leaves','Menyusun daun','Each leaf is placed by hand across the length of cloth.','Setiap daun diletakkan dengan tangan di sepanjang kain.'],['proc-5','Finishing the bundle','Merapikan gulungan','The cloth is covered, smoothed and rolled tightly.','Kain ditutup, diratakan dan digulung rapat.'],['proc-6','Steaming','Pengukusan','Bundles are steamed so shape and colour transfer.','Gulungan dikukus agar bentuk dan warna berpindah.'],['proc-7','Steamed product','Hasil kukusan','Bundles rest before being opened to reveal the print.','Gulungan didiamkan sebelum dibuka untuk melihat motif.'],['proc-8','Drying','Pengeringan','The printed cloth dries in the shade before sewing.','Kain bermotif dikeringkan di tempat teduh sebelum dijahit.']];
+function vProcess(){const id=UI.lang==='id';return phead(t('process'),id?'Dari alam menjadi karya abadi':'From nature to timeless creation',id?'Delapan tahap produksi di workshop kami, dari pengumpulan daun hingga pengeringan. Proses 100% buatan tangan.':'Eight production stages in our workshop, from leaf collection to drying. A fully handmade process.')+
+ `<section class="sec"><div class="wrap"><div class="steps eight">${PROC.map((s,i)=>`<div class="step"><div class="ph"><img src="${IMG(s[0])}" alt="${s[1]}" loading="lazy"></div><span class="n">${String(i+1).padStart(2,'0')} / 08</span><h4>${id?s[2]:s[1]}</h4><p>${id?s[4]:s[3]}</p></div>`).join('')}</div></div></section>
+ <section class="sec band"><div class="wrap split"><div class="stack" style="gap:18px"><span class="eyebrow">${id?'Satu dari satu':'One of one'}</span><h2>${id?'Tidak ada dua kain yang sama.':'No two pieces are the same.'}</h2><p class="lead">${id?'Daun mencetak berbeda menurut usianya, musim dan kandungan taninnya. Karena itu setiap produk kami diberi label: barang persis atau keluarga motif.':'A leaf prints differently depending on its age, the season and its tannin. That is why every product carries a label: exact piece or pattern family.'}</p><a class="btn light arrow" href="#shop" style="width:max-content">${t('explore')}</a></div><div class="ph"><img src="${IMG('fabric-mannequin-1')}" alt="" loading="lazy"></div></div></section>`}
+function vWholesale(){const id=UI.lang==='id';return phead(t('wholesale'),id?'Bermitra dengan Niken Ecoprint':'Partner with Niken Ecoprint',id?'Untuk butik, distributor, brand desain dan hotel. Target pasar kami: Singapura, Jepang, Australia, Eropa dan Amerika Serikat.':'For boutiques, distributors, design brands and hotels. Our target markets are Singapore, Japan, Australia, Europe and the USA.')+
+ `<section class="sec"><div class="wrap two"><div class="stack" style="gap:30px">
+  <div class="stack"><h3>${id?'Cara memesan':'How ordering works'}</h3><div class="tbl-wrap"><table><tbody>${[['1',id?'Inquiry':'Inquiry',id?'Kirim produk, jumlah, negara':'Send products, quantity, country'],['2',id?'Penawaran':'Quotation',id?'Spesifikasi, MOQ, lead time, termin, pengiriman':'Spec, MOQ, lead time, terms, shipping'],['3',id?'Sampel':'Sample',id?'Opsional sebelum produksi besar':'Optional before bulk'],['4',id?'Persetujuan & invoice':'Approval & invoice',id?'Sesuai termin di penawaran':'Per the quoted terms'],['5',id?'Produksi & kirim':'Production & shipping',id?'Kemasan ekspor':'Export packaging']].map(r=>`<tr><td class="mono">${r[0]}</td><td><b>${r[1]}</b></td><td class="muted">${r[2]}</td></tr>`).join('')}</tbody></table></div></div>
+  <div class="stack"><h3>${id?'MOQ & harga':'MOQ & pricing'}</h3><p class="muted">${id?'MOQ ditetapkan per produk. Harga grosir dan ekspor dikirim dalam penawaran tertulis dengan mata uang, basis pengiriman (mis. FOB) dan masa berlaku yang jelas. Harga retail di website tidak berlaku untuk pesanan bisnis.':'MOQ is set per product. Wholesale and export prices come in a written quotation with a stated currency, shipping basis (e.g. FOB) and validity. Retail prices on this site do not apply to business orders.'}</p></div>
+  <div class="stack"><h3>${id?'Kemasan & pengiriman':'Packaging & shipping'}</h3><p class="muted">${id?'Kemasan retail, hadiah dan karton ekspor diatur terpisah. Biaya kirim, pajak dan bea masuk dihitung per negara dalam penawaran.':'Retail, gift and export-carton packaging are handled separately. Shipping, tax and import duty are calculated per country in the quotation.'}</p></div>
+  <div class="tbl-wrap"><table><thead><tr><th>${id?'Kategori':'Category'}</th><th>${id?'Contoh produk':'Example products'}</th><th>Retail MOQ</th></tr></thead><tbody>${DB.categories.filter(c=>!c.soon).map(c=>`<tr><td>${esc(Ltxt(c.name))}</td><td class="muted">${pub().filter(p=>p.cat===c.id).slice(0,3).map(p=>esc(p.sku)).join(', ')}</td><td>${c.id==='fabric'?(id?'Fleksibel':'Flexible'):c.id==='footwear'?'1 pair':'1 pc'}</td></tr>`).join('')}</tbody></table></div>
+ </div>${INQ.done&&UI.route==='inq-done'?'':inquiryForm('b2b')}</div></section>`}
+function vCustom(){const id=UI.lang==='id';return phead('Custom & Private Label',id?'Motif Anda, keahlian kami':'Your motif, our craft',id?'Kami mengembangkan motif, warna, produk, label dan kemasan untuk brand Anda. Proyek dimulai dari brief, dievaluasi, dibuatkan sampel bila perlu, lalu diberi penawaran.':'We develop motifs, colours, products, labels and packaging for your brand. Projects start from a brief, are evaluated, sampled when needed, then quoted.')+
+ `<section class="sec"><div class="wrap two"><div class="stack" style="gap:28px"><div class="usp" style="grid-template-columns:1fr">${[[id?'Yang bisa kami buat':'What we can make',id?'Kain ecoprint per meter, pakaian, rompi, tas, dompet, syal dan alas kaki.':'Ecoprint fabric by the metre, garments, vests, bags, wallets, scarves and footwear.'],[id?'Batasan':'Limits',id?'Motif alami tidak dapat diulang identik. Kami menyepakati keluarga motif dan toleransi warna di sampel.':'Natural prints cannot be repeated identically. We agree a pattern family and colour tolerance on the sample.'],[id?'Proses':'Process',id?'Brief → evaluasi → sampel bila perlu → penawaran → produksi.':'Brief → evaluation → sample if needed → quotation → production.']].map(u=>`<div style="padding-left:0;border-left:0"><h4>${u[0]}</h4><p>${u[1]}</p></div>`).join('')}</div><div class="ph" style="aspect-ratio:4/3;overflow:hidden"><img src="${IMG('proc-4')}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>${inquiryForm('custom')}</div></section>`}
+function vJournal(){const id=UI.lang==='id';return phead(t('journal'),id?'Pameran & peragaan busana':'Exhibitions & fashion shows',id?'Dokumentasi dari profil perusahaan. Juga: Indo Haus Market Melbourne (2025–2026), Startup & SME to the Next Level Singapore, Ecoprint Fashion Week TMII 2025 Jakarta, Ecoprint Fashion Trend 2025 Bogor, Rakernas IWAPI.':'Documentation from the company profile. Also: Indo Haus Market Melbourne (2025–2026), Startup & SME to the Next Level Singapore, Ecoprint Fashion Week TMII 2025 Jakarta, Ecoprint Fashion Trend 2025 Bogor, IWAPI National Working Meeting.')+`<section class="sec"><div class="wrap">${gal(EXH)}</div></section>`}
+function vContact(){const id=UI.lang==='id';const C=DB.contact;const ph=phoneTxt();return phead(t('contact'),id?'Mari terhubung':"Let's connect",'')+
+ `<section class="sec"><div class="wrap two"><div class="stack" style="gap:22px"><dl class="spec" style="font-size:1rem"><dt>${id?'Perusahaan':'Company'}</dt><dd>PT. Manna Borneo Persada (Niken Ecoprint)</dd><dt>Email</dt><dd><span class="mono">${esc(C.email)}</span> <button class="link small" type="button" data-act="copy" data-v="${esc(C.email)}">${id?'Salin':'Copy'}</button></dd><dt>WhatsApp</dt><dd>${ph?`<span class="mono">${esc(ph)}</span>`:`<span class="muted">${id?'Nomor resmi sedang dikonfirmasi':'Official number being confirmed'}</span>`}</dd><dt>Instagram</dt><dd><a href="https://instagram.com/${esc(C.instagram)}" target="_blank" rel="noopener">@${esc(C.instagram)}</a></dd><dt>${id?'Lokasi':'Location'}</dt><dd>${C.addressConfirmed?esc(C.address):'Balikpapan, East Kalimantan, Indonesia'}</dd></dl>
+ <img src="${IMG('logo')}" alt="Niken Ecoprint logo" style="width:200px;border-radius:2px"></div>${inquiryForm('b2b')}</div></section>`}
+function vFaq(){const id=UI.lang==='id';return phead(t('faq'),id?'Pertanyaan & kebijakan':'Questions & policies','')+`<section class="sec"><div class="wrap faq" style="max-width:860px">${FAQ().map(q=>`<details><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join('')}</div></section>`}
+let CATF={errs:{}};
+function vCatalogue(){const id=UI.lang==='id';const E=CATF.errs;const m=DB.catalogueMeta;return phead(t('catalogue'),id?'Katalog internasional':'International catalogue',id?`Versi ${m.version} · ${m.date} · ${m.lang}. Dibuat langsung dari database produk sehingga nama, SKU dan bahan selalu sama dengan website.`:`Version ${m.version} · ${m.date} · ${m.lang}. Built from the product database so names, SKUs and materials always match the website.`)+
+ `<section class="sec"><div class="wrap two"><div class="stack" style="gap:16px"><h3>${id?'Isi katalog':"What's inside"}</h3><p class="muted">${id?'Kain, tas & aksesori, fashion, alas kaki, custom & private label, grosir, MOQ & lead time, kemasan & pengiriman, cara memesan.':'Fabrics, bags & accessories, fashion, footwear, custom & private label, wholesale, MOQ & lead time, packaging & shipping, how to order.'}</p><a class="btn ghost arrow" href="#catalogue-view" style="width:max-content">${id?'Lihat katalog digital':'View the digital catalogue'}</a></div>
+ <form class="panel" id="catform" novalidate><h3>${t('reqcat')}</h3><div class="fgrid2">${fld('k-name',id?'Nama':'Name',`<input id="k-name" autocomplete="name">`,E.name)}${fld('k-email','Email',`<input id="k-email" type="email" autocomplete="email">`,E.email)}${fld('k-company',id?'Perusahaan (opsional)':'Company (optional)',`<input id="k-company">`)}${fld('k-country',id?'Negara (opsional)':'Country (optional)',`<select id="k-country"><option value=""></option>${COUNTRIES.map(x=>`<option>${x}</option>`).join('')}</select>`)}</div><button class="btn" type="submit" style="width:max-content">${t('reqcat')}</button></form></div></section>`}
+function vCatalogueView(){const id=UI.lang==='id';const m=DB.catalogueMeta;const order=['fabric','bags','accessories','fashion','footwear'];const ps=pub().filter(p=>p.catalogue);
+ return`<section class="phead"><div class="wrap stack"><div class="crumb"><a href="#catalogue">${t('catalogue')}</a>/<span>v${esc(m.version)}</span></div><h1>Niken Ecoprint Catalogue</h1><p class="lead">Version ${esc(m.version)} · ${esc(m.date)} · ${esc(m.lang)} · ${ps.length} products</p></div></section>
+ <div class="wrap catalogue" style="padding-block:36px 90px"><div class="cpage"><div class="split"><div class="stack" style="gap:14px"><span class="eyebrow">PT. Manna Borneo Persada</span><h2>Leaves tell the story of Borneo</h2><p class="muted">Botanical ecoprint textiles and products from Balikpapan, East Kalimantan. Natural dye from Ulin wood and Borneo leaves; handmade by women artisans.</p></div><div class="ph"><img src="${IMG('fabric-mannequin-2')}" alt=""></div></div>
+ ${order.map(cid=>{const list=ps.filter(p=>p.cat===cid);if(!list.length)return'';return`<div><h3 style="margin:18px 0 6px">${esc(catName(cid))}</h3>${list.map(p=>`<div class="cprod"><img src="${IMG(p.images[0])}" alt="${esc(Ltxt(p.name))}" loading="lazy"><div class="stack" style="gap:8px"><b style="font-family:var(--f-display);font-weight:400;font-size:1.25rem">${esc(Ltxt(p.name))}</b><p class="muted small">${esc(Ltxt(p.story))}</p><dl class="spec small"><dt>SKU</dt><dd class="mono">${esc(p.sku)}</dd><dt>Material</dt><dd>${esc(Ltxt(p.material))}</dd><dt>Size</dt><dd>${esc(Ltxt(p.size))}</dd><dt>Patterns</dt><dd>${p.mode==='exact'?'Exact piece':'Representative pattern; varies per piece'}</dd><dt>MOQ</dt><dd>Retail 1 · Wholesale per quotation</dd><dt>Custom</dt><dd>Size, motif and colour on request</dd><dt>Care</dt><dd>${esc(Ltxt(CARE[p.care]))}</dd></dl><button class="link small" type="button" data-act="quote-for" data-v="${p.sku}" style="width:max-content">Wholesale inquiry</button></div></div>`).join('')}</div>`}).join('')}
+ <div class="split" style="align-items:start;border-top:1px solid var(--line);padding-top:22px"><div class="stack"><h3>How to order</h3><p class="muted small">Send an inquiry with products, quantities and destination. We reply with a quotation stating currency, shipping basis, MOQ, lead time and payment terms. Samples are available before bulk production.</p></div><div class="stack"><h3>Contact</h3><p class="muted small">${esc(DB.contact.email)} · @${esc(DB.contact.instagram)}</p></div></div></div></div>`}
+
+/* =========================================================
+   ADMIN CMS
+   ========================================================= */
+const ATABS=[['dash','Dashboard',null],['products','Produk & Stok','product'],['orders','Pesanan','order.view'],['inquiries','Inquiry & Quotation','inquiry'],['content','Konten & Kontak','content'],['catalogue','Katalog','catalogue'],['reports','Laporan','report'],['settings','Pengaturan & Audit','settings'],['tests','Uji Penerimaan','tests']];
+const payChip=s=>`<span class="chip ${s==='paid'?'ok':s==='pending'?'warn':s==='refunded'||s==='partially refunded'?'info':'bad'}">${s}</span>`;
+const fulChip=s=>`<span class="chip ${s==='delivered'?'ok':s==='shipped'||s==='processing'?'info':s==='unfulfilled'?'plain':'bad'}">${s}</span>`;
+function vAdmin(){
+ if(!UI.role)return`<section class="phead"><div class="wrap stack"><span class="eyebrow">Admin CMS</span><h1>Masuk sebagai</h1><p class="lead">Pilih role untuk mencoba hak akses. Di versi live, setiap role masuk dengan akun sendiri, MFA dan pembatasan percobaan login; izin diperiksa di server.</p></div></section><div class="wrap" style="padding-block:36px 90px"><div class="roles">${Object.entries(ROLES).map(([k,r])=>`<button class="role" type="button" data-act="role" data-v="${k}"><b>${r.n}</b><span>${r.d}</span></button>`).join('')}</div></div>`;
+ const tabs=ATABS.filter(x=>!x[2]||can(UI.role,x[2]));if(!tabs.find(x=>x[0]===UI.tab))UI.tab='dash';
+ const counts={orders:DB.orders.filter(o=>o.pay==='paid'&&o.ful==='unfulfilled').length,inquiries:DB.inquiries.filter(i=>i.status==='New').length};
+ let body='';try{body=({dash:aDash,products:aProducts,orders:aOrders,inquiries:aInq,content:aContent,catalogue:aCatalogue,reports:aReports,settings:aSettings,tests:aTests})[UI.tab]()}catch(e){body=`<div class="note warn">${esc(e.message)}</div>`}
+ return`<div class="admin"><nav class="aside" aria-label="CMS"><div class="who"><span class="lbl">Masuk sebagai</span><b style="font-family:var(--f-display);font-weight:400;font-size:1.3rem">${ROLES[UI.role].n}</b><button class="link small" type="button" data-act="logout" style="width:max-content;padding:0">Ganti role</button></div>${tabs.map(x=>`<button type="button" data-act="tab" data-v="${x[0]}" aria-current="${UI.tab===x[0]}">${x[1]}${counts[x[0]]?`<span class="badge-n" style="position:static">${counts[x[0]]}</span>`:''}</button>`).join('')}</nav><div class="amain">${body}</div></div>`;
+}
+function aDash(){
+ const paid=DB.orders.filter(o=>o.pay==='paid');const rev=paid.reduce((a,o)=>a+o.total,0)-DB.orders.filter(o=>o.pay==='refunded').reduce((a,o)=>a+o.total,0);
+ const low=DB.products.filter(p=>isPublic(p)&&p.sale!=='quote'&&avail(p)<=1);
+ return`<div class="stack"><span class="eyebrow">Dashboard</span><h2>Ringkasan hari ini</h2></div>
+ <div class="kpis"><div class="kpi"><span>Pesanan baru (paid, belum diproses)</span><b>${DB.orders.filter(o=>o.pay==='paid'&&o.ful==='unfulfilled').length}</b></div><div class="kpi"><span>Inquiry baru</span><b>${DB.inquiries.filter(i=>i.status==='New').length}</b></div><div class="kpi ${low.length?'alert':''}"><span>Stok rendah (≤1)</span><b>${low.length}</b></div><div class="kpi"><span>Pendapatan terverifikasi</span><b style="font-size:1.4rem">${rp(rev)}</b></div></div>
+ ${DB.orders.some(o=>o.recon)?`<div class="note warn"><b>Antrean rekonsiliasi:</b> ${DB.orders.filter(o=>o.recon).map(o=>o.no).join(', ')} menerima pembayaran terlambat untuk barang yang sudah tidak tersedia.</div>`:''}
+ ${DB.inquiries.some(i=>i.notify==='failed')?`<div class="note warn">${DB.inquiries.filter(i=>i.notify==='failed').length} notifikasi inquiry gagal terkirim. Inquiry tetap tersimpan; kirim ulang dari menu Inquiry.</div>`:''}
+ <div class="two"><div class="stack"><h3 style="font-size:1.2rem">Pesanan terbaru</h3>${DB.orders.length?`<div class="tbl-wrap"><table><thead><tr><th>No</th><th>Pembeli</th><th>Bayar</th><th>Pemenuhan</th><th class="num">Total</th></tr></thead><tbody>${DB.orders.slice(0,6).map(o=>`<tr><td class="mono">${o.no}</td><td>${esc(o.customer.name)}</td><td>${payChip(o.pay)}</td><td>${fulChip(o.ful)}</td><td class="num">${rp(o.total)}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty"><p>Belum ada pesanan. Coba beli produk dari toko, lalu kembali ke sini.</p><a class="btn sm" href="#shop">Buka toko</a></div>`}</div>
+ <div class="stack"><h3 style="font-size:1.2rem">Stok rendah</h3><div class="tbl-wrap"><table><thead><tr><th>SKU</th><th>Produk</th><th class="num">Tersedia</th></tr></thead><tbody>${low.map(p=>`<tr><td class="mono">${p.sku}</td><td>${esc(p.name.en)}</td><td class="num">${avail(p)}</td></tr>`).join('')||'<tr><td colspan="3" class="muted">Tidak ada</td></tr>'}</tbody></table></div></div></div>`;
+}
+/* ---- products ---- */
+function aProducts(){
+ const ed=UI.editId&&DB.products.find(p=>p.id===UI.editId);
+ const st=s=>`<span class="chip ${s==='published'?'ok':s==='draft'?'warn':'plain'}">${s}</span>`;
+ return`<div class="row" style="justify-content:space-between"><div class="stack"><span class="eyebrow">Produk & Stok</span><h2>${DB.products.length} produk</h2></div><button class="btn sm" type="button" data-act="p-new">Tambah produk</button></div>
+ <div class="two"><div class="tbl-wrap"><table><thead><tr><th>SKU</th><th>Nama</th><th>Mode</th><th>Status</th><th class="num">Harga</th><th class="num">Stok</th></tr></thead><tbody>${DB.products.map(p=>`<tr class="click ${UI.editId===p.id?'sel':''}" data-act="p-edit" data-v="${p.id}"><td class="mono">${p.sku}</td><td>${esc(p.name.en)}${p.rev?' <span class="chip warn plain">draft rev</span>':''}</td><td class="small">${p.mode==='exact'?'exact':'pattern'} · ${p.sale}</td><td>${st(p.status)}</td><td class="num">${p.price?rp(p.price):'—'}</td><td class="num">${p.sale==='quote'?'—':avail(p)}</td></tr>`).join('')}</tbody></table></div>
+ <div>${ed?editor(ed):`<div class="empty"><p>Pilih produk untuk mengedit. Alur: edit → simpan draft → preview → publish.</p></div>`}</div></div>`;
+}
+function editor(p){
+ const r=Object.assign({},p,p.rev||{});const isOwner=can(UI.role,'price');const canEdit=can(UI.role,'product');
+ const cats=DB.categories;
+ return`<form class="panel" id="pform" data-id="${p.id}" novalidate><div class="row" style="justify-content:space-between"><h3 style="font-size:1.25rem">${esc(p.name.en)}</h3><span class="mono small muted">${p.id}</span></div>
+ ${p.rev?`<div class="note warn">Ada perubahan draft yang belum dipublikasikan. Toko masih menampilkan versi lama.</div>`:''}
+ <div class="fgrid2">
+ ${fld('e-sku','SKU unik',`<input id="e-sku" value="${esc(r.sku)}">`,null,p.legacySku?'Kode lama: '+p.legacySku:'')}
+ ${fld('e-cat','Kategori',`<select id="e-cat">${cats.map(c=>`<option value="${c.id}" ${r.cat===c.id?'selected':''}>${esc(c.name.en)}</option>`).join('')}</select>`)}
+ ${fld('e-nen','Nama (EN)',`<input id="e-nen" value="${esc(r.name.en)}">`)}${fld('e-nid','Nama (ID)',`<input id="e-nid" value="${esc(r.name.id)}">`)}
+ <div class="full">${fld('e-sen','Cerita (EN)',`<textarea id="e-sen">${esc(r.story.en)}</textarea>`)}</div>
+ <div class="full">${fld('e-sid','Cerita (ID)',`<textarea id="e-sid">${esc(r.story.id)}</textarea>`,null,'Kosong = tampil versi EN dengan penanda [EN].')}</div>
+ ${fld('e-men','Bahan (EN)',`<input id="e-men" value="${esc(r.material.en)}">`)}${fld('e-size','Ukuran / dimensi (EN)',`<input id="e-size" value="${esc(r.size.en)}">`)}
+ ${fld('e-mode','Mode motif',`<select id="e-mode" ${p.hasOrders?'disabled':''}><option value="pattern" ${r.mode==='pattern'?'selected':''}>Pattern family</option><option value="exact" ${r.mode==='exact'?'selected':''}>Exact piece</option></select>`,null,p.hasOrders?'Terkunci: produk sudah pernah dipesan.':'')}
+ ${fld('e-sale','Mode penjualan',`<select id="e-sale">${[['retail','Retail ready stock'],['mto','Made to order'],['quote','Request price / quote']].map(x=>`<option value="${x[0]}" ${r.sale===x[0]?'selected':''}>${x[1]}</option>`).join('')}</select>`)}
+ ${fld('e-price','Harga retail (IDR)',`<input id="e-price" inputmode="numeric" value="${r.price||''}" ${isOwner?'':'disabled'}>`,null,isOwner?(p.fob?`Referensi internal FOB katalog: USD ${p.fob.usd}/${p.fob.unit} (${p.fob.label}). Bukan harga retail.`:''):'Hanya Owner yang dapat mengubah harga.')}
+ ${fld('e-lead','Lead time (EN)',`<input id="e-lead" value="${esc(r.lead?.en||'')}" placeholder="Kosong = MTO lewat inquiry">`)}
+ </div>
+ <div class="stack" style="gap:8px"><span class="lbl">Foto (urutan = galeri)</span><div class="row">${r.images.map((im,i)=>`<span style="position:relative"><img src="${IMG(im)}" alt="" style="width:64px;height:78px;object-fit:cover;border-radius:2px"><button type="button" class="btn xs ghost" data-act="img-rm" data-v="${i}" style="position:absolute;right:-6px;top:-6px;background:var(--card)" aria-label="Hapus foto">×</button></span>`).join('')||'<span class="muted small">Belum ada foto. Produk tanpa foto tidak bisa dipublikasikan.</span>'}</div>
+  <div class="row"><select id="e-addimg" style="width:auto" aria-label="Tambah foto dari media library"><option value="">Tambah dari media library…</option>${MEDIA.map(m=>`<option>${m}</option>`).join('')}</select><label class="btn xs ghost" for="e-upload" style="cursor:pointer">Upload</label><input id="e-upload" type="file" accept="image/jpeg,image/png,image/webp" hidden></div></div>
+ ${p.mode==='exact'?`<div class="stack" style="gap:8px"><span class="lbl">Exact pieces</span><div class="tbl-wrap vtbl"><table><thead><tr><th>Kode piece</th><th>Label</th><th>Status</th></tr></thead><tbody>${p.pieces.map(pc=>`<tr><td class="mono small">${pc.code}</td><td>${esc(pc.label)}</td><td>${pc.status==='sold'?'<span class="chip plain">sold</span>':pc.status==='reserved'?`<span class="chip warn">reserved · ${pc.heldBy}</span>`:'<span class="chip ok">available</span>'}</td></tr>`).join('')}</tbody></table></div><button class="btn xs ghost" type="button" data-act="piece-add" style="width:max-content">Tambah piece (pakai foto utama)</button></div>`:
+ `<div class="stack" style="gap:8px"><span class="lbl">Varian & stok</span><div class="tbl-wrap vtbl"><table><thead><tr><th>Varian</th><th class="num">Stok</th><th class="num">Dipesan</th><th class="num">Tersedia</th></tr></thead><tbody>${p.variants.map((v,i)=>`<tr><td>${esc(v.label)}</td><td class="num"><input id="e-st-${i}" inputmode="numeric" value="${v.stock}" style="width:70px;text-align:right" aria-label="Stok ${esc(v.label)}"></td><td class="num">${v.reserved}</td><td class="num">${v.stock-v.reserved}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">Tanpa varian</td></tr>'}</tbody></table></div><div class="row"><input id="e-newvar" placeholder="Varian baru, mis. XL" style="width:180px" aria-label="Nama varian baru"><button class="btn xs ghost" type="button" data-act="var-add">Tambah varian</button></div></div>`}
+ <div class="row" style="border-top:1px solid var(--line);padding-top:16px">
+  <button class="btn sm" type="submit" ${canEdit?'':'disabled'}>Simpan draft</button>
+  <button class="btn sm ghost" type="button" data-act="p-preview">Preview</button>
+  ${p.status!=='published'||p.rev?`<button class="btn sm ghost" type="button" data-act="p-publish">Publish</button>`:''}
+  ${p.status==='published'?`<button class="btn sm ghost" type="button" data-act="p-status" data-v="draft">Unpublish</button>`:''}
+  ${p.status!=='archived'?`<button class="btn sm ghost" type="button" data-act="p-status" data-v="archived">Archive</button>`:`<button class="btn sm ghost" type="button" data-act="p-status" data-v="draft">Restore</button>`}
+  <button class="btn sm ghost" type="button" data-act="p-dup">Duplikat</button>
+  ${p.status==='draft'&&!p.hasOrders?`<button class="btn sm danger" type="button" data-act="p-del">Hapus permanen</button>`:''}
+ </div>${UI.confirmDel===p.id?`<div class="note warn row" style="justify-content:space-between"><span>Hapus ${esc(p.sku)} permanen? Tindakan ini tidak bisa dibatalkan.</span><span class="row"><button class="btn xs danger" type="button" data-act="p-del-yes">Ya, hapus</button><button class="btn xs ghost" type="button" data-act="p-del-no">Batal</button></span></div>`:''}</form>`;
+}
+const MEDIA=['flats-rose','sneakers-canvas','fabric-rack','bag-totes-2','bomber-mannequin','vest-lurik-hanger','vest-red-feature','vest-unisex','vest-lurik','shirt-hijab','tunic','women-sleeveless','shirt-orange','tee','bomber','fabric-yellow','fabric-brown','fabric-mannequin-1','fabric-mannequin-2','bag-clutch','bag-duffel','bag-totes','wallet-short','wallet-long','shoes-women','sneakers-brown','sneakers-olive','rack','fabric-mood','stilllife-mood','artisan-mood'];
+function readEditor(p){
+ const g=id=>$('#'+id)?.value??'';const base=Object.assign({},p,p.rev||{});
+ const rev={sku:g('e-sku').trim(),cat:g('e-cat'),name:{en:g('e-nen').trim(),id:g('e-nid').trim()},story:{en:g('e-sen').trim(),id:g('e-sid').trim()},material:{en:g('e-men').trim(),id:base.material.id},size:{en:g('e-size').trim(),id:base.size.id},
+  mode:p.hasOrders?p.mode:g('e-mode'),sale:g('e-sale'),price:$('#e-price').disabled?base.price:(parseInt(g('e-price').replace(/\D/g,''))||null),lead:g('e-lead').trim()?{en:g('e-lead').trim(),id:base.lead?.id||''}:null,images:base.images.slice()};
+ const stocks=p.variants.map((v,i)=>{const el=$('#e-st-'+i);return el?Math.max(0,parseInt(el.value)||0):v.stock});
+ return{rev,stocks};
+}
+API.saveProduct=(role,p,rev,stocks)=>{
+ if(!rev.sku)throw new Error('SKU wajib diisi.');
+ if(DB.products.some(x=>x.id!==p.id&&(x.sku===rev.sku||(x.rev&&x.rev.sku===rev.sku))))throw new Error('SKU '+rev.sku+' sudah dipakai produk lain. SKU harus unik.');
+ const cur=Object.assign({},p,p.rev||{});
+ if((rev.price||null)!==(cur.price||null)&&!can(role,'price'))throw Object.assign(new Error('403 · Hanya Owner yang dapat mengubah harga.'),{code:403});
+ return API.admin(role,'product.edit',`Simpan draft ${rev.sku}`,()=>{
+  if(p.status==='published')p.rev=rev;else{Object.assign(p,rev);p.rev=null}
+  stocks.forEach((s,i)=>{const v=p.variants[i];if(v&&s!==v.stock){if(s<v.reserved)throw new Error(`Stok ${v.label} tidak boleh di bawah jumlah yang sedang dipesan (${v.reserved}).`);move(p,v.label,s-v.stock,'adjust','admin');v.stock=s}});
+ });
+};
+/* ---- orders ---- */
+function aOrders(){
+ const o=UI.orderSel&&DB.orders.find(x=>x.no===UI.orderSel);const canF=can(UI.role,'order.fulfill');const own=UI.role==='owner';
+ return`<div class="stack"><span class="eyebrow">Pesanan</span><h2>${DB.orders.length} pesanan</h2><p class="muted small">Status pembayaran dan status pemenuhan dipisah. Data item adalah snapshot saat pesanan dibuat.</p></div>
+ <div class="two"><div class="tbl-wrap"><table><thead><tr><th>No</th><th>Tanggal</th><th>Pembeli</th><th>Bayar</th><th>Pemenuhan</th><th class="num">Total</th></tr></thead><tbody>${DB.orders.map(x=>`<tr class="click ${UI.orderSel===x.no?'sel':''}" data-act="o-sel" data-v="${x.no}"><td class="mono">${x.no}${x.recon?' ⚑':''}</td><td class="small">${fmtD(x.at)}</td><td>${esc(x.customer.name)}</td><td>${payChip(x.pay)}</td><td>${fulChip(x.ful)}</td><td class="num">${rp(x.total)}</td></tr>`).join('')||'<tr><td colspan="6" class="muted">Belum ada pesanan</td></tr>'}</tbody></table></div>
+ <div>${o?`<div class="panel"><div class="row" style="justify-content:space-between"><h3 style="font-size:1.25rem">${o.no}</h3><div class="row">${payChip(o.pay)}${fulChip(o.ful)}</div></div>
+  <dl class="spec small"><dt>Pembeli</dt><dd>${esc(o.customer.name)} · ${esc(o.customer.email)} · ${esc(o.customer.phone)}</dd><dt>Alamat</dt><dd>${esc(o.customer.address)}${o.customer.city?', '+esc(o.customer.city):''} · ${esc(o.zone)}</dd><dt>Metode</dt><dd>${esc(o.method)}</dd>${o.pay==='pending'?`<dt>Reservasi</dt><dd>sampai ${fmtD(o.expiresAt)}</dd>`:''}</dl>
+  <div class="tbl-wrap"><table><thead><tr><th>Item (snapshot)</th><th class="num">Qty</th><th class="num">Harga</th></tr></thead><tbody>${o.items.map(i=>`<tr><td><span class="mono small">${i.sku}</span><br>${esc(i.name)} · ${esc(i.variant)}${i.lead?`<br><span class="small muted">${esc(i.lead)}</span>`:''}</td><td class="num">${i.qty}</td><td class="num">${rp(i.unit*i.qty)}</td></tr>`).join('')}<tr><td>Ongkir</td><td></td><td class="num">${rp(o.ship)}</td></tr><tr><td><b>Total</b></td><td></td><td class="num"><b>${rp(o.total)}</b></td></tr></tbody></table></div>
+  ${o.recon?`<div class="note warn">Rekonsiliasi: pembayaran diterima setelah reservasi habis dan barang sudah terjual. Hubungi pembeli untuk pengganti atau refund.</div>`:''}
+  ${fld('o-track','Nomor resi',`<input id="o-track" value="${esc(o.tracking)}" ${canF?'':'disabled'}>`)}
+  ${fld('o-notes','Catatan internal',`<textarea id="o-notes" style="min-height:70px" ${canF||own?'':'disabled'}>${esc(o.notes)}</textarea>`)}
+  <div class="row">${canF&&o.pay==='paid'&&o.ful==='unfulfilled'?`<button class="btn sm" type="button" data-act="o-ful" data-v="processing">Proses / packing</button>`:''}${canF&&o.ful==='processing'?`<button class="btn sm" type="button" data-act="o-ful" data-v="shipped">Tandai dikirim</button>`:''}${canF&&o.ful==='shipped'?`<button class="btn sm" type="button" data-act="o-ful" data-v="delivered">Tandai diterima</button>`:''}${canF?`<button class="btn sm ghost" type="button" data-act="o-save">Simpan catatan</button>`:''}
+  ${own&&o.pay==='pending'?`<button class="btn sm danger" type="button" data-act="o-cancel">Batalkan & lepas stok</button>`:''}
+  ${own&&o.pay==='paid'?`<button class="btn sm ghost" type="button" data-act="o-refund">Refund penuh</button>`:''}
+  ${(canF||own)&&['delivered','shipped'].includes(o.ful)?`<button class="btn sm ghost" type="button" data-act="o-ful" data-v="returned">Catat retur</button>`:''}
+  ${(canF||own)&&o.ful==='returned'&&!o.restocked?`<button class="btn sm ghost" type="button" data-act="o-restock">Restok setelah diperiksa</button>`:''}</div>
+  <div class="audit">${o.log.slice().reverse().map(l=>`<div>${fmtD(l.at)} · ${esc(l.m)}</div>`).join('')}</div></div>`:`<div class="empty"><p>Pilih pesanan untuk melihat detail.</p></div>`}</div></div>`;
+}
+/* ---- inquiries & quotes ---- */
+const ISTAT=['New','Assigned','In Discussion','Quotation Sent','Approved','In Production','Completed','Lost','Cancelled'];
+const PICS=['—','Sales 1','Sales 2','Owner'];
+function aInq(){
+ const q=UI.inqSel&&DB.inquiries.find(x=>x.no===UI.inqSel);const quotes=q?DB.quotes.filter(x=>x.inq===q.no):[];
+ const p=q&&DB.products.find(p=>p.sku===q.sku);
+ return`<div class="stack"><span class="eyebrow">Inquiry & Quotation</span><h2>${DB.inquiries.length} inquiry</h2></div>
+ <div class="two"><div class="tbl-wrap"><table><thead><tr><th>No</th><th>Jenis</th><th>Dari</th><th>Status</th><th>PIC</th></tr></thead><tbody>${DB.inquiries.map(x=>`<tr class="click ${UI.inqSel===x.no?'sel':''}" data-act="i-sel" data-v="${x.no}"><td class="mono">${x.no}</td><td>${esc(x.type)}</td><td>${esc(x.name)}${x.company?'<br><span class="small muted">'+esc(x.company)+'</span>':''}</td><td><span class="chip ${x.status==='New'?'warn':['Lost','Cancelled'].includes(x.status)?'bad':x.status==='Completed'?'ok':'info'}">${x.status}</span>${x.notify==='failed'?' <span class="chip bad plain">notif gagal</span>':''}</td><td>${esc(x.pic||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="muted">Belum ada inquiry. Kirim satu dari halaman Wholesale atau Custom.</td></tr>'}</tbody></table></div>
+ <div>${q?`<div class="panel"><div class="row" style="justify-content:space-between"><h3 style="font-size:1.25rem">${q.no}</h3><span class="mono small muted">${fmtD(q.at)}</span></div>
+  <dl class="spec small">${[['Jenis',q.type],['Nama',q.name],['Perusahaan',q.company],['Email',q.email],['WhatsApp',q.wa],['Negara',q.country],['Tipe bisnis',q.btype],['Produk/SKU',q.sku],['Jumlah',q.qty],['Ukuran/bahan',q.spec],['Target',q.when],['Tujuan',q.dest],['Branding',q.brand],['Kemasan',q.pack],['Lampiran',q.file],['Catatan',q.notes],['Marketing consent',q.mkt?'ya':'tidak']].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>
+  ${q.notify==='failed'?`<div class="note warn row" style="justify-content:space-between"><span>Email notifikasi gagal. Inquiry tetap tersimpan.</span><button class="btn xs ghost" type="button" data-act="i-retry">Kirim ulang</button></div>`:`<p class="small muted">Notifikasi: ${q.notify}</p>`}
+  <div class="fgrid2">${fld('i-status','Status',`<select id="i-status">${ISTAT.map(s=>`<option ${q.status===s?'selected':''}>${s}</option>`).join('')}</select>`)}${fld('i-pic','PIC',`<select id="i-pic">${PICS.map(s=>`<option ${q.pic===s?'selected':''}>${s}</option>`).join('')}</select>`)}</div>
+  <button class="btn sm" type="button" data-act="i-save" style="width:max-content">Simpan status</button>
+  <div style="border-top:1px solid var(--line);padding-top:16px" class="stack"><h4>Quotation</h4>
+  ${quotes.map(x=>`<div class="note"><b class="mono">${x.no} v${x.ver}</b> · ${x.status} · ${x.cur} ${Number(x.price).toLocaleString('id-ID')} / unit × ${x.qty} · ${x.basis}${x.port?' '+esc(x.port):''} · berlaku s/d ${esc(x.valid)}<br><span class="small">Lead time: ${esc(x.lead)} · Termin: ${esc(x.terms)}${x.sample?' · Sampel: '+esc(x.sample):''}${x.excl?' · Pengecualian: '+esc(x.excl):''}</span>${x.status==='Draft'?`<div class="row" style="margin-top:8px"><button class="btn xs" type="button" data-act="q-send" data-v="${x.no}|${x.ver}">Tandai terkirim</button></div>`:x.status==='Sent'?`<div class="row" style="margin-top:8px"><button class="btn xs" type="button" data-act="q-approve" data-v="${x.no}|${x.ver}">Catat disetujui buyer</button></div>`:''}</div>`).join('')||'<p class="small muted">Belum ada quotation.</p>'}
+  <form id="qform" class="stack" novalidate style="gap:12px"><span class="lbl">${quotes.length?'Versi baru':'Buat quotation'}</span><div class="fgrid2">
+   ${fld('q-qty','Jumlah',`<input id="q-qty" value="${esc(q.qty||'')}">`)}${fld('q-cur','Mata uang',`<select id="q-cur"><option>USD</option><option>IDR</option><option>SGD</option><option>AUD</option></select>`)}
+   ${fld('q-price','Harga / unit',`<input id="q-price" inputmode="decimal">`,null,p&&p.fob&&can(UI.role,'quote')?`Referensi FOB katalog: USD ${p.fob.usd}/${p.fob.unit}. Tinjau sebelum dipakai.`:'')}
+   ${fld('q-basis','Basis harga',`<select id="q-basis"><option>FOB</option><option>EXW</option><option>CIF</option><option>DAP</option><option>Domestic delivered</option></select>`)}
+   ${fld('q-port','Pelabuhan / titik',`<input id="q-port" placeholder="mis. Balikpapan / Tanjung Perak">`)}${fld('q-valid','Berlaku sampai',`<input id="q-valid" type="date">`)}
+   ${fld('q-lead','Lead time & titik mulai',`<input id="q-lead" placeholder="mis. 30 hari kerja sejak DP & approval sampel">`)}${fld('q-terms','Termin pembayaran',`<input id="q-terms" placeholder="mis. 50% DP, 50% sebelum kirim">`)}
+   ${fld('q-sample','Biaya sampel/custom',`<input id="q-sample">`)}${fld('q-excl','Pengecualian biaya',`<input id="q-excl" placeholder="mis. bea masuk negara tujuan">`)}
+  </div>${UI.qErr?`<p class="small" style="color:var(--bad)">${esc(UI.qErr)}</p>`:''}<button class="btn sm" type="submit" style="width:max-content">Simpan quotation (draft)</button></form></div></div>`:`<div class="empty"><p>Pilih inquiry untuk menindaklanjuti.</p></div>`}</div></div>`;
+}
+/* ---- content ---- */
+function aContent(){const C=DB.content,K=DB.contact;const own=UI.role==='owner';
+ return`<div class="stack"><span class="eyebrow">Konten & Kontak</span><h2>Konten homepage</h2></div>
+ <form class="panel" id="cform" novalidate><div class="fgrid2">${fld('c-hen','Judul hero (EN)',`<input id="c-hen" value="${esc(C.heroTitle.en)}">`)}${fld('c-hid','Judul hero (ID)',`<input id="c-hid" value="${esc(C.heroTitle.id)}">`)}<div class="full">${fld('c-sen','Paragraf hero (EN)',`<textarea id="c-sen" style="min-height:80px">${esc(C.heroSub.en)}</textarea>`)}</div><div class="full">${fld('c-sid','Paragraf hero (ID)',`<textarea id="c-sid" style="min-height:80px">${esc(C.heroSub.id)}</textarea>`)}</div>
+ ${fld('c-feat','Produk unggulan',`<select id="c-feat">${pub().map(p=>`<option value="${p.id}" ${C.featured===p.id?'selected':''}>${esc(p.name.en)}</option>`).join('')}</select>`)}
+ ${fld('c-hero','Foto hero',`<select id="c-hero">${['hero-forest','fabric-mood','story-arranging','identity-rack'].map(x=>`<option ${C.heroImg===x?'selected':''}>${x}</option>`).join('')}</select>`,null,C.heroImg==='hero-forest'?'Gambar konsep dari brief. Ganti dengan foto asli sebelum peluncuran.':'')}
+ </div><button class="btn sm" type="submit" style="width:max-content">Publish konten</button></form>
+ <div class="stack"><h2 style="font-size:1.6rem">Kontak & legalitas</h2><p class="muted small">Data yang belum dikonfirmasi owner tidak tampil di website.</p></div>
+ <div class="panel"><span class="lbl">Nomor WhatsApp aktif ${own?'':'(hanya Owner yang dapat menetapkan)'}</span>
+  ${K.phones.map((ph,i)=>`<label class="check"><input type="radio" name="activePhone" value="${i}" ${K.activePhone===i?'checked':''} ${own?'':'disabled'}> <span class="mono">${esc(ph.n)}</span> <span class="small muted">· sumber: ${esc(ph.src)}</span></label>`).join('')}
+  <label class="check"><input type="radio" name="activePhone" value="" ${K.activePhone==null?'checked':''} ${own?'':'disabled'}> Belum ditetapkan (website menampilkan "sedang dikonfirmasi")</label>
+  <label class="check"><input type="checkbox" id="k-addr" ${K.addressConfirmed?'checked':''} ${own?'':'disabled'}> Alamat lengkap dikonfirmasi: <span class="small">${esc(K.address)}</span></label>
+  <span class="lbl" style="margin-top:8px">Klaim legalitas (tampil setelah bukti diperiksa)</span>
+  ${K.legal.map((l,i)=>`<label class="check"><input type="checkbox" data-legal="${i}" ${l.verified?'checked':''} ${own?'':'disabled'}> <b>${esc(l.k)}</b> · ${esc(l.note)}</label>`).join('')}
+  ${own?`<button class="btn sm" type="button" data-act="k-save" style="width:max-content">Simpan kontak & legalitas</button>`:''}</div>`}
+function aCatalogue(){const m=DB.catalogueMeta;return`<div class="stack"><span class="eyebrow">Katalog</span><h2>Katalog v${esc(m.version)}</h2><p class="muted small">Pilih produk yang masuk katalog digital. Simpan sebagai versi baru agar buyer tahu tanggal pembaruan.</p></div>
+ <div class="panel"><div class="tbl-wrap"><table><thead><tr><th></th><th>SKU</th><th>Produk</th><th>Status</th></tr></thead><tbody>${DB.products.filter(isPublic).map(p=>`<tr><td><input type="checkbox" data-catp="${p.id}" ${p.catalogue?'checked':''} aria-label="Masuk katalog" style="width:auto"></td><td class="mono">${p.sku}</td><td>${esc(p.name.en)}</td><td>${p.status}</td></tr>`).join('')}</tbody></table></div>
+ <div class="row"><button class="btn sm" type="button" data-act="cat-save">Simpan sebagai versi baru</button><a class="btn sm ghost" href="#catalogue-view">Preview katalog</a></div><p class="small muted">Ekspor PDF otomatis dijadwalkan pada tahap implementasi (Tahap 5/7).</p></div>`}
+function aReports(){
+ const by={};DB.orders.filter(o=>o.pay==='paid').forEach(o=>o.items.forEach(i=>{by[i.sku]=by[i.sku]||{n:i.name,q:0,r:0};by[i.sku].q+=i.qty;by[i.sku].r+=i.unit*i.qty}));
+ const it={};DB.inquiries.forEach(i=>it[i.type]=(it[i.type]||0)+1);
+ const csv=['sku,name,qty,revenue_idr',...Object.entries(by).map(([k,v])=>`${k},"${v.n}",${v.q},${v.r}`)].join('\n');
+ return`<div class="stack"><span class="eyebrow">Laporan</span><h2>Penjualan & inquiry</h2><p class="muted small">Pendapatan hanya dari pembayaran terverifikasi. Klik WhatsApp tidak dihitung sebagai penjualan.</p></div>
+ <div class="two"><div class="tbl-wrap"><table><thead><tr><th>SKU</th><th>Produk</th><th class="num">Qty</th><th class="num">Pendapatan</th></tr></thead><tbody>${Object.entries(by).map(([k,v])=>`<tr><td class="mono">${k}</td><td>${esc(v.n)}</td><td class="num">${v.q}</td><td class="num">${rp(v.r)}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">Belum ada penjualan terbayar</td></tr>'}</tbody></table></div>
+ <div class="tbl-wrap"><table><thead><tr><th>Jenis inquiry</th><th class="num">Jumlah</th></tr></thead><tbody>${Object.entries(it).map(([k,v])=>`<tr><td>${k}</td><td class="num">${v}</td></tr>`).join('')||'<tr><td colspan="2" class="muted">Belum ada</td></tr>'}</tbody></table></div></div>
+ <div class="stack"><span class="lbl">Ekspor CSV</span><textarea id="csv" readonly style="font-family:var(--f-mono);font-size:.8rem;min-height:120px">${esc(csv)}</textarea><button class="btn sm ghost" type="button" data-act="copy-csv" style="width:max-content">Salin CSV</button></div>`;
+}
+function aSettings(){const S=DB.settings;return`<div class="stack"><span class="eyebrow">Pengaturan</span><h2>Transaksi & pengiriman</h2></div>
+ <form class="panel" id="sform" novalidate><div class="fgrid2">${fld('s-res','Durasi reservasi stok (menit)',`<input id="s-res" inputmode="numeric" value="${S.reserveMin}">`)}${fld('s-notif','Simulasi email notifikasi',`<select id="s-notif"><option value="1" ${S.notifyOk?'selected':''}>Berhasil</option><option value="0" ${S.notifyOk?'':'selected'}>Gagal (uji retry)</option></select>`)}</div>
+ <div class="tbl-wrap vtbl"><table><thead><tr><th>Wilayah</th><th class="num">Tarif (IDR)</th><th>Dilayani</th></tr></thead><tbody>${S.zones.map((z,i)=>`<tr><td>${esc(z.name)}</td><td class="num"><input id="z-r-${i}" inputmode="numeric" value="${z.rate}" style="width:110px;text-align:right" aria-label="Tarif ${esc(z.name)}"></td><td><input type="checkbox" id="z-on-${i}" ${z.on?'checked':''} style="width:auto" aria-label="Dilayani ${esc(z.name)}"></td></tr>`).join('')}</tbody></table></div>
+ <p class="small muted">Checkout internasional: nonaktif sampai pembayaran, negara layanan, ongkir dan ketentuan impor siap.</p><button class="btn sm" type="submit" style="width:max-content">Simpan pengaturan</button></form>
+ <div class="stack"><h3 style="font-size:1.2rem">Audit log</h3><div class="audit">${DB.audit.map(a=>`<div>${fmtD(a.at)} · ${ROLES[a.role]?.n||a.role} · ${esc(a.perm)} · ${esc(a.desc)}</div>`).join('')||'<div>Belum ada aktivitas.</div>'}</div></div>
+ <div class="stack"><h3 style="font-size:1.2rem">Mutasi stok</h3><div class="audit">${DB.movements.slice(0,80).map(m=>`<div>${fmtD(m.at)} · ${m.sku} · ${esc(m.ref)} · ${m.delta>0?'+':''}${m.delta} · ${m.reason} · ${esc(m.refNo||'')}</div>`).join('')||'<div>Belum ada mutasi.</div>'}</div></div>
+ <div class="panel"><b>Reset data demo</b><p class="small muted">Mengembalikan produk, pesanan dan inquiry ke data awal di browser ini.</p>${UI.confirmReset?`<div class="row"><button class="btn sm danger" type="button" data-act="reset-yes">Ya, reset semua</button><button class="btn sm ghost" type="button" data-act="reset-no">Batal</button></div>`:`<button class="btn sm danger" type="button" data-act="reset" style="width:max-content">Reset data demo</button>`}</div>`}
+
+/* ---- acceptance tests (Blueprint §17) run against a copy of the data ---- */
+function runTests(){
+ const backup=DB;SANDBOX=true;const R=[];const ok=(n,c,d)=>R.push({n,c:!!c,d});
+ try{
+  DB=clone(backup);DB.orders=[];DB.events=[];DB.inquiries=[];DB.audit=[];DB.movements=[];
+  const cust={name:'Uji Pembeli',email:'uji@example.com',phone:'+62 812 0000 0000',address:'Jl. Contoh No. 1, Balikpapan'};
+  const exact=DB.products.find(p=>p.mode==='exact'&&p.status==='published');exact.pieces.forEach(x=>x.status='available');const pc=exact.pieces[0];
+  const mk=(lines,z='kal',extra={})=>API.createOrder(Object.assign({lines,customer:cust,country:'ID',zone:z,pay:'QRIS (simulasi)'},extra));
+  // 1 draft not public
+  const dr=DB.products.find(p=>p.status==='draft');ok('Draft tidak tampil di toko',!pub().includes(dr)&&!lineInfo({pid:dr.id,ref:null}).ok,'Produk draft '+dr.sku+' tidak publik dan tidak bisa dibeli.');
+  // 2 exact piece concurrency
+  const a=mk([{pid:exact.id,ref:pc.id,qty:1}]);const b=mk([{pid:exact.id,ref:pc.id,qty:1}]);
+  ok('Exact piece tidak oversold pada dua checkout bersamaan',a.ok&&!b.ok,'Checkout pertama berhasil, kedua ditolak: '+Ltxt(b.errs?.cart||''));
+  // 3 duplicate callback
+  const r1=API.payment(a.order.no,'paid','evt-1');const r2=API.payment(a.order.no,'paid','evt-1');const r3=API.payment(a.order.no,'paid','evt-2');
+  ok('Callback duplikat tidak membuat pembayaran ganda',r1.ok&&r2.dup&&r3.dup&&DB.orders.filter(o=>o.pay==='paid').length===1&&pc.status==='sold','Event sama diabaikan; event berbeda untuk order paid juga diabaikan.');
+  // 4 expired reservation releases
+  const pv=DB.products.find(p=>isPublic(p)&&p.mode==='pattern'&&p.sale==='retail'&&p.price>0&&p.variants.some(v=>v.stock-v.reserved>1));const vv=pv.variants.find(v=>v.stock>1);const before=vv.stock-vv.reserved;
+  const c=mk([{pid:pv.id,ref:vv.id,qty:1}]);const mid=vv.stock-vv.reserved;c.order.expiresAt=now()-1;API.sweep();
+  ok('Reservasi kedaluwarsa kembali tersedia',mid===before-1&&vv.stock-vv.reserved===before&&c.order.pay==='expired',`Tersedia ${before} → ${mid} saat dipesan → ${vv.stock-vv.reserved} setelah expired.`);
+  // 5 failed payment releases
+  const d=mk([{pid:pv.id,ref:vv.id,qty:1}]);API.payment(d.order.no,'failed','evt-3');ok('Pembayaran gagal melepas stok',d.order.pay==='failed'&&vv.stock-vv.reserved===before,'Status failed, stok kembali '+before+'.');
+  // 6 tampered price
+  const e=mk([{pid:pv.id,ref:vv.id,qty:1,price:1}],'kal',{clientTotal:1});const exp=pv.price+DB.settings.zones[0].rate;
+  ok('Harga dari browser tidak diterima',e.ok&&e.order.total===exp&&e.order.priceTampered,`Browser kirim Rp1, server menetapkan ${rp(exp)}.`);API.payment(e.order.no,'expired','evt-4');
+  // 7 unserved zone & out-of-stock variant
+  const f=mk([{pid:pv.id,ref:vv.id,qty:1}],'pap');const zero=DB.products.find(p=>isPublic(p)&&p.variants.some(v=>v.stock===0)&&p.sale==='retail');const zv=zero.variants.find(v=>v.stock===0);const g=mk([{pid:zero.id,ref:zv.id,qty:1}]);
+  ok('Wilayah tanpa layanan & varian habis tidak bisa checkout',!f.ok&&f.errs.zone&&!g.ok,'Papua ditolak; '+zero.sku+' '+zv.label+' (stok 0) ditolak.');
+  // 8 snapshot unchanged after product edit
+  const snapName=a.order.items[0].name,snapPrice=a.order.items[0].unit;Object.assign(exact,{name:{en:'Renamed',id:'Renamed'},price:1});
+  ok('Edit produk tidak mengubah snapshot pesanan lama',a.order.items[0].name===snapName&&a.order.items[0].unit===snapPrice,'Snapshot tetap "'+snapName+'" '+rp(snapPrice)+'.');
+  // 9 archived not purchasable
+  const ar=DB.products.find(p=>p.id===pv.id);ar.status='archived';ok('Produk archived tidak bisa dibeli, histori tetap',!lineInfo({pid:ar.id,ref:vv.id,qty:1}).ok&&DB.orders.some(o=>o.items.some(i=>i.sku===ar.sku)),'Pesanan lama untuk '+ar.sku+' tetap ada.');ar.status='published';
+  // 10 restricted role
+  let denied=0;try{API.admin('fulfillment','product.edit','x',()=>{})}catch(x){if(x.code===403)denied++}try{API.saveProduct('content',pv,Object.assign({},pv,{price:pv.price+1}),pv.variants.map(v=>v.stock))}catch(x){if(x.code===403)denied++}try{API.admin('sales','settings','role',()=>{})}catch(x){if(x.code===403)denied++}
+  ok('Role terbatas ditolak oleh API',denied===3,'Fulfillment edit produk, Content Admin ubah harga, Sales ubah pengaturan: ketiganya 403.');
+  // 11 inquiry saved despite notify failure
+  DB.settings.notifyOk=false;const iq=API.inquiry({type:'export',name:'Buyer Uji',email:'b@example.com',country:'Japan',privacy:true,sku:'NE-BAG-EC-001'});
+  ok('Inquiry tersimpan dengan nomor walau notifikasi gagal',iq.ok&&/INQ-2026-\d{4}/.test(iq.inq.no)&&iq.inq.notify==='failed'&&DB.inquiries.length===1,iq.inq?.no+' tersimpan, notifikasi: failed (bisa dikirim ulang).');
+  // 12 FOB not retail
+  const fq=DB.products.find(p=>isPublic(p)&&p.sale==='quote'&&p.fob);ok('Harga FOB tidak terbaca sebagai harga retail',!purchasable(fq)&&!fq.price,fq.sku+' punya referensi FOB USD '+fq.fob.usd+' tetapi tidak punya harga retail sehingga hanya bisa inquiry.');
+  // 13 late payment on sold piece → reconciliation
+  const ex2=DB.products.filter(p=>p.mode==='exact'&&p.status==='published')[1];const p2=ex2.pieces[0];p2.status='available';const h=mk([{pid:ex2.id,ref:p2.id,qty:1}]);API.payment(h.order.no,'expired','evt-5');const i2=mk([{pid:ex2.id,ref:p2.id,qty:1}]);API.payment(i2.order.no,'paid','evt-6');API.payment(h.order.no,'paid','evt-7');
+  ok('Pembayaran terlambat untuk barang terjual masuk rekonsiliasi',h.order.recon&&p2.status==='sold'&&i2.order.pay==='paid','Order pertama ditandai rekonsiliasi; barang tidak dijanjikan ganda.');
+ }catch(err){ok('Eksekusi uji',false,err.message)}
+ finally{DB=backup;SANDBOX=false}
+ return R;
+}
+function aTests(){const R=UI.tests;return`<div class="stack"><span class="eyebrow">Uji penerimaan · Blueprint §17</span><h2>Uji otomatis pada salinan data</h2><p class="muted small">Pengujian berjalan pada salinan database sehingga data toko tidak berubah.</p></div>
+ <div class="row"><button class="btn sm" type="button" data-act="run-tests">Jalankan uji</button>${R?`<span class="chip ${R.every(r=>r.c)?'ok':'bad'}">${R.filter(r=>r.c).length}/${R.length} lulus</span>`:''}</div>
+ ${R?`<div class="panel" style="gap:0">${R.map(r=>`<div class="test"><span class="chip ${r.c?'ok':'bad'}">${r.c?'Lulus':'Gagal'}</span><div><b>${esc(r.n)}</b><div class="small muted">${esc(r.d)}</div></div></div>`).join('')}</div>`:''}`}
+
+
+/* =========================================================
+   HERO FX — drifting leaves, light motes, parallax
+   ========================================================= */
+const RM=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+const FX={cv:null,ctx:null,raf:0,leaves:[],motes:[],w:0,h:0,dpr:1,mx:0,my:0,t0:0,last:0};
+const LEAF_COL=['#C9932E','#8C9A4B','#B5562F','#D8B465','#6E7F3A','#A8652F','#7A4A2A'];
+function fxSize(){const r=FX.cv.getBoundingClientRect();FX.dpr=Math.min(2,window.devicePixelRatio||1);FX.w=r.width;FX.h=r.height;FX.cv.width=Math.round(r.width*FX.dpr);FX.cv.height=Math.round(r.height*FX.dpr);FX.ctx.setTransform(FX.dpr,0,0,FX.dpr,0,0)}
+function mkLeaf(top){const d=.35+Math.random()*.65;return{x:Math.random()*(FX.w+200)-40,y:top?-30-Math.random()*FX.h*.6:Math.random()*FX.h,d,s:(6+Math.random()*9)*(.6+d*.7),vy:(.25+Math.random()*.55)*(.5+d),ph:Math.random()*6.28,fr:.6+Math.random()*1.4,rot:Math.random()*6.28,vr:(Math.random()-.5)*.02,c:LEAF_COL[Math.random()*LEAF_COL.length|0],a:.55+d*.4}}
+function mkMote(){return{x:FX.w*(.45+Math.random()*.55),y:Math.random()*FX.h,r:.6+Math.random()*1.7,vy:-(.05+Math.random()*.18),ph:Math.random()*6.28,tw:.5+Math.random()*1.5}}
+function heroMount(){
+ const cv=document.querySelector('#hero canvas.fx');
+ if(!cv){FX.cv=null;cancelAnimationFrame(FX.raf);return}
+ if(FX.cv===cv)return;
+ FX.cv=cv;FX.ctx=cv.getContext('2d');fxSize();
+ if(RM.matches)return;
+ const n=FX.w<700?12:24;FX.leaves=Array.from({length:n},()=>mkLeaf(false));FX.motes=Array.from({length:FX.w<700?18:36},mkMote);
+ cancelAnimationFrame(FX.raf);FX.last=performance.now();FX.raf=requestAnimationFrame(fxLoop);
+}
+function drawLeaf(c,L,t){
+ c.save();c.translate(L.x+FX.mx*14*L.d,L.y+FX.my*8*L.d);c.rotate(L.rot);
+ const flip=Math.cos(t*.0012*L.fr+L.ph);c.scale(Math.max(.15,Math.abs(flip))*L.s,L.s);
+ c.globalAlpha=L.a;c.fillStyle=L.c;
+ c.beginPath();c.moveTo(0,-1);c.bezierCurveTo(.62,-.55,.58,.55,0,1.05);c.bezierCurveTo(-.58,.55,-.62,-.55,0,-1);c.fill();
+ c.globalAlpha=L.a*.55;c.strokeStyle='rgba(255,240,205,.8)';c.lineWidth=.07;c.beginPath();c.moveTo(0,-.9);c.lineTo(0,1.25);c.stroke();
+ c.restore();
+}
+function fxLoop(now){
+ FX.raf=requestAnimationFrame(fxLoop);
+ if(!FX.cv||!FX.cv.isConnected){cancelAnimationFrame(FX.raf);FX.cv=null;return}
+ if(document.hidden)return;
+ const r=FX.cv.getBoundingClientRect();if(r.bottom<0)return; // off-screen: skip work
+ const dt=Math.min(50,now-FX.last)/16.7;FX.last=now;
+ const c=FX.ctx;c.clearRect(0,0,FX.w,FX.h);
+ const wind=Math.sin(now*.00023)*.55+Math.sin(now*.00071)*.25-.25;
+ for(const m of FX.motes){m.y+=m.vy*dt;m.x+=Math.sin(now*.0004+m.ph)*.12*dt+wind*.05;if(m.y<-5){m.y=FX.h+5;m.x=FX.w*(.45+Math.random()*.55)}
+  const a=.18+.32*(.5+.5*Math.sin(now*.002*m.tw+m.ph));c.globalAlpha=a;c.fillStyle='#FFE9B8';c.beginPath();c.arc(m.x+FX.mx*6,m.y+FX.my*4,m.r,0,6.283);c.fill()}
+ c.globalAlpha=1;
+ for(const L of FX.leaves){L.y+=L.vy*dt;L.x+=(wind*L.d*.9+Math.sin(now*.0011*L.fr+L.ph)*.55)*dt;L.rot+=L.vr*dt+Math.sin(now*.0009+L.ph)*.004;
+  if(L.y>FX.h+30||L.x<-60||L.x>FX.w+80)Object.assign(L,mkLeaf(true));drawLeaf(c,L,now)}
+}
+window.addEventListener('resize',()=>{if(FX.cv)fxSize()});
+document.addEventListener('pointermove',e=>{const h=document.getElementById('hero');if(!h||RM.matches||e.pointerType==='touch')return;const r=h.getBoundingClientRect();if(e.clientY>r.bottom)return;
+ FX.mx=(e.clientX/r.width-.5);FX.my=((e.clientY-r.top)/r.height-.5);h.style.setProperty('--px',(-FX.mx*22).toFixed(1)+'px');h.style.setProperty('--py',(-FX.my*14).toFixed(1)+'px')},{passive:true});
+window.addEventListener('scroll',()=>{const h=document.getElementById('hero');if(!h||RM.matches)return;const y=window.scrollY;if(y<h.offsetHeight+200)h.style.setProperty('--sy',(y*.28).toFixed(1)+'px')},{passive:true});
+
+/* =========================================================
+   AMBIENCE — forest bed + trickling stream, synthesised (no files)
+   Very quiet by design; starts only after the visitor's first gesture
+   (browsers block audio before that) and only on the home page.
+   ========================================================= */
+const AMB={ctx:null,master:null,on:false,armed:true,timer:0,next:0,bird:0,stream:null,level:.32};
+try{if(localStorage.getItem(KEY+'-sound')==='off')AMB.armed=false}catch(e){}
+function noiseBuf(C,secs,brown){const n=C.sampleRate*secs|0,b=C.createBuffer(2,n,C.sampleRate);for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch);let last=0;for(let i=0;i<n;i++){const w=Math.random()*2-1;if(brown){last=(last+.02*w)/1.02;d[i]=last*3.5}else d[i]=w}}return b}
+function ambGraph(C,dest){
+ const white=noiseBuf(C,4,false),brown=noiseBuf(C,6,true);
+ const loop=(buf,off)=>{const s=C.createBufferSource();s.buffer=buf;s.loop=true;s.start(0,off||0);return s};
+ const chain=(...n)=>{for(let i=0;i<n.length-1;i++)n[i].connect(n[i+1]);return n[n.length-1]};
+ const bq=(type,f,q)=>{const b=C.createBiquadFilter();b.type=type;b.frequency.value=f;b.Q.value=q||.7;return b};
+ const g=v=>{const x=C.createGain();x.gain.value=v;return x};
+ const pan=p=>{const x=C.createStereoPanner?C.createStereoPanner():g(1);if(x.pan)x.pan.value=p;return x};
+ const lfo=(hz,depth,param)=>{const o=C.createOscillator();o.frequency.value=hz;const d=g(depth);o.connect(d);d.connect(param);o.start();return o};
+ // 1. forest air: deep, slow-breathing brown noise
+ const bedG=g(.16);chain(loop(brown,.3),bq('lowpass',380,.5),bedG,dest);lfo(.045,.06,bedG.gain);
+ // 2. canopy rustle: soft high band that swells with the wind
+ const rus=g(.012);chain(loop(white,1.1),bq('bandpass',2600,.6),bq('lowpass',5200,.5),rus,pan(.3),dest);lfo(.11,.009,rus.gain);
+ // 3. stream: two water bands, gain wobbled by the scheduler for a trickling texture
+ const st=g(.03),st2=g(.012);chain(loop(white,2.2),bq('bandpass',950,1.4),st,pan(-.45),dest);chain(loop(white,.7),bq('bandpass',2300,2.2),st2,pan(-.35),dest);
+ // 4. distant insects: narrow high band, pulsing
+ const ins=g(.0016);chain(loop(white,3.1),bq('bandpass',6100,9),ins,pan(.55),dest);lfo(13,.0012,ins.gain);
+ return{st,st2};
+}
+function ambEvents(C,dest,S,from,to){
+ // stream wobble (every ~70 ms)
+ for(let t=Math.max(from,S.wob||0);t<to;t+=.07){S.st.gain.setTargetAtTime(.018+Math.random()*.026,t,.03);S.st2.gain.setTargetAtTime(.006+Math.random()*.014,t,.025);S.wob=t+.07}
+ // water droplets / bubbles
+ let t=Math.max(from,S.drop||from);
+ while(t<to){t+=.04+Math.random()*Math.random()*.32;if(t>=to)break;
+  const o=C.createOscillator(),e=C.createGain(),p=C.createStereoPanner?C.createStereoPanner():null,f=520+Math.random()*1100,d=.03+Math.random()*.06,a=.006+Math.random()*.014;
+  o.type='sine';o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(f*(1.5+Math.random()),t+d);
+  e.gain.setValueAtTime(0,t);e.gain.linearRampToValueAtTime(a,t+.004);e.gain.exponentialRampToValueAtTime(.0001,t+d);
+  o.connect(e);if(p){p.pan.value=-.75+Math.random()*.55;e.connect(p);p.connect(dest)}else e.connect(dest);o.start(t);o.stop(t+d+.02)}
+ S.drop=t;
+ // distant birds: a short phrase every 5–14 s
+ if(!S.bird)S.bird=from+2+Math.random()*3;
+ while(S.bird<to){const bt=S.bird,n=2+Math.random()*4|0,base=2600+Math.random()*1700,pp=-.8+Math.random()*1.6;
+  const lp=C.createBiquadFilter();lp.type='lowpass';lp.frequency.value=4200;const p=C.createStereoPanner?C.createStereoPanner():null;if(p){p.pan.value=pp;lp.connect(p);p.connect(dest)}else lp.connect(dest);
+  for(let k=0;k<n;k++){const s=bt+k*(.11+Math.random()*.08),d=.05+Math.random()*.08,o=C.createOscillator(),e=C.createGain(),f=base*(.9+Math.random()*.25);
+   o.frequency.setValueAtTime(f,s);o.frequency.exponentialRampToValueAtTime(f*(Math.random()<.5?1.25:.8),s+d);
+   e.gain.setValueAtTime(0,s);e.gain.linearRampToValueAtTime(.0045+Math.random()*.004,s+.01);e.gain.exponentialRampToValueAtTime(.0001,s+d);o.connect(e);e.connect(lp);o.start(s);o.stop(s+d+.02)}
+  S.bird=bt+5+Math.random()*9}
+}
+function ambBuild(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return false;const C=new AC();
+ const master=C.createGain();master.gain.value=0;const comp=C.createDynamicsCompressor();comp.threshold.value=-30;comp.ratio.value=3;master.connect(comp);comp.connect(C.destination);
+ AMB.ctx=C;AMB.master=master;AMB.S=ambGraph(C,master);
+ AMB.timer=setInterval(()=>{if(C.state!=='running')return;const now=C.currentTime;ambEvents(C,master,AMB.S,Math.max(now,AMB.next||now),now+.35);AMB.next=now+.35},120);return true}
+function ambPlay(){
+ if(!AMB.ctx&&!ambBuild())return;
+ AMB.on=true;AMB.ctx.resume();const t=AMB.ctx.currentTime;AMB.master.gain.cancelScheduledValues(t);AMB.master.gain.setValueAtTime(AMB.master.gain.value,t);AMB.master.gain.setTargetAtTime(AMB.level,t,1.4); // ~5 s gentle fade-in
+ ambUI();
+}
+function ambFade(stop){
+ if(!AMB.ctx)return;const t=AMB.ctx.currentTime;AMB.master.gain.cancelScheduledValues(t);AMB.master.gain.setValueAtTime(AMB.master.gain.value,t);AMB.master.gain.setTargetAtTime(0,t,.35);
+ clearTimeout(AMB._s);AMB._s=setTimeout(()=>{if(!(AMB.on&&isHome()&&!document.hidden))AMB.ctx.suspend()},1800);if(stop)AMB.on=false;ambUI();
+}
+const isHome=()=>UI.route==='home'||UI.route==='';
+function ambRoute(){if(!AMB.ctx)return ambUI();if(AMB.on&&isHome()&&!document.hidden)ambPlay();else ambFade(false)}
+function ambUI(){const b=document.querySelector('.snd');if(!b)return;const id=UI.lang==='id';const playing=AMB.on;
+ b.setAttribute('aria-pressed',playing);b.querySelector('.snd-l').textContent=id?(playing?'Suara hutan: nyala':'Suara hutan: mati'):(playing?'Forest sound: on':'Forest sound: off');
+ b.querySelector('.snd-h').textContent=playing?(id?'Gemercik air & hutan, pelan':'Stream & forest, softly'):(AMB.armed&&!AMB.ctx?(id?'Ketuk di mana saja untuk mendengar':'Tap anywhere to listen'):(id?'Ketuk untuk menyalakan':'Tap to turn on'));
+ b.setAttribute('aria-label',b.querySelector('.snd-l').textContent)}
+function ambGesture(e){if(!AMB.armed||AMB.ctx||!isHome())return;if(e.target&&e.target.closest&&e.target.closest('[data-act=sound]'))return;AMB.armed=false;ambPlay()}
+document.addEventListener('pointerdown',ambGesture,true);document.addEventListener('keydown',ambGesture,true);
+document.addEventListener('visibilitychange',()=>{if(!AMB.ctx)return;if(document.hidden)ambFade(false);else ambRoute()});
+function ambToggle(){if(AMB.on){ambFade(true);AMB.armed=false;try{localStorage.setItem(KEY+'-sound','off')}catch(e){}}else{AMB.armed=false;try{localStorage.setItem(KEY+'-sound','on')}catch(e){}ambPlay()}}
+
+/* =========================================================
+   ROUTER & RENDER
+   ========================================================= */
+function render(keepScroll){
+ const r=UI.route;$('#buybar').hidden=true;document.body.classList.remove('has-buybar');
+ let h;
+ if(r==='home'||r==='')h=vHome();
+ else if(r==='shop')h=vShop();
+ else if(r.startsWith('shop-')){UI.shopCat=r.slice(5);h=vShop()}
+ else if(r.startsWith('p-'))h=vProduct(r.slice(2));
+ else if(r==='cart')h=vCart();else if(r==='checkout')h=vCheckout();else if(r.startsWith('pay-'))h=vPay(r.slice(4));else if(r==='order')h=vOrder();
+ else if(r==='story')h=vStory();else if(r==='process')h=vProcess();else if(r==='wholesale')h=vWholesale();else if(r==='custom')h=vCustom();
+ else if(r==='journal')h=vJournal();else if(r==='contact')h=vContact();else if(r==='faq')h=vFaq();else if(r==='catalogue')h=vCatalogue();else if(r==='catalogue-view')h=vCatalogueView();
+ else if(r==='inq-done')h=vInqDone();else if(r==='admin')h=vAdmin();else h=vHome();
+ $('#view').innerHTML=h;chrome();
+ const titles={shop:t('shop'),story:t('story'),process:t('process'),wholesale:t('wholesale'),custom:'Custom & Private Label',contact:t('contact'),cart:t('cart'),checkout:t('checkout'),admin:'Admin CMS',catalogue:t('catalogue'),journal:t('journal'),faq:t('faq')};
+ document.title=(titles[r.split('-')[0]]?titles[r.split('-')[0]]+' · ':'')+'Niken Ecoprint';
+ heroMount();ambRoute();
+ if(!keepScroll)window.scrollTo(0,0);
+}
+function go(r){if(location.hash.slice(1)===r){UI.route=r;render()}else location.hash=r}
+window.addEventListener('hashchange',()=>{const r=location.hash.slice(1)||'home';if(r==='shop')UI.shopCat='all';if(!r.startsWith('p-'))UI.preview=null;UI.route=r;$('#mnav').classList.remove('open');render()});
+
+/* ---------------- EVENTS ---------------- */
+function addToCart(p,S){
+ const exact=p.mode==='exact';const qty=exact?1:Math.max(1,parseInt(S.qty)||1);
+ const ex=DB.cart.find(l=>l.pid===p.id&&l.ref===S.ref);
+ if(exact&&ex){toast(UI.lang==='id'?'Barang ini sudah ada di keranjang.':'This piece is already in your cart.');return false}
+ const li=lineInfo({pid:p.id,ref:S.ref,qty:(ex?ex.qty:0)+qty});if(!li.ok){toast(UI.lang==='id'?'Stok tidak cukup.':'Not enough stock.');return false}
+ if(ex)ex.qty+=qty;else DB.cart.push({pid:p.id,ref:S.ref,qty});save();return true;
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,v=b.dataset.v;const id=UI.lang==='id';
+ const cur=()=>{const slug=UI.route.slice(2);return DB.products.find(p=>p.slug===slug)};
+ try{switch(a){
+ case'lang':UI.lang=v;try{localStorage.setItem(KEY+'-lang',v)}catch(x){}render(true);break;
+ case'skip':$('#view').focus();($('#view h1,#view h2')||$('#view')).scrollIntoView();break;
+ case'sound':ambToggle();break;
+ case'menu':{const m=$('#mnav');m.classList.toggle('open');$('#menubtn').setAttribute('aria-expanded',m.classList.contains('open'));break}
+ case'cat':UI.shopCat=v;go(v==='all'?'shop':'shop-'+v);break;
+ case'clearq':UI.q='';render(true);break;
+ case'ref':{const p=cur();UI.sel[p.id].ref=v;UI.sel[p.id].qty=1;render(true);break}
+ case'img':{const p=cur();UI.sel[p.id].img=+v;render(true);break}
+ case'qty':{const p=cur();const S=UI.sel[p.id];S.qty=Math.max(1,(parseInt($('#qty').value)||1)+(+v));render(true);break}
+ case'add':case'buynow':{const p=cur();const S=UI.sel[p.id];const q=$('#qty');if(q)S.qty=parseInt(q.value)||1;if(addToCart(p,S)){if(a==='buynow')go('checkout');else{toast((id?'Ditambahkan: ':'Added: ')+Ltxt(p.name));render(true)}}break}
+ case'cqty':{const l=DB.cart[+b.dataset.i];const nq=l.qty+(+v);if(nq<1)break;const li=lineInfo({...l,qty:nq});if(!li.ok&&+v>0){toast(id?'Stok tidak cukup.':'Not enough stock.');break}l.qty=nq;save();render(true);break}
+ case'rm':DB.cart.splice(+b.dataset.i,1);save();render(true);break;
+ case'quote-for':INQ.pre={sku:v,type:'wholesale'};INQ.errs={};go('wholesale');setTimeout(()=>$('#inqform')?.scrollIntoView({behavior:'smooth'}),80);break;
+ case'cart-to-inq':{const items=API.quote(DB.cart).items;INQ.pre={type:'export',country:CO.country,sku:items.map(i=>i.p?.sku).join(', '),qty:items.map(i=>i.qty+'× '+(i.label||'')).join(', ')};go('wholesale');break}
+ case'pay':{const o=DB.orders.find(x=>x.no===b.dataset.no);const evt=b.dataset.dup?(o.lastEvt||'evt'):uid('evt_');o.lastEvt=o.lastEvt||evt;if(!b.dataset.dup)o.lastEvt=evt;const r=API.payment(o.no,v,evt);if(r.dup)toast(id?'Callback duplikat diabaikan. Tidak ada pembayaran ganda.':'Duplicate callback ignored. No double payment.');else if(v==='paid'&&o.pay==='paid'){DB.cart=DB.cart.filter(l=>!o.res.some(x=>x.pid===l.pid&&x.ref===l.ref));save();toast(o.recon?(id?'Masuk antrean rekonsiliasi.':'Sent to reconciliation queue.'):(id?'Pembayaran terverifikasi.':'Payment verified.'))}render(true);break}
+ case'copy':navigator.clipboard?.writeText(v).then(()=>toast(id?'Disalin.':'Copied.'),()=>toast(v));break;
+ case'endpreview':UI.preview=null;UI.tab='products';go('admin');break;
+ /* admin */
+ case'role':UI.role=v;UI.tab='dash';UI.editId=null;render();break;
+ case'logout':UI.role=null;render();break;
+ case'tab':UI.tab=v;UI.qErr='';render();break;
+ case'p-edit':UI.editId=v;UI.confirmDel=null;render(true);break;
+ case'p-new':{API.admin(UI.role,'product.create','Produk baru',()=>{const n=DB.products.length+1;const p=prod({id:uid('p'),slug:'new-product-'+n,sku:'NE-NEW-'+String(n).padStart(3,'0'),cat:'fashion',status:'draft',name:{en:'New product',id:''},story:{en:'',id:''},material:{en:'',id:''},size:{en:'',id:''},mode:'pattern',sale:'retail',variants:V(['One size'],[0])});DB.products.unshift(p);UI.editId=p.id});render(true);break}
+ case'p-dup':{const s=DB.products.find(p=>p.id===UI.editId);API.admin(UI.role,'product.create','Duplikat '+s.sku,()=>{const p=clone(s);Object.assign(p,{id:uid('p'),sku:s.sku+'-COPY',slug:s.slug+'-copy',status:'draft',hasOrders:false,rev:null,featured:false});p.variants.forEach(v=>{v.stock=0;v.reserved=0});p.pieces=[];DB.products.unshift(p);UI.editId=p.id});toast('Duplikat dibuat sebagai draft.');render(true);break}
+ case'p-preview':{const p=DB.products.find(p=>p.id===UI.editId);UI.preview=p.id;UI.sel[p.id]=null;location.hash='p-'+(p.rev?.slug||p.slug);break}
+ case'p-publish':{const p=DB.products.find(p=>p.id===UI.editId);API.admin(UI.role,'product.publish','Publish '+p.sku,()=>{const r=Object.assign({},p,p.rev||{});if(!r.images.length)throw new Error('Tambahkan minimal satu foto sebelum publish.');if(!r.name.en)throw new Error('Nama EN wajib diisi.');if(p.rev){Object.assign(p,p.rev);p.rev=null}p.status='published'});toast('Dipublikasikan. Produk tampil di toko.');render(true);break}
+ case'p-status':{const p=DB.products.find(p=>p.id===UI.editId);API.admin(UI.role,'product.status',`${p.sku} → ${v}`,()=>{p.status=v});toast(v==='archived'?'Diarsipkan. Histori pesanan tetap utuh.':'Status: '+v);render(true);break}
+ case'p-del':UI.confirmDel=UI.editId;render(true);break;
+ case'p-del-no':UI.confirmDel=null;render(true);break;
+ case'p-del-yes':{const p=DB.products.find(p=>p.id===UI.editId);API.admin(UI.role,'product.delete','Hapus '+p.sku,()=>{if(p.hasOrders||p.status!=='draft')throw new Error('Hanya draft tanpa transaksi yang bisa dihapus. Gunakan Archive.');DB.products=DB.products.filter(x=>x!==p)});UI.editId=null;UI.confirmDel=null;toast('Draft dihapus.');render(true);break}
+ case'img-rm':{const p=DB.products.find(p=>p.id===UI.editId);const {rev,stocks}=readEditor(p);rev.images.splice(+v,1);API.saveProduct(UI.role,p,rev,stocks);render(true);break}
+ case'piece-add':{const p=DB.products.find(p=>p.id===UI.editId);API.admin(UI.role,'product.edit','Tambah piece '+p.sku,()=>{const n=p.pieces.length+1;p.pieces.push({id:uid('pc'),code:p.sku+'-P'+String(n).padStart(2,'0'),label:p.pieces[0]?.label||'',img:p.images[0]||'',status:'available'});move(p,'P'+n,+1,'new piece','admin')});render(true);break}
+ case'var-add':{const p=DB.products.find(p=>p.id===UI.editId);const l=$('#e-newvar').value.trim();if(!l)break;API.admin(UI.role,'product.edit','Tambah varian '+l,()=>{if(p.variants.some(x=>x.label===l))throw new Error('Varian sudah ada.');p.variants.push({id:'v-'+l.toLowerCase().replace(/[^a-z0-9]/g,'')+uid(''),label:l,stock:0,reserved:0})});render(true);break}
+ case'o-sel':UI.orderSel=v;render(true);break;
+ case'o-ful':{const o=DB.orders.find(x=>x.no===UI.orderSel);API.admin(UI.role,'order.fulfill',`${o.no} → ${v}`,()=>{const tr=$('#o-track').value.trim();if(v==='shipped'&&!tr)throw new Error('Isi nomor resi sebelum menandai dikirim.');o.tracking=tr;o.ful=v;o.log.push({at:now(),m:'Fulfillment: '+v+(v==='shipped'?' · '+tr:'')})});render(true);break}
+ case'o-save':{const o=DB.orders.find(x=>x.no===UI.orderSel);API.admin(UI.role,'order.fulfill','Catatan '+o.no,()=>{o.tracking=$('#o-track').value.trim();o.notes=$('#o-notes').value});toast('Tersimpan.');render(true);break}
+ case'o-cancel':{const o=DB.orders.find(x=>x.no===UI.orderSel);API.admin(UI.role,'order.cancel','Batalkan '+o.no,()=>{release(o);o.pay='expired';o.ful='cancelled';o.log.push({at:now(),m:'Cancelled by admin; stock released'})});render(true);break}
+ case'o-refund':{const o=DB.orders.find(x=>x.no===UI.orderSel);API.admin(UI.role,'order.refund','Refund '+o.no,()=>{o.pay='refunded';o.recon=false;o.log.push({at:now(),m:'Full refund recorded'})});render(true);break}
+ case'o-restock':{const o=DB.orders.find(x=>x.no===UI.orderSel);API.admin(UI.role,'order.fulfill','Restok retur '+o.no,()=>{for(const r of o.res){const p=DB.products.find(x=>x.id===r.pid);if(!p)continue;if(p.mode==='exact'){const pc=p.pieces.find(x=>x.id===r.ref);if(pc){pc.status='available';delete pc.heldBy}}else{const vv=p.variants.find(x=>x.id===r.ref);if(vv)vv.stock+=r.qty}move(p,r.ref,+r.qty,'return restock',o.no)}o.restocked=true;o.log.push({at:now(),m:'Returned items inspected and restocked'})});render(true);break}
+ case'i-sel':UI.inqSel=v;UI.qErr='';render(true);break;
+ case'i-save':{const q=DB.inquiries.find(x=>x.no===UI.inqSel);API.admin(UI.role,'inquiry.edit',`${q.no} → ${$('#i-status').value}`,()=>{q.status=$('#i-status').value;q.pic=$('#i-pic').value==='—'?'':$('#i-pic').value;if(q.status==='New'&&q.pic)q.status='Assigned'});toast('Status inquiry tersimpan.');render(true);break}
+ case'i-retry':{const q=DB.inquiries.find(x=>x.no===UI.inqSel);API.admin(UI.role,'inquiry.notify','Kirim ulang notifikasi '+q.no,()=>{q.notify=DB.settings.notifyOk?'sent':'failed'});toast(q.notify==='sent'?'Notifikasi terkirim.':'Masih gagal. Periksa pengaturan email.');render(true);break}
+ case'q-send':case'q-approve':{const [no,ver]=v.split('|');const x=DB.quotes.find(q=>q.no===no&&q.ver===+ver);API.admin(UI.role,'quote.edit',`${no} v${ver} ${a==='q-send'?'sent':'approved'}`,()=>{x.status=a==='q-send'?'Sent':'Approved';const q=DB.inquiries.find(i=>i.no===x.inq);q.status=a==='q-send'?'Quotation Sent':'Approved'});render(true);break}
+ case'k-save':API.admin(UI.role,'contact.edit','Kontak & legalitas',()=>{const r=document.querySelector('input[name=activePhone]:checked');DB.contact.activePhone=r&&r.value!==''?+r.value:null;DB.contact.addressConfirmed=$('#k-addr').checked;document.querySelectorAll('[data-legal]').forEach(c=>DB.contact.legal[+c.dataset.legal].verified=c.checked)});toast('Kontak tersimpan.');render(true);break;
+ case'cat-save':API.admin(UI.role,'catalogue.edit','Katalog versi baru',()=>{document.querySelectorAll('[data-catp]').forEach(c=>{const p=DB.products.find(x=>x.id===c.dataset.catp);p.catalogue=c.checked});const m=DB.catalogueMeta;const [maj,min]=m.version.split('.').map(Number);m.version=maj+'.'+(min+1);m.date=new Date().toISOString().slice(0,10)});toast('Katalog v'+DB.catalogueMeta.version+' tersimpan.');render(true);break;
+ case'copy-csv':{const tx=$('#csv');navigator.clipboard?.writeText(tx.value).then(()=>toast('CSV disalin.'),()=>{tx.select();toast('Tekan Ctrl/Cmd+C untuk menyalin.')});break}
+ case'reset':UI.confirmReset=true;render(true);break;case'reset-no':UI.confirmReset=false;render(true);break;
+ case'reset-yes':API.admin(UI.role,'settings','Reset demo',()=>{});DB=seed();UI.confirmReset=false;UI.editId=null;UI.orderSel=null;UI.inqSel=null;save();toast('Data demo direset.');render(true);break;
+ case'run-tests':UI.tests=runTests();render(true);break;
+ }}catch(err){toast(err.message);render(true)}
+});
+document.addEventListener('change',e=>{
+ const el=e.target;
+ if(el.id==='sort'){UI.sort=el.value;render(true)}
+ else if(el.id==='c-country'){CO.country=el.value;readCO();render(true)}
+ else if(el.id==='c-zone'){CO.zone=el.value;readCO();render(true)}
+ else if(el.name==='pay'){CO.pay=el.value}
+ else if(el.id==='e-addimg'&&el.value){const p=DB.products.find(p=>p.id===UI.editId);const {rev,stocks}=readEditor(p);rev.images.push(el.value);try{API.saveProduct(UI.role,p,rev,stocks)}catch(x){toast(x.message)}render(true)}
+ else if(el.id==='e-upload'&&el.files[0]){const f=el.files[0];if(f.size>2.5e6){toast('File terlalu besar. Maksimal 2,5 MB untuk prototype.');return}const rd=new FileReader();rd.onload=()=>{const p=DB.products.find(p=>p.id===UI.editId);const {rev,stocks}=readEditor(p);rev.images.push(rd.result);try{API.saveProduct(UI.role,p,rev,stocks);toast('Foto diunggah ke draft.')}catch(x){toast(x.message)}render(true)};rd.readAsDataURL(f)}
+});
+document.addEventListener('input',e=>{if(e.target.id==='q'){UI.q=e.target.value;clearTimeout(UI._qt);UI._qt=setTimeout(()=>{const pos=e.target.selectionStart;render(true);const q=$('#q');q.focus();q.setSelectionRange(pos,pos)},250)}});
+function readCO(){const g=i=>$('#'+i)?.value;CO.c={name:g('c-name')??CO.c.name,email:g('c-email')??CO.c.email,phone:g('c-phone')??CO.c.phone,address:g('c-address')??CO.c.address,city:g('c-city')??CO.c.city};const pm=document.querySelector('input[name=pay]:checked');if(pm)CO.pay=pm.value}
+document.addEventListener('submit',e=>{
+ e.preventDefault();const f=e.target;const g=i=>($('#'+i)?.value||'').trim();const id=UI.lang==='id';
+ try{
+ if(f.id==='coform'){readCO();const r=API.createOrder({lines:DB.cart,customer:CO.c,country:CO.country==='ID'?'ID':CO.country,zone:CO.zone,pay:CO.pay,clientTotal:+g('c-total')});if(!r.ok){CO.errs=r.errs;render(true);const first=document.querySelector('.err');first?.closest('.fld')?.querySelector('input,select,textarea')?.focus();return}CO.errs={};go('pay-'+r.order.no)}
+ else if(f.id==='osform'){OS.no=g('os-no').toUpperCase();OS.email=g('os-email').toLowerCase();const o=DB.orders.find(x=>x.no===OS.no&&x.customer.email===OS.email);OS.found=o?o.no:null;OS.err=o?'':(id?'Pesanan tidak ditemukan. Periksa nomor dan email.':'No order matches that number and email.');render(true)}
+ else if(f.id==='inqform'){const d={type:g('i-type'),name:g('i-name'),company:g('i-company'),email:g('i-email'),wa:g('i-wa'),country:g('i-country'),btype:g('i-btype'),sku:g('i-sku'),qty:g('i-qty'),spec:g('i-spec'),when:g('i-when'),dest:g('i-dest'),brand:g('i-brand'),pack:g('i-pack'),notes:g('i-notes'),file:$('#i-file')?.files[0]?.name||'',privacy:$('#i-privacy').checked,mkt:$('#i-mkt').checked};const r=API.inquiry(d);if(!r.ok){INQ.errs=r.errs;INQ.pre=d;render(true);$('#inqform').scrollIntoView({behavior:'smooth'});return}INQ={pre:{},errs:{},done:r.inq};go('inq-done')}
+ else if(f.id==='catform'){const r=API.inquiry({type:'catalogue',name:g('k-name'),email:g('k-email'),company:g('k-company'),country:g('k-country'),privacy:true});if(!r.ok){CATF.errs=r.errs;render(true);return}CATF.errs={};INQ.done=r.inq;go('inq-done')}
+ else if(f.id==='pform'){const p=DB.products.find(p=>p.id===f.dataset.id);const {rev,stocks}=readEditor(p);API.saveProduct(UI.role,p,rev,stocks);toast(p.status==='published'?'Draft tersimpan. Preview lalu publish untuk menampilkan di toko.':'Tersimpan.');render(true)}
+ else if(f.id==='qform'){const q=DB.inquiries.find(x=>x.no===UI.inqSel);const price=parseFloat(g('q-price').replace(',','.'));if(!(price>0)||!g('q-valid')||!g('q-lead')||!g('q-terms')){UI.qErr='Isi harga per unit, masa berlaku, lead time dan termin pembayaran.';render(true);return}UI.qErr='';API.admin(UI.role,'quote.create','Quotation untuk '+q.no,()=>{const prev=DB.quotes.filter(x=>x.inq===q.no);const no=prev[0]?.no||'QUO-2026-'+String(++DB.counters.q).padStart(4,'0');DB.quotes.push({no,ver:prev.length+1,inq:q.no,qty:g('q-qty'),cur:g('q-cur'),price,basis:g('q-basis'),port:g('q-port'),valid:g('q-valid'),lead:g('q-lead'),terms:g('q-terms'),sample:g('q-sample'),excl:g('q-excl'),status:'Draft',at:now()});if(['New','Assigned'].includes(q.status))q.status='In Discussion'});toast('Quotation draft tersimpan.');render(true)}
+ else if(f.id==='cform'){API.admin(UI.role,'content.edit','Konten homepage',()=>{const C=DB.content;C.heroTitle={en:g('c-hen'),id:g('c-hid')};C.heroSub={en:g('c-sen'),id:g('c-sid')};C.featured=g('c-feat');C.heroImg=g('c-hero')});toast('Konten dipublikasikan.');render(true)}
+ else if(f.id==='sform'){API.admin(UI.role,'settings','Pengaturan transaksi',()=>{const S=DB.settings;S.reserveMin=Math.max(1,parseInt(g('s-res'))||15);S.notifyOk=g('s-notif')==='1';S.zones.forEach((z,i)=>{z.rate=Math.max(0,parseInt($('#z-r-'+i).value)||0);z.on=$('#z-on-'+i).checked})});toast('Pengaturan tersimpan.');render(true)}
+ }catch(err){toast(err.message);render(true)}
+});
+setInterval(()=>{const el=$('#timer');if(!el)return;const left=Math.max(0,+el.dataset.exp-now());el.textContent=String(Math.floor(left/60000)).padStart(2,'0')+':'+String(Math.floor(left%60000/1000)).padStart(2,'0');if(!left)sweepTick()},1000);
+
+UI.route=location.hash.slice(1)||'home';if(UI.route.startsWith('shop-'))UI.shopCat=UI.route.slice(5);
+API.sweep();render(true);
+</script>
+
+</body>
+</html>
