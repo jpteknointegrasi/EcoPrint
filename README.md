@@ -78,3 +78,4 @@ python3 uat/uat.py
 - Backend + database (e.g. Supabase), real admin login with MFA, server-side permissions
 - Payment gateway with signed webhooks, courier rates, email notifications, PDF catalogue export, backups
 - Owner-approved data: retail prices, active WhatsApp number, return policy, size charts, real hero photo
+
