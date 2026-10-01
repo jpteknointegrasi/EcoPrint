@@ -390,6 +390,8 @@ tr.sel td{background:var(--chip)}
 .cprod{display:grid;grid-template-columns:150px 1fr;gap:22px;padding-block:18px;border-top:1px solid var(--line)}
 .cprod img{width:150px;height:180px;object-fit:cover;border-radius:2px}
 @media (max-width:520px){.cprod{grid-template-columns:1fr}.cprod img{width:100%;height:240px}}
+.is-busy{cursor:progress}
+.is-busy .btn{pointer-events:none;opacity:.7}
 .empty{border:1px dashed var(--line-2);border-radius:var(--r);padding:36px;text-align:center;color:var(--ink-2);display:grid;gap:12px;justify-items:center}
 </style>
 
@@ -415,6 +417,7 @@ tr.sel td{background:var(--chip)}
 <div class="buybar" id="buybar" hidden></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="config.js"></script>
 <script>
 /* =========================================================
    Niken Ecoprint — website prototype following Blueprint v1
@@ -425,7 +428,7 @@ const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const rp=n=>'Rp'+Math.round(n||0).toLocaleString('id-ID');
 const now=()=>Date.now();
-const IMG=n=>n&&n.startsWith('data:')?n:`img/${n}.jpg`;
+const IMG=n=>n&&(n.startsWith('data:')||/^https?:\/\//.test(n))?n:`img/${n}.jpg`;
 const fmtD=t=>new Date(t).toLocaleString('id-ID',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
 const fmtDay=t=>new Date(t).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
 const clone=o=>JSON.parse(JSON.stringify(o));
@@ -603,7 +606,9 @@ function seed(){
 const KEY='niken-ecoprint-proto-v1';
 function loadDB(){try{const s=localStorage.getItem(KEY);if(s){const d=JSON.parse(s);if(d&&d.v===2)return d}}catch(e){}return null}
 let SANDBOX=false; // true while acceptance tests run on a copy: nothing is written to storage
-function save(){if(SANDBOX)return;try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
+const CFG=window.NIKEN_CONFIG||{};
+const REMOTE={on:false,booting:false,sb:null,user:null,busy:false,emails:{},lastEvt:{},ok:()=>!!(CFG.supabaseUrl&&CFG.supabaseAnonKey)};
+function save(){if(SANDBOX)return;try{if(REMOTE.on){localStorage.setItem(KEY+'-remote-cart',JSON.stringify(DB.cart));return}localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
 let DB=loadDB()||seed();
 let UI={lang:'en',route:'home',shopCat:'all',q:'',sort:'featured',sel:{},role:null,tab:'dash',editId:null,orderSel:null,inqSel:null,preview:null,last:null};
 try{const l=localStorage.getItem(KEY+'-lang');if(l)UI.lang=l}catch(e){}
@@ -683,7 +688,7 @@ API.inquiry=(f)=>{
  inq.notify=DB.settings.notifyOk?'sent':'failed'; // inquiry is stored first; notification can fail independently
  save();return{ok:true,inq};
 };
-function sweepTick(){if(API.sweep())render()}
+function sweepTick(){if(REMOTE.on){REMOTE.poll();return}if(API.sweep())render()}
 setInterval(sweepTick,5000);
 
 /* ---------------- helpers for views ---------------- */
@@ -714,7 +719,8 @@ function chrome(){
  $('#hdr-cat').textContent=t('reqcat');
  $('#lang-en').setAttribute('aria-pressed',UI.lang==='en');$('#lang-id').setAttribute('aria-pressed',UI.lang==='id');
  const n=DB.cart.reduce((a,l)=>a+(l.qty||1),0);const b=$('#cartn');b.hidden=!n;b.textContent=n;
- $('#ribbon').textContent=UI.lang==='id'?'PROTOTYPE · Data produk dari katalog; harga retail adalah contoh dan pembayaran disimulasikan sampai owner menyetujui':'PROTOTYPE · Product data from the catalogue; retail prices are examples and payments are simulated until owner approval';
+ $('#ribbon').hidden=REMOTE.on&&!DB.settings.paySimulator;
+ $('#ribbon').textContent=REMOTE.on?(UI.lang==='id'?'STAGING · Terhubung ke database; harga retail masih contoh dan pembayaran masih simulasi':'STAGING · Connected to the database; retail prices are examples and payments are still simulated'):UI.lang==='id'?'PROTOTYPE · Data produk dari katalog; harga retail adalah contoh dan pembayaran disimulasikan sampai owner menyetujui':'PROTOTYPE · Product data from the catalogue; retail prices are examples and payments are simulated until owner approval';
  document.documentElement.lang=UI.lang;
  const ph=phoneTxt();
  $('#footer').innerHTML=`<div class="wrap"><div class="fgrid">
@@ -898,15 +904,15 @@ function vCheckout(){
   <p class="small muted">${id?'Dengan memesan, Anda menyetujui syarat pembelian dan variasi motif alami.':'By ordering you accept the purchase terms and natural motif variation.'}</p></aside></form>`;
 }
 function vPay(no){
- const id=UI.lang==='id';const o=DB.orders.find(x=>x.no===no);if(!o)return vOrder();
+ const id=UI.lang==='id';const o=DB.orders.find(x=>x.no===no);if(!o){if(REMOTE.on&&REMOTE.emails[no]){REMOTE.fetchOrder(no);return`<section class="phead"><div class="wrap stack"><h1>${id?'Memuat pesanan…':'Loading order…'}</h1></div></section>`}OS.no=no;return vOrder()}
  const left=Math.max(0,o.expiresAt-now());const mm=String(Math.floor(left/60000)).padStart(2,'0'),ss=String(Math.floor(left%60000/1000)).padStart(2,'0');
  const st={pending:['warn',id?'Menunggu pembayaran':'Awaiting payment'],paid:['ok',id?'Dibayar':'Paid'],failed:['bad',id?'Gagal':'Failed'],expired:['bad',id?'Kedaluwarsa':'Expired']}[o.pay]||['',o.pay];
  return`<section class="phead"><div class="wrap stack"><span class="eyebrow">${id?'Pesanan':'Order'} ${esc(o.no)}</span><h1>${o.pay==='paid'?(id?'Terima kasih.':'Thank you.'):(id?'Selesaikan pembayaran':'Complete your payment')}</h1></div></section>
  <div class="wrap co"><div class="stack" style="gap:22px">
   <div class="panel"><div class="row" style="justify-content:space-between"><span class="chip ${st[0]}">${st[1]}</span>${o.pay==='pending'?`<span class="timer" id="timer" data-exp="${o.expiresAt}">${mm}:${ss}</span>`:''}</div>
   ${o.pay==='pending'?`<p>${id?'Barang Anda dipesan sampai waktu habis. Metode':'Your items are held until the timer runs out. Method'}: <b>${esc(o.method)}</b>.</p>
-   <div class="note"><b>${id?'Simulasi penyedia pembayaran':'Payment provider simulator'}</b><br>${id?'Tombol ini meniru callback dari penyedia pembayaran untuk menguji status dan stok.':'These buttons mimic provider callbacks so you can test status and stock handling.'}</div>
-   <div class="row"><button class="btn" type="button" data-act="pay" data-v="paid" data-no="${o.no}">${id?'Bayar (sukses)':'Pay (success)'}</button><button class="btn ghost" type="button" data-act="pay" data-v="failed" data-no="${o.no}">${id?'Gagal':'Fail'}</button><button class="btn ghost" type="button" data-act="pay" data-v="expired" data-no="${o.no}">${id?'Kedaluwarsa':'Expire'}</button></div>`:
+   ${REMOTE.on&&!DB.settings.paySimulator?`<p class="muted">${id?'Instruksi pembayaran dikirim ke email Anda. Halaman ini diperbarui otomatis setelah pembayaran terverifikasi.':'Payment instructions were sent to your email. This page updates automatically once payment is verified.'}</p>`:`<div class="note"><b>${id?'Simulasi penyedia pembayaran':'Payment provider simulator'}</b><br>${id?'Tombol ini meniru callback dari penyedia pembayaran untuk menguji status dan stok.':'These buttons mimic provider callbacks so you can test status and stock handling.'}</div>
+   <div class="row"><button class="btn" type="button" data-act="pay" data-v="paid" data-no="${o.no}">${id?'Bayar (sukses)':'Pay (success)'}</button><button class="btn ghost" type="button" data-act="pay" data-v="failed" data-no="${o.no}">${id?'Gagal':'Fail'}</button><button class="btn ghost" type="button" data-act="pay" data-v="expired" data-no="${o.no}">${id?'Kedaluwarsa':'Expire'}</button></div>`}`:
    o.pay==='paid'?`<p>${id?'Pembayaran terverifikasi. Konfirmasi dikirim ke':'Payment verified. A confirmation was sent to'} <b>${esc(o.customer.email)}</b>. ${id?'Kami akan memproses dan mengirimkan nomor resi.':'We will pack your order and send tracking.'}</p><div class="row"><button class="btn ghost sm" type="button" data-act="pay" data-v="paid" data-no="${o.no}" data-dup="1">${id?'Uji: kirim ulang callback yang sama':'Test: resend the same callback'}</button></div>`:
    `<p>${id?'Reservasi dilepas. Barang kembali tersedia untuk pembeli lain.':'The reservation was released and the items are available to others again.'}</p><div class="row"><a class="btn" href="#cart">${id?'Kembali ke keranjang':'Back to cart'}</a><button class="btn ghost sm" type="button" data-act="pay" data-v="paid" data-no="${o.no}">${id?'Uji: pembayaran terlambat masuk':'Test: late payment arrives'}</button></div>`}
   ${o.recon?`<div class="note warn">${id?'Pembayaran terlambat diterima tetapi barang sudah tidak tersedia. Tim kami akan menghubungi Anda untuk penggantian atau refund.':'A late payment was received but the item is no longer available. Our team will contact you about a replacement or refund.'}</div>`:''}
@@ -994,11 +1000,12 @@ const ATABS=[['dash','Dashboard',null],['products','Produk & Stok','product'],['
 const payChip=s=>`<span class="chip ${s==='paid'?'ok':s==='pending'?'warn':s==='refunded'||s==='partially refunded'?'info':'bad'}">${s}</span>`;
 const fulChip=s=>`<span class="chip ${s==='delivered'?'ok':s==='shipped'||s==='processing'?'info':s==='unfulfilled'?'plain':'bad'}">${s}</span>`;
 function vAdmin(){
+ if(!UI.role&&REMOTE.on)return vLogin();
  if(!UI.role)return`<section class="phead"><div class="wrap stack"><span class="eyebrow">Admin CMS</span><h1>Masuk sebagai</h1><p class="lead">Pilih role untuk mencoba hak akses. Di versi live, setiap role masuk dengan akun sendiri, MFA dan pembatasan percobaan login; izin diperiksa di server.</p></div></section><div class="wrap" style="padding-block:36px 90px"><div class="roles">${Object.entries(ROLES).map(([k,r])=>`<button class="role" type="button" data-act="role" data-v="${k}"><b>${r.n}</b><span>${r.d}</span></button>`).join('')}</div></div>`;
- const tabs=ATABS.filter(x=>!x[2]||can(UI.role,x[2]));if(!tabs.find(x=>x[0]===UI.tab))UI.tab='dash';
+ const tabs=ATABS.filter(x=>(!x[2]||can(UI.role,x[2]))&&!(REMOTE.on&&x[0]==='tests'));if(!tabs.find(x=>x[0]===UI.tab))UI.tab='dash';
  const counts={orders:DB.orders.filter(o=>o.pay==='paid'&&o.ful==='unfulfilled').length,inquiries:DB.inquiries.filter(i=>i.status==='New').length};
  let body='';try{body=({dash:aDash,products:aProducts,orders:aOrders,inquiries:aInq,content:aContent,catalogue:aCatalogue,reports:aReports,settings:aSettings,tests:aTests})[UI.tab]()}catch(e){body=`<div class="note warn">${esc(e.message)}</div>`}
- return`<div class="admin"><nav class="aside" aria-label="CMS"><div class="who"><span class="lbl">Masuk sebagai</span><b style="font-family:var(--f-display);font-weight:400;font-size:1.3rem">${ROLES[UI.role].n}</b><button class="link small" type="button" data-act="logout" style="width:max-content;padding:0">Ganti role</button></div>${tabs.map(x=>`<button type="button" data-act="tab" data-v="${x[0]}" aria-current="${UI.tab===x[0]}">${x[1]}${counts[x[0]]?`<span class="badge-n" style="position:static">${counts[x[0]]}</span>`:''}</button>`).join('')}</nav><div class="amain">${body}</div></div>`;
+ return`<div class="admin"><nav class="aside" aria-label="CMS"><div class="who"><span class="lbl">Masuk sebagai</span><b style="font-family:var(--f-display);font-weight:400;font-size:1.3rem">${ROLES[UI.role].n}</b>${REMOTE.user?`<span class="small muted" style="overflow-wrap:anywhere">${esc(REMOTE.user.email||'')}</span>`:''}<button class="link small" type="button" data-act="logout" style="width:max-content;padding:0">${REMOTE.on?'Keluar':'Ganti role'}</button></div>${tabs.map(x=>`<button type="button" data-act="tab" data-v="${x[0]}" aria-current="${UI.tab===x[0]}">${x[1]}${counts[x[0]]?`<span class="badge-n" style="position:static">${counts[x[0]]}</span>`:''}</button>`).join('')}</nav><div class="amain">${body}</div></div>`;
 }
 function aDash(){
  const paid=DB.orders.filter(o=>o.pay==='paid');const rev=paid.reduce((a,o)=>a+o.total,0)-DB.orders.filter(o=>o.pay==='refunded').reduce((a,o)=>a+o.total,0);
@@ -1137,12 +1144,12 @@ function aReports(){
  <div class="stack"><span class="lbl">Ekspor CSV</span><textarea id="csv" readonly style="font-family:var(--f-mono);font-size:.8rem;min-height:120px">${esc(csv)}</textarea><button class="btn sm ghost" type="button" data-act="copy-csv" style="width:max-content">Salin CSV</button></div>`;
 }
 function aSettings(){const S=DB.settings;return`<div class="stack"><span class="eyebrow">Pengaturan</span><h2>Transaksi & pengiriman</h2></div>
- <form class="panel" id="sform" novalidate><div class="fgrid2">${fld('s-res','Durasi reservasi stok (menit)',`<input id="s-res" inputmode="numeric" value="${S.reserveMin}">`)}${fld('s-notif','Simulasi email notifikasi',`<select id="s-notif"><option value="1" ${S.notifyOk?'selected':''}>Berhasil</option><option value="0" ${S.notifyOk?'':'selected'}>Gagal (uji retry)</option></select>`)}</div>
+ <form class="panel" id="sform" novalidate><div class="fgrid2">${fld('s-res','Durasi reservasi stok (menit)',`<input id="s-res" inputmode="numeric" value="${S.reserveMin}">`)}${fld('s-notif','Simulasi email notifikasi',`<select id="s-notif"><option value="1" ${S.notifyOk?'selected':''}>Berhasil</option><option value="0" ${S.notifyOk?'':'selected'}>Gagal (uji retry)</option></select>`)}${REMOTE.on?fld('s-paysim','Simulator pembayaran',`<select id="s-paysim"><option value="1" ${S.paySimulator?'selected':''}>Aktif (staging)</option><option value="0" ${S.paySimulator?'':'selected'}>Mati (pakai payment gateway)</option></select>`,null,'Matikan sebelum website live. Setelah itu hanya webhook payment gateway yang bisa menandai pesanan lunas.'):''}</div>
  <div class="tbl-wrap vtbl"><table><thead><tr><th>Wilayah</th><th class="num">Tarif (IDR)</th><th>Dilayani</th></tr></thead><tbody>${S.zones.map((z,i)=>`<tr><td>${esc(z.name)}</td><td class="num"><input id="z-r-${i}" inputmode="numeric" value="${z.rate}" style="width:110px;text-align:right" aria-label="Tarif ${esc(z.name)}"></td><td><input type="checkbox" id="z-on-${i}" ${z.on?'checked':''} style="width:auto" aria-label="Dilayani ${esc(z.name)}"></td></tr>`).join('')}</tbody></table></div>
  <p class="small muted">Checkout internasional: nonaktif sampai pembayaran, negara layanan, ongkir dan ketentuan impor siap.</p><button class="btn sm" type="submit" style="width:max-content">Simpan pengaturan</button></form>
  <div class="stack"><h3 style="font-size:1.2rem">Audit log</h3><div class="audit">${DB.audit.map(a=>`<div>${fmtD(a.at)} · ${ROLES[a.role]?.n||a.role} · ${esc(a.perm)} · ${esc(a.desc)}</div>`).join('')||'<div>Belum ada aktivitas.</div>'}</div></div>
  <div class="stack"><h3 style="font-size:1.2rem">Mutasi stok</h3><div class="audit">${DB.movements.slice(0,80).map(m=>`<div>${fmtD(m.at)} · ${m.sku} · ${esc(m.ref)} · ${m.delta>0?'+':''}${m.delta} · ${m.reason} · ${esc(m.refNo||'')}</div>`).join('')||'<div>Belum ada mutasi.</div>'}</div></div>
- <div class="panel"><b>Reset data demo</b><p class="small muted">Mengembalikan produk, pesanan dan inquiry ke data awal di browser ini.</p>${UI.confirmReset?`<div class="row"><button class="btn sm danger" type="button" data-act="reset-yes">Ya, reset semua</button><button class="btn sm ghost" type="button" data-act="reset-no">Batal</button></div>`:`<button class="btn sm danger" type="button" data-act="reset" style="width:max-content">Reset data demo</button>`}</div>`}
+ ${REMOTE.on?'':`<div class="panel"><b>Reset data demo</b><p class="small muted">Mengembalikan produk, pesanan dan inquiry ke data awal di browser ini.</p>${UI.confirmReset?`<div class="row"><button class="btn sm danger" type="button" data-act="reset-yes">Ya, reset semua</button><button class="btn sm ghost" type="button" data-act="reset-no">Batal</button></div>`:`<button class="btn sm danger" type="button" data-act="reset" style="width:max-content">Reset data demo</button>`}</div>`}`}
 
 /* ---- acceptance tests (Blueprint §17) run against a copy of the data ---- */
 function runTests(){
@@ -1316,6 +1323,7 @@ function ambToggle(){if(AMB.on){ambFade(true);AMB.armed=false;try{localStorage.s
    ROUTER & RENDER
    ========================================================= */
 function render(keepScroll){
+ if(REMOTE.booting)return;
  const r=UI.route;$('#buybar').hidden=true;document.body.classList.remove('has-buybar');
  let h;
  if(r==='home'||r==='')h=vHome();
@@ -1335,6 +1343,130 @@ function render(keepScroll){
 function go(r){if(location.hash.slice(1)===r){UI.route=r;render()}else location.hash=r}
 window.addEventListener('hashchange',()=>{const r=location.hash.slice(1)||'home';if(r==='shop')UI.shopCat='all';if(!r.startsWith('p-'))UI.preview=null;UI.route=r;$('#mnav').classList.remove('open');render()});
 
+
+/* =========================================================
+   REMOTE BACKEND — Supabase (Blueprint Stage 3)
+   Active when config.js holds a project URL + publishable (anon) key.
+   Every change goes through a database function that recalculates
+   prices, locks stock rows and checks the admin's role; the browser
+   only renders what the server returns. Without config.js values the
+   page runs as the self-contained demo above.
+   ========================================================= */
+function loadScript(src){return new Promise((res,rej)=>{const t=document.createElement('script');t.src=src;t.onload=res;t.onerror=()=>rej(new Error('Could not load '+src));document.head.appendChild(t)})}
+async function rpc(fn,args){const {data,error}=await REMOTE.sb.rpc(fn,args||{});if(error)throw new Error(error.message||'Server error');return data}
+function applySite(s){DB.categories=s.categories||[];DB.products=s.products||[];DB.content=s.content||{};DB.contact=s.contact||{};DB.settings=Object.assign({},DB.settings,s.settings||{});DB.catalogueMeta=s.catalogueMeta||{}}
+REMOTE.loadPublic=async()=>{applySite(await rpc('get_public_site'))};
+REMOTE.loadAdmin=async()=>{const s=await rpc('admin_snapshot');const mine=DB.orders.filter(o=>REMOTE.emails[o.no]);applySite(s);DB.settings=s.settings;DB.contact=s.contact;
+ DB.orders=s.orders.concat(mine.filter(o=>!s.orders.some(x=>x.no===o.no)));DB.inquiries=s.inquiries;DB.quotes=s.quotes;DB.audit=s.audit;DB.movements=s.movements;UI.role=s.role};
+REMOTE.reload=()=>UI.role?REMOTE.loadAdmin():REMOTE.loadPublic();
+REMOTE.cacheOrder=o=>{if(!o)return;const i=DB.orders.findIndex(x=>x.no===o.no);if(i>=0)DB.orders[i]=o;else DB.orders.unshift(o)};
+REMOTE.fetchOrder=async no=>{if(REMOTE._f===no)return;REMOTE._f=no;try{const o=await rpc('get_order',{p_no:no,p_email:REMOTE.emails[no]});if(o)REMOTE.cacheOrder(o);else delete REMOTE.emails[no]}catch(e){toast(e.message)}finally{REMOTE._f=null;render(true)}};
+REMOTE.poll=async()=>{const r=UI.route;if(!r.startsWith('pay-')||REMOTE.busy)return;const no=r.slice(4);const o=DB.orders.find(x=>x.no===no);if(!o||o.pay!=='pending'||!REMOTE.emails[no])return;
+ try{const n=await rpc('get_order',{p_no:no,p_email:REMOTE.emails[no]});if(n&&(n.pay!==o.pay||n.log.length!==o.log.length)){REMOTE.cacheOrder(n);if(n.pay!=='pending')await REMOTE.reload();render(true)}}catch(e){}};
+REMOTE.init=async()=>{
+ await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.min.js');
+ REMOTE.sb=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,storageKey:'niken-admin-session'}});
+ REMOTE.on=true;
+ DB=Object.assign(seed(),{products:[],categories:[],orders:[],inquiries:[],quotes:[],audit:[],movements:[]});
+ try{const c=JSON.parse(localStorage.getItem(KEY+'-remote-cart')||'[]');DB.cart=Array.isArray(c)?c:[]}catch(e){DB.cart=[]}
+ try{const em=JSON.parse(sessionStorage.getItem(KEY+'-orders')||'{}');if(em&&typeof em==='object')REMOTE.emails=em}catch(e){}
+ const {data}=await REMOTE.sb.auth.getSession();
+ if(data&&data.session){try{const me=await rpc('admin_me');if(me){REMOTE.user=me;await REMOTE.loadAdmin();return}}catch(e){}}
+ await REMOTE.loadPublic();
+};
+function rememberOrder(no,email){REMOTE.emails[no]=email;try{sessionStorage.setItem(KEY+'-orders',JSON.stringify(REMOTE.emails))}catch(e){}}
+async function remoteRun(fn,okMsg,after){
+ if(REMOTE.busy)return;REMOTE.busy=true;document.body.classList.add('is-busy');
+ try{const m=await fn();if(okMsg)toast(okMsg);else if(typeof m==='string')toast(m)}catch(e){toast(e.message)}
+ finally{REMOTE.busy=false;document.body.classList.remove('is-busy');render(true);if(after)after()}
+}
+const stockArgs=(p,stocks)=>p.variants.map((v,i)=>({id:v.id,stock:stocks[i]}));
+function editorArgs(){const p=DB.products.find(x=>x.id===UI.editId);const {rev,stocks}=readEditor(p);return{p,rev,args:{p_id:p.id,p_rev:rev,p_stocks:stockArgs(p,stocks)}}}
+function vLogin(){return`<section class="phead"><div class="wrap stack"><span class="eyebrow">Admin CMS</span><h1>Masuk admin</h1><p class="lead">Masuk dengan akun staf. Akun dibuat Owner di Supabase (Authentication → Users), lalu diberi role di tabel admin_users.</p></div></section>
+ <div class="wrap" style="padding-block:36px 90px;max-width:560px"><form class="panel" id="loginform" novalidate>${fld('l-email','Email',`<input id="l-email" type="email" autocomplete="username">`)}${fld('l-pass','Kata sandi',`<input id="l-pass" type="password" autocomplete="current-password">`)}${UI.loginErr?`<p class="small" style="color:var(--bad)" role="alert">${esc(UI.loginErr)}</p>`:''}<button class="btn" type="submit" style="width:max-content">Masuk</button></form></div>`}
+
+REMOTE.click=(a,b,v)=>{
+ const id=UI.lang==='id';
+ const adm=(fn,args,msg,after)=>{remoteRun(async()=>{const r=await rpc(fn,args);const m=after?after(r):null;await REMOTE.loadAdmin();return m},msg);return true};
+ switch(a){
+ case'pay':{const no=b.dataset.no;const evt=b.dataset.dup&&REMOTE.lastEvt[no]?REMOTE.lastEvt[no]:uid('evt_');REMOTE.lastEvt[no]=evt;
+  remoteRun(async()=>{const r=await rpc('payment_callback',{p_no:no,p_type:v,p_event:evt});
+   if(r.dup)return id?'Callback duplikat diabaikan. Tidak ada pembayaran ganda.':'Duplicate callback ignored. No double payment.';
+   if(r.err)throw new Error(r.err);REMOTE.cacheOrder(r.order);await REMOTE.reload();
+   if(v==='paid'&&r.order.pay==='paid'){DB.cart=DB.cart.filter(l=>!r.order.res.some(x=>x.pid===l.pid&&x.ref===l.ref));save();
+    return r.order.recon?(id?'Masuk antrean rekonsiliasi.':'Sent to reconciliation queue.'):(id?'Pembayaran terverifikasi.':'Payment verified.')}});return true}
+ case'role':case'reset':case'reset-yes':case'run-tests':return true;
+ case'logout':remoteRun(async()=>{await REMOTE.sb.auth.signOut();REMOTE.user=null;UI.role=null;UI.editId=null;UI.orderSel=null;UI.inqSel=null;DB.orders=DB.orders.filter(o=>REMOTE.emails[o.no]);DB.inquiries=[];DB.quotes=[];DB.audit=[];DB.movements=[];await REMOTE.loadPublic()},'Anda sudah keluar.');return true;
+ case'p-new':return adm('admin_create_product',{},'Produk baru dibuat sebagai draft.',r=>{UI.editId=r});
+ case'p-dup':return adm('admin_duplicate_product',{p_id:UI.editId},'Duplikat dibuat sebagai draft.',r=>{UI.editId=r});
+ case'p-publish':return adm('admin_publish_product',{p_id:UI.editId},'Dipublikasikan. Produk tampil di toko.');
+ case'p-status':return adm('admin_set_product_status',{p_id:UI.editId,p_status:v},v==='archived'?'Diarsipkan. Histori pesanan tetap utuh.':'Status: '+v);
+ case'p-del-yes':return adm('admin_delete_product',{p_id:UI.editId},'Draft dihapus.',()=>{UI.editId=null;UI.confirmDel=null});
+ case'img-rm':{const e=editorArgs();e.rev.images.splice(+v,1);return adm('admin_save_product',e.args)}
+ case'piece-add':return adm('admin_add_piece',{p_id:UI.editId});
+ case'var-add':{const l=($('#e-newvar')?.value||'').trim();if(!l)return true;return adm('admin_add_variant',{p_id:UI.editId,p_label:l})}
+ case'o-ful':return adm('admin_order_fulfill',{p_no:UI.orderSel,p_ful:v,p_tracking:$('#o-track')?.value||''});
+ case'o-save':return adm('admin_order_notes',{p_no:UI.orderSel,p_tracking:$('#o-track')?.value||'',p_notes:$('#o-notes')?.value||''},'Tersimpan.');
+ case'o-cancel':return adm('admin_order_cancel',{p_no:UI.orderSel});
+ case'o-refund':return adm('admin_order_refund',{p_no:UI.orderSel});
+ case'o-restock':return adm('admin_order_restock',{p_no:UI.orderSel});
+ case'i-save':return adm('admin_inquiry_update',{p_no:UI.inqSel,p_status:$('#i-status').value,p_pic:$('#i-pic').value},'Status inquiry tersimpan.');
+ case'i-retry':return adm('admin_inquiry_retry',{p_no:UI.inqSel},null,r=>r.notify==='sent'?'Notifikasi terkirim.':'Masih gagal. Periksa pengaturan email.');
+ case'q-send':case'q-approve':{const [no,ver]=v.split('|');return adm('admin_quote_set_status',{p_no:no,p_ver:+ver,p_status:a==='q-send'?'Sent':'Approved'})}
+ case'k-save':{const r=document.querySelector('input[name=activePhone]:checked');return adm('admin_save_contact',{p_active:r&&r.value!==''?+r.value:null,p_address_confirmed:$('#k-addr').checked,p_legal:[...document.querySelectorAll('[data-legal]')].map(c=>c.checked)},'Kontak tersimpan.')}
+ case'cat-save':return adm('admin_save_catalogue',{p_ids:[...document.querySelectorAll('[data-catp]')].filter(c=>c.checked).map(c=>c.dataset.catp)},null,r=>'Katalog v'+r.version+' tersimpan.');
+ }
+ return false;
+};
+REMOTE.change=el=>{
+ if(el.id==='e-addimg'&&el.value){const e=editorArgs();e.rev.images.push(el.value);remoteRun(async()=>{await rpc('admin_save_product',e.args);await REMOTE.loadAdmin()});return true}
+ if(el.id==='e-upload'&&el.files[0]){const f=el.files[0];
+  if(!/^image\/(jpeg|png|webp)$/.test(f.type)){toast('Gunakan foto JPG, PNG atau WebP.');return true}
+  if(f.size>5*1024*1024){toast('File terlalu besar. Maksimal 5 MB.');return true}
+  const e=editorArgs();
+  remoteRun(async()=>{const ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[f.type];
+   const path=`products/${e.p.id}/${Date.now().toString(36)}-${Math.random().toString(36).slice(2,7)}.${ext}`;
+   const up=await REMOTE.sb.storage.from('media').upload(path,f,{contentType:f.type,upsert:false});if(up.error)throw new Error(up.error.message);
+   e.rev.images.push(REMOTE.sb.storage.from('media').getPublicUrl(path).data.publicUrl);
+   await rpc('admin_save_product',e.args);await REMOTE.loadAdmin()},'Foto diunggah ke draft.');return true}
+ return false;
+};
+REMOTE.submit=(f,g)=>{
+ const id=UI.lang==='id';
+ switch(f.id){
+ case'loginform':{const email=g('l-email'),pass=$('#l-pass').value;UI.loginErr='';
+  remoteRun(async()=>{const {error}=await REMOTE.sb.auth.signInWithPassword({email,password:pass});if(error){UI.loginErr='Email atau kata sandi salah.';return}
+   const me=await rpc('admin_me');if(!me){await REMOTE.sb.auth.signOut();UI.loginErr='Akun ini belum terdaftar sebagai admin. Minta Owner menambahkan role Anda.';return}
+   REMOTE.user=me;UI.tab='dash';await REMOTE.loadAdmin();return 'Masuk sebagai '+ROLES[me.role].n});return true}
+ case'coform':{readCO();const args={p:{lines:DB.cart,customer:CO.c,country:CO.country==='ID'?'ID':CO.country,zone:CO.zone,pay:CO.pay,clientTotal:+g('c-total'),lang:UI.lang}};let next=null;
+  remoteRun(async()=>{const r=await rpc('create_order',args);if(!r.ok){CO.errs=r.errs;if(r.bad)await REMOTE.reload();return}
+   CO.errs={};rememberOrder(r.order.no,(CO.c.email||'').trim().toLowerCase());REMOTE.cacheOrder(r.order);await REMOTE.reload();next=r.order.no},null,
+   ()=>{if(next)go('pay-'+next);else document.querySelector('.err')?.closest('.fld')?.querySelector('input,select,textarea')?.focus()});return true}
+ case'osform':{OS.no=g('os-no').toUpperCase();OS.email=g('os-email').toLowerCase();
+  remoteRun(async()=>{const o=await rpc('get_order',{p_no:OS.no,p_email:OS.email});if(o){rememberOrder(o.no,OS.email);REMOTE.cacheOrder(o)}OS.found=o?o.no:null;
+   OS.err=o?'':(id?'Pesanan tidak ditemukan. Periksa nomor dan email.':'No order matches that number and email.')});return true}
+ case'inqform':case'catform':{const d=f.id==='catform'?{type:'catalogue',name:g('k-name'),email:g('k-email'),company:g('k-company'),country:g('k-country'),privacy:true}
+   :{type:g('i-type'),name:g('i-name'),company:g('i-company'),email:g('i-email'),wa:g('i-wa'),country:g('i-country'),btype:g('i-btype'),sku:g('i-sku'),qty:g('i-qty'),spec:g('i-spec'),when:g('i-when'),dest:g('i-dest'),brand:g('i-brand'),pack:g('i-pack'),notes:g('i-notes'),file:$('#i-file')?.files[0]?.name||'',privacy:$('#i-privacy').checked,mkt:$('#i-mkt').checked};
+  let done=null;remoteRun(async()=>{const r=await rpc('submit_inquiry',{p:d});if(!r.ok){if(f.id==='catform')CATF.errs=r.errs;else{INQ.errs=r.errs;INQ.pre=d}return}
+   CATF.errs={};INQ={pre:{},errs:{},done:r.inq};done=true},null,()=>{if(done)go('inq-done');else $('#'+f.id)?.scrollIntoView({behavior:'smooth'})});return true}
+ case'pform':{const e=editorArgs();remoteRun(async()=>{await rpc('admin_save_product',e.args);await REMOTE.loadAdmin()},e.p.status==='published'?'Draft tersimpan. Preview lalu publish untuk menampilkan di toko.':'Tersimpan.');return true}
+ case'qform':{const price=parseFloat(g('q-price').replace(',','.'));if(!(price>0)||!g('q-valid')||!g('q-lead')||!g('q-terms')){UI.qErr='Isi harga per unit, masa berlaku, lead time dan termin pembayaran.';render(true);return true}UI.qErr='';
+  return (remoteRun(async()=>{await rpc('admin_quote_create',{p_inq:UI.inqSel,p:{qty:g('q-qty'),cur:g('q-cur'),price,basis:g('q-basis'),port:g('q-port'),valid:g('q-valid'),lead:g('q-lead'),terms:g('q-terms'),sample:g('q-sample'),excl:g('q-excl')}});await REMOTE.loadAdmin()},'Quotation draft tersimpan.'),true)}
+ case'cform':remoteRun(async()=>{await rpc('admin_save_content',{p:{heroTitle:{en:g('c-hen'),id:g('c-hid')},heroSub:{en:g('c-sen'),id:g('c-sid')},featured:g('c-feat'),heroImg:g('c-hero')}});await REMOTE.loadAdmin()},'Konten dipublikasikan.');return true;
+ case'sform':{const S=DB.settings;const p={reserveMin:parseInt(g('s-res'))||15,notifyOk:g('s-notif')==='1',zones:S.zones.map((z,i)=>({id:z.id,rate:parseInt($('#z-r-'+i).value)||0,on:$('#z-on-'+i).checked}))};if($('#s-paysim'))p.paySimulator=g('s-paysim')==='1';
+  remoteRun(async()=>{await rpc('admin_save_settings',{p});await REMOTE.loadAdmin()},'Pengaturan tersimpan.');return true}
+ }
+ return false;
+};
+async function boot(){
+ if(!REMOTE.ok()){API.sweep();render(true);return}
+ REMOTE.booting=true;
+ $('#view').innerHTML='<section class="phead"><div class="wrap stack"><span class="eyebrow">Niken Ecoprint</span><h1>Loading…</h1></div></section>';
+ try{await REMOTE.init();REMOTE.booting=false;render(true)}
+ catch(e){REMOTE.booting=false;REMOTE.on=false;console.warn(e);
+  $('#view').innerHTML=`<section class="phead"><div class="wrap stack"><span class="eyebrow">Niken Ecoprint</span><h1>We can't reach the shop right now.</h1><p class="lead">Check your connection and try again. If it keeps happening, email ${esc(DB.contact.email)}.</p><button class="btn" type="button" onclick="location.reload()" style="width:max-content">Try again</button></div></section>`}
+}
+
 /* ---------------- EVENTS ---------------- */
 function addToCart(p,S){
  const exact=p.mode==='exact';const qty=exact?1:Math.max(1,parseInt(S.qty)||1);
@@ -1345,6 +1477,7 @@ function addToCart(p,S){
 }
 document.addEventListener('click',e=>{
  const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,v=b.dataset.v;const id=UI.lang==='id';
+ if(REMOTE.on&&REMOTE.click(a,b,v))return;
  const cur=()=>{const slug=UI.route.slice(2);return DB.products.find(p=>p.slug===slug)};
  try{switch(a){
  case'lang':UI.lang=v;try{localStorage.setItem(KEY+'-lang',v)}catch(x){}render(true);break;
@@ -1400,6 +1533,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('change',e=>{
  const el=e.target;
+ if(REMOTE.on&&REMOTE.change(el))return;
  if(el.id==='sort'){UI.sort=el.value;render(true)}
  else if(el.id==='c-country'){CO.country=el.value;readCO();render(true)}
  else if(el.id==='c-zone'){CO.zone=el.value;readCO();render(true)}
@@ -1411,6 +1545,7 @@ document.addEventListener('input',e=>{if(e.target.id==='q'){UI.q=e.target.value;
 function readCO(){const g=i=>$('#'+i)?.value;CO.c={name:g('c-name')??CO.c.name,email:g('c-email')??CO.c.email,phone:g('c-phone')??CO.c.phone,address:g('c-address')??CO.c.address,city:g('c-city')??CO.c.city};const pm=document.querySelector('input[name=pay]:checked');if(pm)CO.pay=pm.value}
 document.addEventListener('submit',e=>{
  e.preventDefault();const f=e.target;const g=i=>($('#'+i)?.value||'').trim();const id=UI.lang==='id';
+ if(REMOTE.on&&REMOTE.submit(f,g))return;
  try{
  if(f.id==='coform'){readCO();const r=API.createOrder({lines:DB.cart,customer:CO.c,country:CO.country==='ID'?'ID':CO.country,zone:CO.zone,pay:CO.pay,clientTotal:+g('c-total')});if(!r.ok){CO.errs=r.errs;render(true);const first=document.querySelector('.err');first?.closest('.fld')?.querySelector('input,select,textarea')?.focus();return}CO.errs={};go('pay-'+r.order.no)}
  else if(f.id==='osform'){OS.no=g('os-no').toUpperCase();OS.email=g('os-email').toLowerCase();const o=DB.orders.find(x=>x.no===OS.no&&x.customer.email===OS.email);OS.found=o?o.no:null;OS.err=o?'':(id?'Pesanan tidak ditemukan. Periksa nomor dan email.':'No order matches that number and email.');render(true)}
@@ -1425,7 +1560,7 @@ document.addEventListener('submit',e=>{
 setInterval(()=>{const el=$('#timer');if(!el)return;const left=Math.max(0,+el.dataset.exp-now());el.textContent=String(Math.floor(left/60000)).padStart(2,'0')+':'+String(Math.floor(left%60000/1000)).padStart(2,'0');if(!left)sweepTick()},1000);
 
 UI.route=location.hash.slice(1)||'home';if(UI.route.startsWith('shop-'))UI.shopCat=UI.route.slice(5);
-API.sweep();render(true);
+boot();
 </script>
 
 </body>

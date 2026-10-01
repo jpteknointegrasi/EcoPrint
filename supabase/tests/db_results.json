@@ -1,0 +1,107 @@
+[
+ {
+  "ok": true,
+  "name": "T01 Pengunjung anonim tidak bisa membaca tabel apa pun secara langsung",
+  "note": "8 tabel tertutup untuk select & update"
+ },
+ {
+  "ok": true,
+  "name": "T02 Pengunjung anonim tidak bisa memanggil fungsi admin atau helper",
+  "note": "5 fungsi ditolak"
+ },
+ {
+  "ok": true,
+  "name": "T03 Katalog publik: tanpa draft, tanpa harga FOB, tanpa revisi draft",
+  "note": "21 produk publik; FOB, draft, kontak & pengaturan internal tersembunyi"
+ },
+ {
+  "ok": true,
+  "name": "T04 Validasi checkout di server",
+  "note": "7 field ditolak; wilayah tanpa layanan ditolak"
+ },
+ {
+  "ok": true,
+  "name": "T05 Total dihitung server; harga dari browser diabaikan",
+  "note": "NE-2610-0001: total Rp995,000 (browser kirim Rp1.000)"
+ },
+ {
+  "ok": true,
+  "name": "T06 Exact piece: dua checkout paralel, hanya satu yang berhasil",
+  "note": "Checkout kedua menunggu kunci baris lalu ditolak"
+ },
+ {
+  "ok": true,
+  "name": "T07 Unit terakhir varian: dua checkout paralel, hanya satu yang berhasil",
+  "note": "4 pembeli serentak, 1 berhasil; stok 1 / reservasi 1"
+ },
+ {
+  "ok": true,
+  "name": "T08 Pembayaran sukses, callback duplikat diabaikan",
+  "note": "paid → piece sold; event sama & event baru untuk order paid diabaikan"
+ },
+ {
+  "ok": true,
+  "name": "T09 Pembayaran gagal & reservasi kedaluwarsa melepas stok",
+  "note": "failed → reservasi 0; expired otomatis saat dicek → reservasi 1 → 0"
+ },
+ {
+  "ok": true,
+  "name": "T10 Pembayaran terlambat untuk barang yang sudah terjual masuk rekonsiliasi",
+  "note": "NE-2610-0005 ditandai rekonsiliasi; piece tidak dijual dua kali"
+ },
+ {
+  "ok": true,
+  "name": "T11 Simulator mati: callback hanya diterima dari penyedia (service_role)",
+  "note": "anon ditolak; webhook penyedia (service_role) diterima"
+ },
+ {
+  "ok": true,
+  "name": "T12 Status pesanan hanya dengan nomor + email yang benar",
+  "note": "email lain → null; catatan internal tidak ikut"
+ },
+ {
+  "ok": true,
+  "name": "T13 Admin: izin role ditegakkan di server",
+  "note": "content ubah harga, fulfillment edit produk, sales ubah pengaturan/refund, user non-admin: semua 403/401"
+ },
+ {
+  "ok": true,
+  "name": "T14 Snapshot admin berisi data sesuai role",
+  "note": "Owner semua; Content tanpa data pembeli & FOB; Sales tanpa audit; Fulfillment hanya pesanan"
+ },
+ {
+  "ok": true,
+  "name": "T15 Draft → publish: toko tetap sampai dipublikasikan",
+  "note": "revisi tersimpan sebagai draft, tampil setelah publish"
+ },
+ {
+  "ok": true,
+  "name": "T16 Snapshot pesanan tidak berubah saat produk diedit; hapus produk bertransaksi ditolak",
+  "note": "snapshot tetap \"Ecoprint Leather Clutch Bag\" Rp1,250,000; hapus ditolak"
+ },
+ {
+  "ok": true,
+  "name": "T17 Stok tidak boleh di bawah reservasi; mutasi tercatat",
+  "note": "stok < reservasi ditolak; penyesuaian tercatat; pembatalan melepas reservasi"
+ },
+ {
+  "ok": true,
+  "name": "T18 Alur pemenuhan pesanan ditegakkan server",
+  "note": "tanpa resi & belum bayar ditolak; retur → restok mengembalikan piece"
+ },
+ {
+  "ok": true,
+  "name": "T19 Inquiry tersimpan dengan nomor; notifikasi gagal tetap tersimpan; batas spam",
+  "note": "INQ-2026-0001: notifikasi failed → kirim ulang sent; permintaan ke-6 dalam 10 menit ditolak"
+ },
+ {
+  "ok": true,
+  "name": "T20 Quotation berversi; harga retail tidak berubah",
+  "note": "QUO-2026-0001 v1 → v2 → Sent → Approved; harga retail tetap"
+ },
+ {
+  "ok": true,
+  "name": "T21 Audit log mencatat siapa, kapan, aksi",
+  "note": "16 entri dari 4 role"
+ }
+]
