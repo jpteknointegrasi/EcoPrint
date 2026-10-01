@@ -607,7 +607,7 @@ const KEY='niken-ecoprint-proto-v1';
 function loadDB(){try{const s=localStorage.getItem(KEY);if(s){const d=JSON.parse(s);if(d&&d.v===2)return d}}catch(e){}return null}
 let SANDBOX=false; // true while acceptance tests run on a copy: nothing is written to storage
 const CFG=window.NIKEN_CONFIG||{};
-const REMOTE={on:false,booting:false,sb:null,user:null,busy:false,emails:{},lastEvt:{},ok:()=>!!(CFG.supabaseUrl&&CFG.supabaseAnonKey)};
+const REMOTE={on:false,booting:false,failed:false,sb:null,user:null,busy:false,emails:{},lastEvt:{},ok:()=>!!(CFG.supabaseUrl&&CFG.supabaseAnonKey)};
 function save(){if(SANDBOX)return;try{if(REMOTE.on){localStorage.setItem(KEY+'-remote-cart',JSON.stringify(DB.cart));return}localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
 let DB=loadDB()||seed();
 let UI={lang:'en',route:'home',shopCat:'all',q:'',sort:'featured',sel:{},role:null,tab:'dash',editId:null,orderSel:null,inqSel:null,preview:null,last:null};
@@ -1323,7 +1323,7 @@ function ambToggle(){if(AMB.on){ambFade(true);AMB.armed=false;try{localStorage.s
    ROUTER & RENDER
    ========================================================= */
 function render(keepScroll){
- if(REMOTE.booting)return;
+ if(REMOTE.booting||REMOTE.failed)return; // never fall back to demo data when a live shop is configured
  const r=UI.route;$('#buybar').hidden=true;document.body.classList.remove('has-buybar');
  let h;
  if(r==='home'||r==='')h=vHome();
@@ -1364,7 +1364,9 @@ REMOTE.fetchOrder=async no=>{if(REMOTE._f===no)return;REMOTE._f=no;try{const o=a
 REMOTE.poll=async()=>{const r=UI.route;if(!r.startsWith('pay-')||REMOTE.busy)return;const no=r.slice(4);const o=DB.orders.find(x=>x.no===no);if(!o||o.pay!=='pending'||!REMOTE.emails[no])return;
  try{const n=await rpc('get_order',{p_no:no,p_email:REMOTE.emails[no]});if(n&&(n.pay!==o.pay||n.log.length!==o.log.length)){REMOTE.cacheOrder(n);if(n.pay!=='pending')await REMOTE.reload();render(true)}}catch(e){}};
 REMOTE.init=async()=>{
- await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.min.js');
+ // bundled copy first (vendor/), CDN only as a fallback
+ try{await loadScript('vendor/supabase.js')}catch(e){await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js')}
+ if(!window.supabase||!window.supabase.createClient)throw new Error('Supabase library unavailable');
  REMOTE.sb=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,storageKey:'niken-admin-session'}});
  REMOTE.on=true;
  DB=Object.assign(seed(),{products:[],categories:[],orders:[],inquiries:[],quotes:[],audit:[],movements:[]});
@@ -1463,7 +1465,7 @@ async function boot(){
  REMOTE.booting=true;
  $('#view').innerHTML='<section class="phead"><div class="wrap stack"><span class="eyebrow">Niken Ecoprint</span><h1>Loading…</h1></div></section>';
  try{await REMOTE.init();REMOTE.booting=false;render(true)}
- catch(e){REMOTE.booting=false;REMOTE.on=false;console.warn(e);
+ catch(e){REMOTE.booting=false;REMOTE.failed=true;console.warn(e);
   $('#view').innerHTML=`<section class="phead"><div class="wrap stack"><span class="eyebrow">Niken Ecoprint</span><h1>We can't reach the shop right now.</h1><p class="lead">Check your connection and try again. If it keeps happening, email ${esc(DB.contact.email)}.</p><button class="btn" type="button" onclick="location.reload()" style="width:max-content">Try again</button></div></section>`}
 }
 
