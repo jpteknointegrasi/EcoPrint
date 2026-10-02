@@ -654,7 +654,7 @@ function seed(){
    address:'De Green Azaria C7 No. 15, Batakan, Balikpapan, East Kalimantan, Indonesia',addressConfirmed:false,
    legal:[{k:'NIB',note:'Business Registration Number',verified:false},{k:'HKI',note:'Intellectual property (registered)',verified:false},{k:'Business certificates',note:'Legal & operational documents',verified:false}],
   },
-  settings:{reserveMin:15,notifyOk:true,intlCheckout:false,
+  settings:{reserveMin:15,notifyOk:true,intlCheckout:false,salesLive:true,
    zones:[{id:'kal',name:'Kalimantan',rate:25000,on:true},{id:'jawa',name:'Jawa & Bali',rate:45000,on:true},{id:'sum',name:'Sumatra',rate:55000,on:true},{id:'sul',name:'Sulawesi',rate:50000,on:true},{id:'nus',name:'NTB, NTT & Maluku',rate:75000,on:true},{id:'pap',name:'Papua',rate:0,on:false}],
    pay:['Virtual Account (simulasi)','QRIS (simulasi)']},
   catalogueMeta:{version:'1.0',date:'2026-10-01',lang:'EN'},
@@ -683,7 +683,9 @@ const ROLES={owner:{n:'Owner',d:'Akses penuh: harga, role, pengaturan, uji pener
 function can(role,perm){const p=PERMS[role]||[];return p.includes('*')||p.includes(perm)||p.some(x=>perm.startsWith(x+'.'))}
 API.admin=(role,perm,desc,fn)=>{if(!can(role,perm)){const e=new Error(`403 · Role "${ROLES[role]?.n||role}" tidak memiliki izin "${perm}"`);e.code=403;throw e}const r=fn();DB.audit.unshift({at:now(),role,perm,desc});if(DB.audit.length>300)DB.audit.length=300;save();return r};
 const isPublic=p=>p&&p.status==='published';
-const purchasable=p=>isPublic(p)&&p.price>0&&(p.sale==='retail'||(p.sale==='mto'&&!!p.lead));
+const LIVE=()=>!!DB.settings.salesLive;
+const esale=p=>LIVE()?p.sale:'quote';
+const purchasable=p=>LIVE()&&isPublic(p)&&p.price>0&&(p.sale==='retail'||(p.sale==='mto'&&!!p.lead));
 const avail=p=>p.mode==='exact'?p.pieces.filter(x=>x.status==='available').length:p.variants.reduce((a,v)=>a+Math.max(0,v.stock-v.reserved),0);
 function lineInfo(l){
  const p=DB.products.find(x=>x.id===l.pid);const r={pid:l.pid,ref:l.ref,qty:Math.max(1,parseInt(l.qty)||1),p,ok:true,why:'',unit:0,label:''};
@@ -756,12 +758,12 @@ const catName=id=>{const c=DB.categories.find(c=>c.id===id);return c?Ltxt(c.name
 const pub=()=>DB.products.filter(isPublic);
 function view(p){return UI.preview===p.id&&p.rev?Object.assign({},p,p.rev):p}
 function stockChip(p){
- if(p.sale==='quote')return`<span class="chip info">${t('quoteonly')}</span>`;
- if(p.sale==='mto')return`<span class="chip info">${t('madeorder')}</span>`;
+ if(esale(p)==='quote')return`<span class="chip info">${t('quoteonly')}</span>`;
+ if(esale(p)==='mto')return`<span class="chip info">${t('madeorder')}</span>`;
  const a=avail(p);if(a<=0){const r=p.mode==='exact'&&p.pieces.some(x=>x.status==='reserved');return`<span class="chip ${r?'warn':'bad'}">${r?t('reserved'):t('soldout')}</span>`}
  return`<span class="chip ok">${t('instock')}${p.mode==='pattern'&&a<=2?(UI.lang==='id'?' · sisa '+a:' · '+a+' left'):''}</span>`;
 }
-function priceTxt(p){if(p.sale==='quote'||!(p.price>0))return`<span class="muted">${t('quoteonly')}</span>`;return`<span class="price">${rp(p.price)}</span>`}
+function priceTxt(p){if(esale(p)==='quote'||!(p.price>0))return`<span class="muted">${t('quoteonly')}</span>`;return`<span class="price">${rp(p.price)}</span>`}
 function card(p){p=view(p);return`<a class="pcard" href="#p-${p.slug}">
  <div class="ph">${p.images[0]?`<img src="${IMG(p.images[0])}" alt="${esc(Ltxt(p.name))}" loading="lazy">`:''}<span class="tag">${p.mode==='exact'?t('exact'):t('pattern')}</span></div>
  <div class="label"><div class="sku"><span>${esc(p.sku)}</span><span>${esc(catName(p.cat))}</span></div><h4>${esc(Ltxt(p.name))}</h4><div class="meta">${priceTxt(p)}${stockChip(p)}</div></div></a>`}
@@ -798,7 +800,8 @@ function chrome(){
  $('#hdr-cat').textContent=t('reqcat');
  $('#lang-en').setAttribute('aria-pressed',UI.lang==='en');$('#lang-id').setAttribute('aria-pressed',UI.lang==='id');
  const n=DB.cart.reduce((a,l)=>a+(l.qty||1),0);const b=$('#cartn');b.hidden=!n;b.textContent=n;
- $('#ribbon').hidden=REMOTE.on&&!DB.settings.paySimulator;
+ $('#ribbon').hidden=REMOTE.on&&(!LIVE()||!DB.settings.paySimulator);
+ $('#cartbtn').style.display=LIVE()?'':'none';
  $('#ribbon').textContent=REMOTE.on?(UI.lang==='id'?'STAGING · Terhubung ke database; harga retail masih contoh dan pembayaran masih simulasi':'STAGING · Connected to the database; retail prices are examples and payments are still simulated'):UI.lang==='id'?'PROTOTYPE · Data produk dari katalog; harga retail adalah contoh dan pembayaran disimulasikan sampai owner menyetujui':'PROTOTYPE · Product data from the catalogue; retail prices are examples and payments are simulated until owner approval';
  document.documentElement.lang=UI.lang;
  const ph=phoneTxt();
@@ -922,12 +925,12 @@ function vProduct(slug){
  const v=!exact&&p.variants.find(v=>v.id===S.ref);const left=v?v.stock-v.reserved:0;
  const canAdd=buy&&(exact?!!(S.ref&&p.pieces.find(x=>x.id===S.ref&&x.status==='available')):left>0);
  let action;
- if(p.sale==='quote'||!(p.price>0))action=`<button class="btn arrow" type="button" data-act="quote-for" data-v="${p.sku}">${t('reqprice')}</button>`;
- else if(p.sale==='mto'&&!p.lead)action=`<button class="btn arrow" type="button" data-act="quote-for" data-v="${p.sku}">${t('mto')}</button><p class="small muted">${id?'Waktu produksi belum ditetapkan, jadi pesanan ini diproses lewat inquiry.':'Lead time is not set yet, so this order goes through an inquiry.'}</p>`;
+ if(esale(p)==='quote'||!(p.price>0))action=`<button class="btn arrow" type="button" data-act="quote-for" data-v="${p.sku}">${t('reqprice')}</button>`;
+ else if(esale(p)==='mto'&&!p.lead)action=`<button class="btn arrow" type="button" data-act="quote-for" data-v="${p.sku}">${t('mto')}</button><p class="small muted">${id?'Waktu produksi belum ditetapkan, jadi pesanan ini diproses lewat inquiry.':'Lead time is not set yet, so this order goes through an inquiry.'}</p>`;
  else action=`<div class="row">${exact?'':`<div class="qty"><button type="button" data-act="qty" data-v="-1" aria-label="Decrease">−</button><input id="qty" inputmode="numeric" value="${S.qty}" aria-label="${t('qty')}"><button type="button" data-act="qty" data-v="1" aria-label="Increase">+</button></div>`}<button class="btn" type="button" data-act="add" ${canAdd?'':'disabled'}>${p.sale==='mto'?t('mto'):t('addcart')}</button><button class="btn ghost" type="button" data-act="buynow" ${canAdd?'':'disabled'}>${t('buynow')}</button></div>`;
  const related=pub().filter(x=>x.cat===p.cat&&x.id!==p.id).slice(0,4);
  document.body.classList.add('has-buybar');
- const bb=$('#buybar');bb.hidden=false;bb.innerHTML=`<div><div class="mono small">${esc(p.sku)}</div>${priceTxt(p)}</div>${(p.sale==='quote'||(p.sale==='mto'&&!p.lead))?`<button class="btn sm" type="button" data-act="quote-for" data-v="${p.sku}">${p.sale==='quote'?t('reqprice'):t('mto')}</button>`:`<button class="btn sm" type="button" data-act="add" ${canAdd?'':'disabled'}>${t('addcart')}</button>`}`;
+ const bb=$('#buybar');bb.hidden=false;bb.innerHTML=`<div><div class="mono small">${esc(p.sku)}</div>${priceTxt(p)}</div>${(esale(p)==='quote'||(esale(p)==='mto'&&!p.lead))?`<button class="btn sm" type="button" data-act="quote-for" data-v="${p.sku}">${esale(p)==='quote'?t('reqprice'):t('mto')}</button>`:`<button class="btn sm" type="button" data-act="add" ${canAdd?'':'disabled'}>${t('addcart')}</button>`}`;
  return`${UI.preview===raw.id?`<div class="preview-bar"><span>PREVIEW · ${raw.rev?'perubahan draft belum dipublikasi':'produk berstatus '+raw.status}</span><button class="link" type="button" data-act="endpreview">Kembali ke CMS</button></div>`:''}
  <div class="wrap"><div class="crumb" style="padding-top:24px"><a href="#home">Home</a>/<a href="#shop">${t('shop')}</a>/<a href="#shop-${p.cat}">${esc(catName(p.cat))}</a>/<span>${esc(Ltxt(p.name))}</span></div>
  <div class="pd"><div class="gallery"><div class="main">${p.images.length?`<img src="${IMG(p.images[S.img])}" alt="${esc(Ltxt(p.name))}">`:''}</div>${p.images.length>1?`<div class="thumbs">${p.images.map((im,i)=>`<button type="button" data-act="img" data-v="${i}" aria-pressed="${S.img===i}" aria-label="Photo ${i+1}"><img src="${IMG(im)}" alt=""></button>`).join('')}</div>`:''}</div>
@@ -935,7 +938,7 @@ function vProduct(slug){
   <p class="muted">${L(p.story)}</p>
   ${opts}
   ${!exact&&buy&&v&&left>0&&left<=2?`<p class="small" style="color:var(--warn)">${id?`Sisa ${left} untuk ukuran ${v.label}.`:`Only ${left} left in ${v.label}.`}</p>`:''}
-  ${p.sale==='mto'&&p.lead?`<div class="note warn"><b>${t('madeorder')}.</b> ${L(p.lead)}</div>`:''}
+  ${esale(p)==='mto'&&p.lead?`<div class="note warn"><b>${t('madeorder')}.</b> ${L(p.lead)}</div>`:''}
   ${!exact?`<div class="note">${id?'Foto adalah contoh keluarga motif. Susunan daun dan warna pada barang Anda akan sedikit berbeda.':'Photos show the pattern family. Leaf placement and colour on your piece will vary slightly.'}</div>`:''}
   ${action}
   ${waNum()?`<a class="wa-link" href="${waHref(id?`Halo Niken Ecoprint, saya ingin bertanya tentang ${Ltxt(p.name)} (${p.sku}).`:`Hello Niken Ecoprint, I'd like to ask about ${Ltxt(p.name)} (${p.sku}).`)}" target="_blank" rel="noopener noreferrer">${WA_ICON}${id?'Tanya produk ini via WhatsApp':'Ask about this piece on WhatsApp'}</a>`:''}
@@ -950,7 +953,9 @@ function vProduct(slug){
 }
 
 /* ---------------- CART & CHECKOUT ---------------- */
+function vClosed(){const id=UI.lang==='id';const wa=waHref(waMsg());return`<section class="phead"><div class="wrap stack"><h1>${t('cart')}</h1></div></section><div class="wrap" style="padding-block:40px 90px"><div class="empty"><p>${id?'Pembelian online belum dibuka. Untuk memesan atau menanyakan harga, hubungi kami langsung.':'Online checkout is not open yet. To order or ask for prices, contact us directly.'}</p><div class="row" style="justify-content:center">${wa?`<a class="btn" href="${wa}" target="_blank" rel="noopener noreferrer">WhatsApp</a>`:''}<a class="btn ghost" href="#shop">${t('explore')}</a></div></div></div>`}
 function vCart(){
+ if(!LIVE())return vClosed();
  const id=UI.lang==='id';const q=API.quote(DB.cart,null);
  if(!DB.cart.length)return`<section class="phead"><div class="wrap stack"><h1>${t('cart')}</h1></div></section><div class="wrap" style="padding-block:40px 90px"><div class="empty"><p>${t('empty')}</p><a class="btn" href="#shop">${t('explore')}</a></div></div>`;
  return`<section class="phead"><div class="wrap stack"><h1>${t('cart')}</h1></div></section><div class="wrap co"><div>${q.items.map((i,ix)=>`<div class="line"><img src="${IMG(i.p?.images[0])}" alt=""><div class="stack" style="gap:4px"><span class="mono small muted">${esc(i.p?.sku)}${i.label?' · '+esc(i.label):''}</span><b style="font-family:var(--f-display);font-weight:400;font-size:1.15rem">${esc(Ltxt(i.p?.name))}</b>
@@ -962,7 +967,7 @@ function vCart(){
 }
 let CO={country:'ID',zone:'kal',pay:'',errs:{},c:{}};
 function vCheckout(){
- const id=UI.lang==='id';if(!DB.cart.length)return vCart();
+ const id=UI.lang==='id';if(!LIVE()||!DB.cart.length)return vCart();
  const q=API.quote(DB.cart,CO.zone);const E=CO.errs,c=CO.c;
  const zones=DB.settings.zones;
  return`<section class="phead"><div class="wrap stack"><div class="crumb"><a href="#cart">${t('cart')}</a>/<span>${t('checkout')}</span></div><h1>${t('checkout')}</h1><p class="lead">${id?'Checkout tamu. Stok dipesan selama '+DB.settings.reserveMin+' menit setelah pesanan dibuat.':'Guest checkout. Stock is held for '+DB.settings.reserveMin+' minutes after you place the order.'}</p></div></section>
@@ -1223,8 +1228,8 @@ function aReports(){
  <div class="tbl-wrap"><table><thead><tr><th>Jenis inquiry</th><th class="num">Jumlah</th></tr></thead><tbody>${Object.entries(it).map(([k,v])=>`<tr><td>${k}</td><td class="num">${v}</td></tr>`).join('')||'<tr><td colspan="2" class="muted">Belum ada</td></tr>'}</tbody></table></div></div>
  <div class="stack"><span class="lbl">Ekspor CSV</span><textarea id="csv" readonly style="font-family:var(--f-mono);font-size:.8rem;min-height:120px">${esc(csv)}</textarea><button class="btn sm ghost" type="button" data-act="copy-csv" style="width:max-content">Salin CSV</button></div>`;
 }
-function aSettings(){const S=DB.settings;return`<div class="stack"><span class="eyebrow">Pengaturan</span><h2>Transaksi & pengiriman</h2></div>
- <form class="panel" id="sform" novalidate><div class="fgrid2">${fld('s-res','Durasi reservasi stok (menit)',`<input id="s-res" inputmode="numeric" value="${S.reserveMin}">`)}${fld('s-notif','Simulasi email notifikasi',`<select id="s-notif"><option value="1" ${S.notifyOk?'selected':''}>Berhasil</option><option value="0" ${S.notifyOk?'':'selected'}>Gagal (uji retry)</option></select>`)}${REMOTE.on?fld('s-paysim','Simulator pembayaran',`<select id="s-paysim"><option value="1" ${S.paySimulator?'selected':''}>Aktif (staging)</option><option value="0" ${S.paySimulator?'':'selected'}>Mati (pakai payment gateway)</option></select>`,null,'Matikan sebelum website live. Setelah itu hanya webhook payment gateway yang bisa menandai pesanan lunas.'):''}</div>
+function aSettings(){const S=DB.settings;const own=UI.role==='owner';return`<div class="stack"><span class="eyebrow">Pengaturan</span><h2>Transaksi & pengiriman</h2></div>
+ <form class="panel" id="sform" novalidate><div class="fgrid2">${fld('s-live','Mode penjualan',`<select id="s-live" ${own?'':'disabled'}><option value="0" ${S.salesLive?'':'selected'}>Mode Katalog (harga disembunyikan, pemesanan via WhatsApp)</option><option value="1" ${S.salesLive?'selected':''}>Mode Jualan (harga tampil, checkout aktif)</option></select>`,null,own?'Aktifkan Mode Jualan setelah harga retail final diisi dan simulator pembayaran dimatikan.':'Hanya Owner yang dapat mengubah mode penjualan.')}${fld('s-res','Durasi reservasi stok (menit)',`<input id="s-res" inputmode="numeric" value="${S.reserveMin}">`)}${fld('s-notif','Simulasi email notifikasi',`<select id="s-notif"><option value="1" ${S.notifyOk?'selected':''}>Berhasil</option><option value="0" ${S.notifyOk?'':'selected'}>Gagal (uji retry)</option></select>`)}${REMOTE.on?fld('s-paysim','Simulator pembayaran',`<select id="s-paysim"><option value="1" ${S.paySimulator?'selected':''}>Aktif (staging)</option><option value="0" ${S.paySimulator?'':'selected'}>Mati (pakai payment gateway)</option></select>`,null,'Matikan sebelum website live. Setelah itu hanya webhook payment gateway yang bisa menandai pesanan lunas.'):''}</div>
  <div class="tbl-wrap vtbl"><table><thead><tr><th>Wilayah</th><th class="num">Tarif (IDR)</th><th>Dilayani</th></tr></thead><tbody>${S.zones.map((z,i)=>`<tr><td>${esc(z.name)}</td><td class="num"><input id="z-r-${i}" inputmode="numeric" value="${z.rate}" style="width:110px;text-align:right" aria-label="Tarif ${esc(z.name)}"></td><td><input type="checkbox" id="z-on-${i}" ${z.on?'checked':''} style="width:auto" aria-label="Dilayani ${esc(z.name)}"></td></tr>`).join('')}</tbody></table></div>
  <p class="small muted">Checkout internasional: nonaktif sampai pembayaran, negara layanan, ongkir dan ketentuan impor siap.</p><button class="btn sm" type="submit" style="width:max-content">Simpan pengaturan</button></form>
  <div class="stack"><h3 style="font-size:1.2rem">Audit log</h3><div class="audit">${DB.audit.map(a=>`<div>${fmtD(a.at)} · ${ROLES[a.role]?.n||a.role} · ${esc(a.perm)} · ${esc(a.desc)}</div>`).join('')||'<div>Belum ada aktivitas.</div>'}</div></div>
@@ -1535,7 +1540,7 @@ REMOTE.submit=(f,g)=>{
  case'qform':{const price=parseFloat(g('q-price').replace(',','.'));if(!(price>0)||!g('q-valid')||!g('q-lead')||!g('q-terms')){UI.qErr='Isi harga per unit, masa berlaku, lead time dan termin pembayaran.';render(true);return true}UI.qErr='';
   return (remoteRun(async()=>{await rpc('admin_quote_create',{p_inq:UI.inqSel,p:{qty:g('q-qty'),cur:g('q-cur'),price,basis:g('q-basis'),port:g('q-port'),valid:g('q-valid'),lead:g('q-lead'),terms:g('q-terms'),sample:g('q-sample'),excl:g('q-excl')}});await REMOTE.loadAdmin()},'Quotation draft tersimpan.'),true)}
  case'cform':remoteRun(async()=>{await rpc('admin_save_content',{p:{heroTitle:{en:g('c-hen'),id:g('c-hid')},heroSub:{en:g('c-sen'),id:g('c-sid')},featured:g('c-feat'),heroImg:g('c-hero')}});await REMOTE.loadAdmin()},'Konten dipublikasikan.');return true;
- case'sform':{const S=DB.settings;const p={reserveMin:parseInt(g('s-res'))||15,notifyOk:g('s-notif')==='1',zones:S.zones.map((z,i)=>({id:z.id,rate:parseInt($('#z-r-'+i).value)||0,on:$('#z-on-'+i).checked}))};if($('#s-paysim'))p.paySimulator=g('s-paysim')==='1';
+ case'sform':{const S=DB.settings;const p={reserveMin:parseInt(g('s-res'))||15,notifyOk:g('s-notif')==='1',zones:S.zones.map((z,i)=>({id:z.id,rate:parseInt($('#z-r-'+i).value)||0,on:$('#z-on-'+i).checked}))};if($('#s-paysim'))p.paySimulator=g('s-paysim')==='1';if($('#s-live')&&!$('#s-live').disabled)p.salesLive=g('s-live')==='1';
   remoteRun(async()=>{await rpc('admin_save_settings',{p});await REMOTE.loadAdmin()},'Pengaturan tersimpan.');return true}
  }
  return false;
@@ -1636,7 +1641,7 @@ document.addEventListener('submit',e=>{
  else if(f.id==='pform'){const p=DB.products.find(p=>p.id===f.dataset.id);const {rev,stocks}=readEditor(p);API.saveProduct(UI.role,p,rev,stocks);toast(p.status==='published'?'Draft tersimpan. Preview lalu publish untuk menampilkan di toko.':'Tersimpan.');render(true)}
  else if(f.id==='qform'){const q=DB.inquiries.find(x=>x.no===UI.inqSel);const price=parseFloat(g('q-price').replace(',','.'));if(!(price>0)||!g('q-valid')||!g('q-lead')||!g('q-terms')){UI.qErr='Isi harga per unit, masa berlaku, lead time dan termin pembayaran.';render(true);return}UI.qErr='';API.admin(UI.role,'quote.create','Quotation untuk '+q.no,()=>{const prev=DB.quotes.filter(x=>x.inq===q.no);const no=prev[0]?.no||'QUO-2026-'+String(++DB.counters.q).padStart(4,'0');DB.quotes.push({no,ver:prev.length+1,inq:q.no,qty:g('q-qty'),cur:g('q-cur'),price,basis:g('q-basis'),port:g('q-port'),valid:g('q-valid'),lead:g('q-lead'),terms:g('q-terms'),sample:g('q-sample'),excl:g('q-excl'),status:'Draft',at:now()});if(['New','Assigned'].includes(q.status))q.status='In Discussion'});toast('Quotation draft tersimpan.');render(true)}
  else if(f.id==='cform'){API.admin(UI.role,'content.edit','Konten homepage',()=>{const C=DB.content;C.heroTitle={en:g('c-hen'),id:g('c-hid')};C.heroSub={en:g('c-sen'),id:g('c-sid')};C.featured=g('c-feat');C.heroImg=g('c-hero')});toast('Konten dipublikasikan.');render(true)}
- else if(f.id==='sform'){API.admin(UI.role,'settings','Pengaturan transaksi',()=>{const S=DB.settings;S.reserveMin=Math.max(1,parseInt(g('s-res'))||15);S.notifyOk=g('s-notif')==='1';S.zones.forEach((z,i)=>{z.rate=Math.max(0,parseInt($('#z-r-'+i).value)||0);z.on=$('#z-on-'+i).checked})});toast('Pengaturan tersimpan.');render(true)}
+ else if(f.id==='sform'){API.admin(UI.role,'settings','Pengaturan transaksi',()=>{const S=DB.settings;S.reserveMin=Math.max(1,parseInt(g('s-res'))||15);if(UI.role==='owner')S.salesLive=g('s-live')==='1';S.notifyOk=g('s-notif')==='1';S.zones.forEach((z,i)=>{z.rate=Math.max(0,parseInt($('#z-r-'+i).value)||0);z.on=$('#z-on-'+i).checked})});toast('Pengaturan tersimpan.');render(true)}
  }catch(err){toast(err.message);render(true)}
 });
 setInterval(()=>{const el=$('#timer');if(!el)return;const left=Math.max(0,+el.dataset.exp-now());el.textContent=String(Math.floor(left/60000)).padStart(2,'0')+':'+String(Math.floor(left%60000/1000)).padStart(2,'0');if(!left)sweepTick()},1000);
