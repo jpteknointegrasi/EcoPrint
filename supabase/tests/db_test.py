@@ -113,16 +113,17 @@ def run():
         check(all(denied(c, f) for f in fns), 'ada fungsi yang bisa dipanggil')
         return f'{len(fns)} fungsi ditolak'
 
-    @test('T03 Katalog publik: tanpa draft, tanpa harga FOB, tanpa revisi draft')
+    @test('T03 Katalog publik: tanpa draft, FOB resmi tampil, tanpa revisi draft')
     def _():
         c = anon()
         s = rpc(c, 'get_public_site')
         skus = [p['sku'] for p in s['products']]
         check('NE-ACC-SCF-001' not in skus and 'NE-FSH-BLZ-001' not in skus, 'draft bocor')
-        check(all(p['fob'] is None and p['rev'] is None for p in s['products']), 'FOB/rev bocor')
+        check(all(p['rev'] is None for p in s['products']), 'revisi draft bocor')
+        check(any(p['fob'] for p in s['products']) and all(p['price'] is None for p in s['products'] if p['fob'] and p['sale'] == 'quote'), 'FOB resmi tidak tampil / terbaca sebagai harga')
         check(s['contact']['phones'] == [] and s['contact']['address'] is None, 'kontak belum dikonfirmasi bocor')
         check('notifyOk' not in s['settings'], 'pengaturan internal bocor')
-        return f'{len(skus)} produk publik; FOB, draft, kontak & pengaturan internal tersembunyi'
+        return f'{len(skus)} produk publik; FOB resmi tampil; draft, kontak & pengaturan internal tersembunyi'
 
     @test('T04 Validasi checkout di server')
     def _():
@@ -252,10 +253,10 @@ def run():
         snap = {r: rpc(admin(r), 'admin_snapshot') for r in ['owner', 'content', 'sales', 'fulfillment']}
         fob = lambda s: any(p['fob'] for p in s['products'])
         check(snap['owner']['orders'] and fob(snap['owner']) and snap['owner']['audit'], 'owner kurang data')
-        check(not snap['content']['orders'] and not snap['content']['inquiries'] and not fob(snap['content']), 'content melihat PII/FOB')
+        check(not snap['content']['orders'] and not snap['content']['inquiries'], 'content melihat PII')
         check(snap['sales']['orders'] and fob(snap['sales']) and not snap['sales']['audit'], 'sales salah')
-        check(snap['fulfillment']['orders'] and not snap['fulfillment']['inquiries'] and not fob(snap['fulfillment']), 'fulfillment salah')
-        return 'Owner semua; Content tanpa data pembeli & FOB; Sales tanpa audit; Fulfillment hanya pesanan'
+        check(snap['fulfillment']['orders'] and not snap['fulfillment']['inquiries'], 'fulfillment salah')
+        return 'Owner semua; Content tanpa data pembeli; Sales tanpa audit; Fulfillment hanya pesanan'
 
     @test('T15 Draft → publish: toko tetap sampai dipublikasikan')
     def _():

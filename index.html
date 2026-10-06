@@ -455,6 +455,158 @@ body.has-buybar .wa-fab{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .is-busy{cursor:progress}
 .is-busy .btn{pointer-events:none;opacity:.7}
 .empty{border:1px dashed var(--line-2);border-radius:var(--r);padding:36px;text-align:center;color:var(--ink-2);display:grid;gap:12px;justify-items:center}
+/* printed catalogue */
+.cv-tools{background:var(--paper);border-bottom:1px solid var(--line)}
+.cv-tools-in{display:flex;align-items:center;gap:18px;padding-block:14px;flex-wrap:wrap}
+.cv-tools-t{display:grid;gap:2px;flex:1;min-width:220px}
+.cvbook{display:grid;justify-items:center;gap:32px;padding:32px 16px 90px;background:#E7E2D3}
+.cv-page{position:relative;width:min(794px,100%);aspect-ratio:210/297;overflow:hidden;background:#F7F4EC;color:#282B25;container-type:inline-size;box-shadow:0 22px 44px -24px rgba(20,28,22,.55);font-family:var(--f-body);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.cv-page *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.cv-page .qr{display:block;width:100%;height:auto}
+.cv-page .qr-wait{display:block;width:100%;aspect-ratio:1;background:#fff}
+.cv-eye{display:block;font:500 1.5cqw/1.65 var(--f-mono);letter-spacing:.28em;text-transform:uppercase;color:#E9E5D5}
+.cv-eye.dark{color:#3A3E36}
+.cv-mark{font:400 2.5cqw/1 var(--f-display);color:#1F3326;letter-spacing:0;text-transform:none}
+.cv-mark i{font-style:italic}
+.cv-band{position:absolute;left:0;right:0;top:0;height:3.2cqw;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2230%22 viewBox=%220 0 40 30%22%3E%3Crect width=%2240%22 height=%2230%22 fill=%22%23F7F4EC%22/%3E%3Cpath d=%22M0 3 H40 M0 27 H40%22 stroke=%22%23203024%22 stroke-width=%221.2%22/%3E%3Cpath d=%22M2 25 L20 7 L38 25Z%22 fill=%22none%22 stroke=%22%23203024%22 stroke-width=%221.4%22/%3E%3Cpath d=%22M10 25 L20 15 L30 25Z%22 fill=%22%23203024%22/%3E%3Cpath d=%22M0 12 L3 15 L0 18 M40 12 L37 15 L40 18%22 fill=%22none%22 stroke=%22%23203024%22 stroke-width=%221.2%22/%3E%3Ccircle cx=%2220%22 cy=%225%22 r=%221.1%22 fill=%22%23203024%22/%3E%3C/svg%3E") repeat-x;background-size:auto 100%;z-index:2}
+.cv-band.b{top:auto;bottom:0;transform:scaleY(-1)}
+.cv-band.light{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2230%22 viewBox=%220 0 40 30%22%3E%3Crect width=%2240%22 height=%2230%22 fill=%22%23203024%22/%3E%3Cpath d=%22M0 3 H40 M0 27 H40%22 stroke=%22%23C9D3A6%22 stroke-width=%221.2%22/%3E%3Cpath d=%22M2 25 L20 7 L38 25Z%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-width=%221.4%22/%3E%3Cpath d=%22M10 25 L20 15 L30 25Z%22 fill=%22%23C9D3A6%22/%3E%3Cpath d=%22M0 12 L3 15 L0 18 M40 12 L37 15 L40 18%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-width=%221.2%22/%3E%3Ccircle cx=%2220%22 cy=%225%22 r=%221.1%22 fill=%22%23C9D3A6%22/%3E%3C/svg%3E")}
+/* cover */
+.cv-cover{background:#F7F4EC url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Cg transform=%22translate(50 52) rotate(-28) scale(0.9)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(155 40) rotate(34) scale(0.62)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(140 150) rotate(152) scale(0.95)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(42 165) rotate(205) scale(0.58)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(100 102) rotate(80) scale(0.45)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Ccircle cx=%22100%22 cy=%2220%22 r=%221.6%22 fill=%22%2368734A%22 fill-opacity=%220.3%22/%3E%3Ccircle cx=%22190%22 cy=%22100%22 r=%221.6%22 fill=%22%2368734A%22 fill-opacity=%220.3%22/%3E%3Ccircle cx=%2212%22 cy=%22110%22 r=%221.6%22 fill=%22%2368734A%22 fill-opacity=%220.3%22/%3E%3Ccircle cx=%2295%22 cy=%22188%22 r=%221.6%22 fill=%22%2368734A%22 fill-opacity=%220.3%22/%3E%3Ccircle cx=%22180%22 cy=%22190%22 r=%221.6%22 fill=%22%2368734A%22 fill-opacity=%220.3%22/%3E%3C/svg%3E");background-size:30cqw}
+.cv-brand{position:absolute;top:8cqw;left:0;right:0;text-align:center}
+.cv-brand b{display:block;font:500 13.5cqw/.9 var(--f-display);color:#1A2E20;letter-spacing:-.025em}
+.cv-brand b i{font-weight:400;font-style:italic}
+.cv-brand span{display:block;margin-top:2.6cqw;font:500 1.75cqw/1 var(--f-mono);letter-spacing:.34em;color:#33372F}
+.cv-hero{position:absolute;left:0;right:0;top:43cqw;height:60cqw;background:#203024}
+.cv-hero img{width:100%;height:100%;object-fit:cover;object-position:62% 38%;display:block}
+.cv-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(26,46,32,.88) 0%,rgba(26,46,32,.35) 48%,rgba(26,46,32,0) 70%),linear-gradient(0deg,rgba(26,46,32,.75) 0%,rgba(26,46,32,0) 45%)}
+.cv-hero-tx{position:absolute;left:7cqw;bottom:6cqw;z-index:1;max-width:62cqw}
+.cv-hero h1{font:400 7.6cqw/1.02 var(--f-display);color:#F7F4EC;margin:2cqw 0 0;letter-spacing:-.015em}
+.cv-cfoot{position:absolute;left:7cqw;right:7cqw;top:107cqw;bottom:7cqw;display:flex;justify-content:space-between;align-items:center;gap:6cqw}
+.cv-rule{display:block;width:12cqw;height:.55cqw;background:#68734A;margin-bottom:2.6cqw}
+.cv-tag{font:400 5.5cqw/1.04 var(--f-display);color:#1D211C;margin:2.2cqw 0 2.2cqw;letter-spacing:-.01em}
+.cv-url{font:500 2.1cqw/1 var(--f-mono);letter-spacing:.16em;color:#282B25}
+.cv-qrbox{margin:0;width:23cqw;padding:2cqw;background:#fff;box-shadow:0 1cqw 3cqw -1.6cqw rgba(0,0,0,.35);text-align:center}
+.cv-qrbox figcaption{font:500 1.25cqw/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#3A3E36;margin-top:1.2cqw}
+/* inner pages */
+.cv-prod,.cv-intro{background:#F7F4EC}
+.cv-intro::before{display:none}
+.cv-prod::before,.cv-intro::before{content:"";position:absolute;right:-6cqw;bottom:3cqw;width:30cqw;height:36cqw;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22340%22 height=%22400%22 viewBox=%220 0 340 400%22%3E%3Cpath d=%22M30 380 C110 290 200 170 300 30%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.6%22/%3E%3Cg transform=%22translate(112.8 282.1172801669377) rotate(-33.2) scale(0.837)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(92.0 238.33346180745033) rotate(58.0) scale(0.795)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(180.4 189.82569799763468) rotate(-30.6) scale(0.746)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(164.79999999999998 144.68561642328893) rotate(60.8) scale(0.6970000000000001)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(253.2 102.97233078442636) rotate(-27.8) scale(0.648)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(237.60000000000002 64.14930184888759) rotate(63.6) scale(0.599)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(305 26) rotate(35) scale(0.6)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3C/svg%3E") no-repeat;background-size:contain;transform:scaleX(-1);opacity:.9;pointer-events:none}
+.cv-ph{position:absolute;top:0;left:0;right:0;height:9.5cqw;padding:2.2cqw 7cqw 0;display:flex;justify-content:space-between;align-items:center;border-bottom:.15cqw solid #DCD5C4;font:500 1.35cqw/1 var(--f-mono);letter-spacing:.22em;text-transform:uppercase;color:#68734A}
+.cv-ph::before{content:"";position:absolute;left:0;right:0;top:0;height:1.4cqw;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2230%22 viewBox=%220 0 40 30%22%3E%3Crect width=%2240%22 height=%2230%22 fill=%22%23F7F4EC%22/%3E%3Cpath d=%22M0 3 H40 M0 27 H40%22 stroke=%22%23203024%22 stroke-width=%221.2%22/%3E%3Cpath d=%22M2 25 L20 7 L38 25Z%22 fill=%22none%22 stroke=%22%23203024%22 stroke-width=%221.4%22/%3E%3Cpath d=%22M10 25 L20 15 L30 25Z%22 fill=%22%23203024%22/%3E%3Cpath d=%22M0 12 L3 15 L0 18 M40 12 L37 15 L40 18%22 fill=%22none%22 stroke=%22%23203024%22 stroke-width=%221.2%22/%3E%3Ccircle cx=%2220%22 cy=%225%22 r=%221.1%22 fill=%22%23203024%22/%3E%3C/svg%3E") repeat-x;background-size:auto 100%}
+.cv-pf{position:absolute;bottom:0;left:7cqw;right:7cqw;height:7.5cqw;display:flex;justify-content:space-between;align-items:center;border-top:.15cqw solid #DCD5C4;font:500 1.25cqw/1 var(--f-mono);letter-spacing:.14em;color:#8A8B7E;text-transform:uppercase}
+.cv-pf span:last-child{font:400 2.2cqw/1 var(--f-display);color:#1F3326;letter-spacing:0}
+.cv-cat{position:absolute;top:13cqw;left:7cqw;right:7cqw}
+.cv-cat .cv-eye{color:#68734A}
+.cv-cat h2{font:400 5.6cqw/1 var(--f-display);margin:1.2cqw 0 0;color:#1A2E20;letter-spacing:-.015em}
+.cv-grid{position:absolute;left:7cqw;right:7cqw;top:13.5cqw;bottom:10.5cqw;display:grid;grid-template-rows:1fr 1fr;gap:3.6cqw;z-index:1}
+.cv-row{display:grid;gap:3.6cqw;min-height:0}
+.cv-row.p2{grid-template-columns:1fr 1fr}
+.cv-card{display:grid;grid-template-rows:minmax(0,1fr) auto;background:#FBF9F4;border:.15cqw solid #E3DCCB;min-height:0}
+.cv-img{position:relative;min-height:0;overflow:hidden;background:#fff;padding:1.2cqw}
+.cv-img img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+.cv-card.wide{grid-template-rows:minmax(0,1fr);grid-template-columns:58% 1fr}
+.cv-card.wide.port{grid-template-columns:42% 1fr}
+.cv-card.wide .cv-body{display:flex;flex-direction:column;justify-content:center;padding:3cqw 3.2cqw;border-left:.15cqw solid #E3DCCB}
+.cv-card.wide .cv-top h3{font-size:3cqw}
+.cv-card.wide .cv-story{-webkit-line-clamp:6;font-size:1.4cqw;margin:1.6cqw 0 1.8cqw}
+.cv-card.wide .cv-body dd{-webkit-line-clamp:2}
+.cv-card.wide .cv-pqr{width:10cqw}
+.cv-card.wide .cv-top{grid-template-columns:1fr 10cqw}
+.cv-row.p2 .cv-story{display:none}
+.cv-row.p2 .cv-top{grid-template-columns:1fr 7.5cqw}
+.cv-row.p2 .cv-pqr{width:7.5cqw}
+.cv-row.p2 .cv-body{padding:1.8cqw 2.2cqw 2cqw}
+.cv-row.p2 .cv-body dl{margin-top:1.2cqw}
+.cv-wait{padding:80px 16px;text-align:center;color:var(--ink-2);font-family:var(--f-mono);letter-spacing:.1em}
+.cv-mode{position:absolute;left:1.6cqw;top:1.6cqw;font:500 1.05cqw/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;background:#F7F4EC;color:#282B25;padding:.8cqw 1.1cqw}
+.cv-body{padding:2cqw 2.3cqw 2.2cqw}
+.cv-top{display:grid;grid-template-columns:1fr 9cqw;gap:2cqw;align-items:start}
+.cv-sku{font:500 1.15cqw/1 var(--f-mono);letter-spacing:.12em;color:#68734A}
+.cv-top h3{font:400 2.45cqw/1.12 var(--f-display);margin:.8cqw 0 0;color:#1D211C}
+.cv-pqr{margin:0;width:9cqw;text-align:center}
+.cv-pqr figcaption{font:500 .95cqw/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#8A8B7E;margin-top:.5cqw}
+.cv-story{font-size:1.3cqw;line-height:1.5;color:#5A5D52;margin:1cqw 0 1.2cqw;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cv-body dl{display:grid;grid-template-columns:auto 1fr;gap:.45cqw 1.6cqw;margin:0;font-size:1.22cqw;line-height:1.4}
+.cv-body dt{font:500 1cqw/1.6 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#8A8B7E}
+.cv-body dd{margin:0;color:#282B25;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+/* intro */
+.cv-intro-g{position:absolute;top:14.5cqw;left:7cqw;right:7cqw;height:74cqw;display:grid;grid-template-columns:1.15fr 1fr;gap:6cqw;z-index:1}
+.cv-intro-tx h2{font:400 5.4cqw/1.04 var(--f-display);color:#1A2E20;margin:1.8cqw 0 3cqw;letter-spacing:-.015em}
+.cv-lead{font-size:1.6cqw;line-height:1.58;color:#3F433C;margin:0 0 3cqw}
+.cv-facts{display:grid;grid-template-columns:1fr 1fr;gap:2.2cqw 4cqw;margin:0}
+.cv-facts div{border-top:.15cqw solid #DCD5C4;padding-top:1.4cqw}
+.cv-facts dt{font:500 1.1cqw/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#68734A}
+.cv-facts dd{margin:.6cqw 0 0;font-size:1.65cqw;line-height:1.4}
+.cv-intro-ph{min-height:0;background:#EEE9DC}
+.cv-intro-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.cv-intro-b{position:absolute;top:92cqw;left:7cqw;right:7cqw;bottom:10.5cqw;display:grid;grid-template-columns:1fr 1fr;gap:6cqw;border-top:.15cqw solid #DCD5C4;padding-top:4cqw;z-index:1}
+.cv-intro-b h3{font:400 2.5cqw/1.1 var(--f-display);color:#1A2E20;margin:0 0 1.6cqw}
+.cv-toc{list-style:none;margin:0;padding:0}
+.cv-toc li{display:grid;grid-template-columns:4.5cqw auto 1fr auto;align-items:baseline;gap:1.2cqw;padding:.8cqw 0;font-size:1.55cqw}
+.cv-toc span{font:500 1.2cqw var(--f-mono);color:#68734A;letter-spacing:.1em}
+.cv-toc b{font-weight:500}
+.cv-toc i{border-bottom:.15cqw dotted #C9C0AA}
+.cv-toc em{font:500 1.3cqw var(--f-mono);font-style:normal;color:#5A5D52}
+.cv-legend p{font-size:1.35cqw;line-height:1.5;color:#4A4E46;margin:0 0 1.2cqw}
+.cv-legend b{color:#1D211C;font-weight:600}
+/* back cover */
+.cv-back{background:#1F3326 url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Cg transform=%22translate(50 52) rotate(-28) scale(0.9)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.16%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(155 40) rotate(34) scale(0.62)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.16%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(140 150) rotate(152) scale(0.95)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.16%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(42 165) rotate(205) scale(0.58)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.16%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(100 102) rotate(80) scale(0.45)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.16%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Ccircle cx=%22100%22 cy=%2220%22 r=%221.6%22 fill=%22%23C9D3A6%22 fill-opacity=%220.16%22/%3E%3Ccircle cx=%22190%22 cy=%22100%22 r=%221.6%22 fill=%22%23C9D3A6%22 fill-opacity=%220.16%22/%3E%3Ccircle cx=%2212%22 cy=%22110%22 r=%221.6%22 fill=%22%23C9D3A6%22 fill-opacity=%220.16%22/%3E%3Ccircle cx=%2295%22 cy=%22188%22 r=%221.6%22 fill=%22%23C9D3A6%22 fill-opacity=%220.16%22/%3E%3Ccircle cx=%22180%22 cy=%22190%22 r=%221.6%22 fill=%22%23C9D3A6%22 fill-opacity=%220.16%22/%3E%3C/svg%3E");background-size:30cqw;color:#F1EDE2}
+.cv-back::after{content:"";position:absolute;right:-4cqw;bottom:10cqw;width:44cqw;height:52cqw;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22340%22 height=%22400%22 viewBox=%220 0 340 400%22%3E%3Cpath d=%22M30 380 C110 290 200 170 300 30%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.3%22 stroke-width=%221.6%22/%3E%3Cg transform=%22translate(112.8 282.1172801669377) rotate(-33.2) scale(0.837)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(92.0 238.33346180745033) rotate(58.0) scale(0.795)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(180.4 189.82569799763468) rotate(-30.6) scale(0.746)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(164.79999999999998 144.68561642328893) rotate(60.8) scale(0.6970000000000001)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(253.2 102.97233078442636) rotate(-27.8) scale(0.648)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(237.60000000000002 64.14930184888759) rotate(63.6) scale(0.599)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(305 26) rotate(35) scale(0.6)%22 fill=%22none%22 stroke=%22%23C9D3A6%22 stroke-opacity=%220.3%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3C/svg%3E") no-repeat;background-size:contain;transform:scaleX(-1);pointer-events:none}
+.cv-back-in{position:absolute;top:13cqw;left:8cqw;right:8cqw;z-index:1}
+.cv-back .cv-eye{color:#C9D3A6}
+.cv-back h2{font:400 7cqw/1.02 var(--f-display);color:#F7F4EC;margin:2cqw 0 6cqw;letter-spacing:-.015em}
+.cv-steps{list-style:none;counter-reset:st;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4.5cqw 6cqw}
+.cv-steps li{counter-increment:st;position:relative;padding-left:6cqw;font-size:1.55cqw;line-height:1.55;color:#D5D9C7}
+.cv-steps li::before{content:counter(st);position:absolute;left:0;top:0;width:4cqw;height:4cqw;border-radius:50%;border:.15cqw solid #C9D3A6;color:#C9D3A6;font:500 1.5cqw/4cqw var(--f-mono);text-align:center}
+.cv-steps b{display:block;font:400 2.4cqw/1.2 var(--f-display);color:#F7F4EC;margin-bottom:.6cqw}
+.cv-contact{margin-top:8cqw;padding-top:5cqw;border-top:.15cqw solid rgba(241,237,226,.25);display:grid;grid-template-columns:1fr auto;gap:5cqw;align-items:end}
+.cv-contact dl{display:grid;grid-template-columns:auto 1fr;gap:1.4cqw 3cqw;margin:0}
+.cv-contact dt{font:500 1.15cqw/1.6 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#C9D3A6}
+.cv-contact dd{margin:0;font-size:1.8cqw;color:#F7F4EC}
+.cv-qrs{display:flex;gap:3cqw}
+.cv-qrs figure{margin:0;width:16cqw;text-align:center}
+.cv-qrs .qr{padding:1.2cqw;background:#fff}
+.cv-qrs figcaption{font:500 1.1cqw/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#D5D9C7;margin-top:1.2cqw}
+.cv-back-f{position:absolute;left:8cqw;right:8cqw;bottom:7cqw;padding-top:2.4cqw;border-top:.15cqw solid rgba(241,237,226,.25);display:flex;justify-content:space-between;align-items:baseline;font:500 1.2cqw/1 var(--f-mono);letter-spacing:.12em;color:#B9BFA9}
+.cv-mark.light{color:#F7F4EC;font-size:3cqw}
+.cv-price{display:block;margin-top:.9cqw;font:500 1.35cqw/1 var(--f-mono);letter-spacing:.06em;color:#805E43}
+.cv-terms{margin:1.4cqw 0 0;font:500 1.25cqw/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#5A5D52}
+.cv-grid.first{top:31.5cqw}
+.cv-price-pg{background:#F7F4EC}
+.cv-price-pg::before{display:none;content:"";position:absolute;right:-6cqw;bottom:3cqw;width:34cqw;height:40cqw;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22340%22 height=%22400%22 viewBox=%220 0 340 400%22%3E%3Cpath d=%22M30 380 C110 290 200 170 300 30%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.6%22/%3E%3Cg transform=%22translate(112.8 282.1172801669377) rotate(-33.2) scale(0.837)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(92.0 238.33346180745033) rotate(58.0) scale(0.795)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(180.4 189.82569799763468) rotate(-30.6) scale(0.746)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(164.79999999999998 144.68561642328893) rotate(60.8) scale(0.6970000000000001)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(253.2 102.97233078442636) rotate(-27.8) scale(0.648)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(237.60000000000002 64.14930184888759) rotate(63.6) scale(0.599)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3Cg transform=%22translate(305 26) rotate(35) scale(0.6)%22 fill=%22none%22 stroke=%22%2368734A%22 stroke-opacity=%220.42%22 stroke-width=%221.3%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M0 -38 C20 -24 22 18 0 40 C-22 18 -20 -24 0 -38Z%22/%3E%3Cpath d=%22M0 -38 L0 52%22/%3E%3Cpath d=%22M0 -18 L11 -27 M0 -4 L15 -15 M0 10 L15 -1 M0 24 L12 15 M0 -18 L-11 -27 M0 -4 L-15 -15 M0 10 L-15 -1 M0 24 L-12 15%22/%3E%3C/g%3E%3C/svg%3E") no-repeat;background-size:contain;transform:scaleX(-1);pointer-events:none}
+.cv-pp{position:absolute;top:14cqw;left:7cqw;right:7cqw;z-index:1}
+.cv-pp h2{font:400 6.2cqw/1 var(--f-display);color:#1A2E20;margin:1.6cqw 0 3cqw;letter-spacing:-.015em}
+.cv-pp .cv-lead{max-width:70cqw}
+.cv-pt{width:100%;border-collapse:collapse;margin:1cqw 0 4cqw;font-size:1.9cqw}
+.cv-pt th{font:500 1.15cqw/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#68734A;text-align:left;padding:1.4cqw 0;border-bottom:.2cqw solid #1F3326}
+.cv-pt th:last-child,.cv-pt td:last-child{text-align:right;white-space:nowrap}
+.cv-pt td{padding:1.15cqw 0;border-bottom:.15cqw solid #DCD5C4}
+.cv-pt td:last-child{font:500 1.8cqw/1 var(--f-mono);color:#1F3326}
+.cv-note{background:#EFEADD;border-left:.6cqw solid #805E43;padding:2.4cqw 3cqw;max-width:72cqw}
+.cv-note b{font:500 1.2cqw/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#805E43}
+.cv-note p{margin:1cqw 0 0;font-size:1.55cqw;line-height:1.55;color:#3F433C}
+.cv-id{display:block;font-family:var(--f-display);font-style:italic;font-weight:400;color:#6E7166;font-size:1.5cqw;line-height:1.35;margin-top:.4cqw;letter-spacing:0;text-transform:none}
+.cv-id.xs{font-size:1.2cqw;margin-top:.2cqw}
+.cv-id.xh{font-size:2.6cqw;margin-top:.8cqw;color:#68734A}
+.cv-id.xp{font-family:var(--f-body);font-size:.9em;margin-top:1cqw;color:#7A7D70}
+.cv-id.xhero{font-size:3cqw;color:#D9DEC8;margin-top:1.2cqw}
+.cv-id.xtag{font-size:2.3cqw;margin:-1.2cqw 0 2cqw;color:#68734A}
+.cv-idi{font-family:var(--f-display);font-style:italic;font-weight:400;letter-spacing:0;text-transform:none;opacity:.8}
+.cv-back .cv-id{color:#C3C9B2}
+.cv-back .cv-id.xhero{color:#C9D3A6}
+.cv-qrbox figcaption i{display:block;font-family:var(--f-display);text-transform:none;letter-spacing:0;font-size:1.25cqw;color:#6E7166;margin-top:.3cqw}
+@media print{
+  @page{size:A4;margin:0}
+  html,body:has(.cvbook){background:#fff!important}
+  body:has(.cvbook){margin:0!important;padding:0!important}
+  body:has(.cvbook) > :not(#view){display:none!important}
+  body:has(.cvbook) #view > :not(.cvbook){display:none!important}
+  body:has(.cvbook) #view{padding:0!important;margin:0!important}
+  .cvbook{display:block;padding:0;background:none}
+  .cv-page{width:210mm;height:297mm;aspect-ratio:auto;box-shadow:none;margin:0;break-after:page;page-break-after:always}
+  .cv-page:last-child{break-after:auto;page-break-after:auto}
+}
 </style>
 
 <button class="skip" type="button" data-act="skip">Skip to content</button>
@@ -522,12 +674,12 @@ function prod(o){return Object.assign({status:'published',featured:false,variant
 const V=(labels,stocks)=>labels.map((l,i)=>({id:'v-'+l.toLowerCase().replace(/[^a-z0-9]/g,''),label:l,stock:stocks[i]??0,reserved:0}));
 function seed(){
  const products=[
-  prod({id:'p1',slug:'ecoprint-utility-vest',sku:'NE-FSH-VST-001',cat:'fashion',featured:true,
+  prod({id:'p1',slug:'ecoprint-utility-vest',sku:'NE-FSH-VST-001',legacySku:'NE-RTW-TN-001',cat:'fashion',featured:true,fob:{usd:75,unit:'pc',label:'Blouse/Tunik'},
    name:{en:'Ecoprint Utility Vest',id:'Rompi Utility Ecoprint'},
    story:{en:'The vest from our company profile: a unisex utility cut in cotton linen, printed with Borneo leaves and coloured with Ulin wood. Two patch pockets, a full zip, and a leaf pattern that is never quite the same twice.',id:'Rompi dari profil perusahaan kami: potongan utility unisex dari katun linen, dicetak dengan daun Borneo dan diwarnai kayu Ulin. Dua saku tempel, ritsleting penuh, dan motif daun yang tak pernah persis sama.'},
    material:{en:'Cotton linen. Ulin wood & Borneo leaves (per profile)',id:'Katun linen. Kayu Ulin & daun Borneo (sesuai profil)'},size:{en:'S, M, L, XL. Custom size on request',id:'S, M, L, XL. Ukuran custom atas permintaan'},
    mode:'pattern',sale:'retail',price:685000,variants:V(['S','M','L','XL'],[2,4,3,1]),images:['vest-red-feature','vest-unisex']}),
-  prod({id:'p2',slug:'lurik-wrap-vest',sku:'NE-FSH-VST-002',legacySku:'NE-RTW-TN-001',cat:'fashion',
+  prod({id:'p2',slug:'lurik-wrap-vest',sku:'NE-FSH-VST-002',legacySku:'NE-RTW-TN-001',cat:'fashion',fob:{usd:75,unit:'pc',label:'Blouse/Tunik'},
    name:{en:'Lurik Wrap Vest',id:'Rompi Lilit Lurik'},
    story:{en:'From our unisex Vest & Outer Collection: a striped lurik panel paired with an eco-printed front, with side ties and a button closure. Handcrafted from natural fibres and printed with real leaves using organic dyes. A single piece: what you see is what ships.',id:'Dari Koleksi Vest & Outer unisex kami: panel lurik bergaris dipadukan bagian depan ecoprint, dengan tali samping dan kancing. Dibuat tangan dari serat alami dan dicetak dengan daun asli menggunakan pewarna organik. Satu-satunya: barang di foto adalah yang dikirim.'},
    material:{en:'Natural fibres: lurik and eco-printed fabric; organic dyes',id:'Serat alami: lurik dan kain ecoprint; pewarna organik'},size:{en:'All size',id:'All size'},
@@ -552,7 +704,7 @@ function seed(){
    story:{en:'Short-sleeve camp-collar shirt in 100% premium cotton, warm Ulin tones with leaf prints across the body.',id:'Kemeja kerah camp lengan pendek, 100% katun premium, nuansa hangat Ulin dengan motif daun.'},
    material:{en:'100% premium cotton',id:'100% katun premium'},size:{en:'M, L, XL. Custom on request',id:'M, L, XL. Custom atas permintaan'},
    mode:'pattern',sale:'retail',price:625000,variants:V(['M','L','XL'],[3,3,2]),images:['shirt-orange']}),
-  prod({id:'p7',slug:'botanical-tee',sku:'NE-FSH-TEE-001',legacySku:'NE-RTW-MS-001',cat:'fashion',
+  prod({id:'p7',slug:'botanical-tee',sku:'NE-FSH-TEE-001',legacySku:'NE-RTW-MS-001',cat:'fashion',fob:{usd:80,unit:'pc',label:'Shirt'},
    name:{en:'Botanical Tee',id:'Kaos Botanical'},
    story:{en:'An everyday crew-neck tee covered in soft green and ochre leaf prints.',id:'Kaos kerah bulat harian dengan cetakan daun hijau lembut dan oker.'},
    material:{en:'Cotton',id:'Katun'},size:{en:'M, L, XL',id:'M, L, XL'},
@@ -605,7 +757,7 @@ function seed(){
   prod({id:'p17',slug:'womens-leather-shoes',sku:'NE-FTW-FS-001',cat:'footwear',care:'leather',fob:{usd:75,unit:'pair',label:"Women's shoes"},
    name:{en:"Women's Ecoprint Leather Flats · Amber",id:'Sepatu Flat Kulit Wanita Ecoprint · Amber'},
    story:{en:'Handcrafted women\'s flats in genuine leather with a botanical ecoprint finish. Designed for all-day wear with a cushioned, anti-slip rubber outsole. This model: pointed toe with a bow, printed in gold and amber leaves.',id:'Sepatu flat wanita buatan tangan dari kulit asli dengan motif ecoprint botanical. Nyaman dipakai seharian dengan sol karet empuk dan anti-slip. Model ini: ujung lancip dengan pita, motif daun emas dan amber.'},
-   material:{en:'Genuine leather upper; cushioned anti-slip rubber outsole',id:'Kulit asli; sol karet empuk anti-slip'},size:{en:'EU 37–41',id:'EU 37–41'},
+   material:{en:'Genuine leather upper; cushioned anti-slip rubber outsole',id:'Kulit asli; sol karet empuk anti-slip'},size:{en:'EU 37–40',id:'EU 37–40'},
    mode:'pattern',sale:'mto',price:895000,lead:{en:'Example: 21 working days from payment',id:'Contoh: 21 hari kerja sejak pembayaran'},variants:V(['37','38','39','40','41'],[3,3,3,3,2]),images:['shoes-women'],pkg:{w:900,dim:'32×20×12 cm'}}),
   prod({id:'p18',slug:'ecoprint-sneakers-umber',sku:'NE-FTW-SNK-001',cat:'footwear',fob:{usd:70,unit:'pair',label:'Canvas shoes'},
    name:{en:'Ecoprint Runner Sneakers',id:'Sneakers Runner Ecoprint'},
@@ -625,7 +777,7 @@ function seed(){
   prod({id:'p22',slug:'womens-leather-flats-rose',sku:'NE-FTW-FS-002',cat:'footwear',care:'leather',fob:{usd:75,unit:'pair',label:"Women's shoes"},
    name:{en:"Women's Ecoprint Leather Flats · Rose & Moss",id:'Sepatu Flat Kulit Wanita Ecoprint · Rose & Moss'},
    story:{en:'Handcrafted women\'s flats in genuine leather with a botanical ecoprint finish. Designed for all-day wear with a cushioned, anti-slip rubber outsole. This model: a pointed slip-on with a bow, printed in moss-green and rose leaves over a deep red ground.',id:'Sepatu flat wanita buatan tangan dari kulit asli dengan motif ecoprint botanical. Nyaman dipakai seharian dengan sol karet empuk dan anti-slip. Model ini: slip-on ujung lancip dengan pita, motif daun hijau lumut dan merah muda di atas dasar merah tua.'},
-   material:{en:'Genuine leather upper; cushioned anti-slip rubber outsole',id:'Kulit asli; sol karet empuk anti-slip'},size:{en:'EU 37–41',id:'EU 37–41'},
+   material:{en:'Genuine leather upper; cushioned anti-slip rubber outsole',id:'Kulit asli; sol karet empuk anti-slip'},size:{en:'EU 37–40',id:'EU 37–40'},
    mode:'pattern',sale:'mto',price:895000,lead:{en:'Example: 21 working days from payment',id:'Contoh: 21 hari kerja sejak pembayaran'},variants:V(['37','38','39','40','41'],[2,3,3,2,1]),images:['flats-rose'],pkg:{w:900,dim:'32×20×12 cm'}}),
   prod({id:'p23',slug:'ecoprint-semi-formal-blazer',sku:'NE-FSH-BLZ-001',cat:'fashion',status:'draft',
    name:{en:'Ecoprint Semi-formal Blazer',id:'Blazer Semi-formal Ecoprint'},
@@ -660,7 +812,7 @@ function seed(){
   settings:{reserveMin:15,notifyOk:true,intlCheckout:false,salesLive:true,
    zones:[{id:'kal',name:'Kalimantan',rate:25000,on:true},{id:'jawa',name:'Jawa & Bali',rate:45000,on:true},{id:'sum',name:'Sumatra',rate:55000,on:true},{id:'sul',name:'Sulawesi',rate:50000,on:true},{id:'nus',name:'NTB, NTT & Maluku',rate:75000,on:true},{id:'pap',name:'Papua',rate:0,on:false}],
    pay:['Virtual Account (simulasi)','QRIS (simulasi)']},
-  catalogueMeta:{version:'1.0',date:'2026-10-01',lang:'EN'},
+  catalogueMeta:{version:'1.2',date:'2026-10-06',lang:'EN/ID'},
   orders:[],inquiries:[],quotes:[],movements:[],events:[],audit:[],counters:{o:0,i:0,q:0},
  };
 }
@@ -786,7 +938,7 @@ function waMsg(){const id=UI.lang==='id',r=UI.route;
  if(r==='wholesale'||r==='custom')return id?'Halo Niken Ecoprint, saya ingin bertanya tentang pemesanan grosir / custom.':"Hello Niken Ecoprint, I'd like to ask about wholesale / custom orders.";
  if(r==='order')return id?'Halo Niken Ecoprint, saya ingin menanyakan status pesanan saya.':"Hello Niken Ecoprint, I'd like to ask about my order status.";
  return id?'Halo Niken Ecoprint, saya ingin bertanya.':"Hello Niken Ecoprint, I have a question."}
-const WA_HIDE=r=>r==='admin'||r==='checkout'||r.startsWith('pay-')||r==='catalogue-view';
+const WA_HIDE=r=>r==='admin'||r==='checkout'||r.startsWith('pay-')||r==='catalogue-view'||r==='catalogue-print';
 function waFab(){const el=$('#wafab');if(!el)return;const h=waHref(waMsg());const r=UI.route;
  if(!h||WA_HIDE(r)){el.hidden=true;el.classList.remove('show');return}
  const id=UI.lang==='id';el.hidden=false;el.href=h;el.setAttribute('aria-label',id?'Chat dengan Niken Ecoprint di WhatsApp':'Chat with Niken Ecoprint on WhatsApp');
@@ -945,7 +1097,7 @@ function vProduct(slug){
   ${!exact?`<div class="note">${id?'Foto adalah contoh keluarga motif. Susunan daun dan warna pada barang Anda akan sedikit berbeda.':'Photos show the pattern family. Leaf placement and colour on your piece will vary slightly.'}</div>`:''}
   ${action}
   ${waNum()?`<a class="wa-link" href="${waHref(id?`Halo Niken Ecoprint, saya ingin bertanya tentang ${Ltxt(p.name)} (${p.sku}).`:`Hello Niken Ecoprint, I'd like to ask about ${Ltxt(p.name)} (${p.sku}).`)}" target="_blank" rel="noopener noreferrer">${WA_ICON}${id?'Tanya produk ini via WhatsApp':'Ask about this piece on WhatsApp'}</a>`:''}
-  <p class="small muted">${id?'Untuk grosir atau ekspor':'For wholesale or export'}: <button class="link" type="button" data-act="quote-for" data-v="${p.sku}">${t('reqquote')}</button></p>
+  ${p.fob&&fobTxt(p.fob)?`<p class="small"><b>${id?'Harga ekspor FOB':'Export price (FOB)'}:</b> <span class="mono">${fobTxt(p.fob)}</span></p>`:''}<p class="small muted">${id?'Untuk grosir atau ekspor':'For wholesale or export'}: <button class="link" type="button" data-act="quote-for" data-v="${p.sku}">${t('reqquote')}</button></p>
   <div class="tabs-d">
    <details open><summary>${id?'Spesifikasi':'Specifications'}</summary><div class="body"><dl class="spec"><dt>SKU</dt><dd class="mono">${esc(p.sku)}</dd>${p.legacySku?`<dt>${id?'Kode lama':'Former code'}</dt><dd class="mono">${esc(p.legacySku)}</dd>`:''}<dt>${id?'Bahan':'Material'}</dt><dd>${L(p.material)}</dd><dt>${t('size')}</dt><dd>${L(p.size)}</dd><dt>${id?'Paket':'Package'}</dt><dd>${(p.pkg.w/1000).toLocaleString(id?'id-ID':'en')} kg · ${esc(p.pkg.dim)}</dd><dt>${id?'Asal':'Made in'}</dt><dd>Balikpapan, Indonesia</dd></dl></div></details>
    <details><summary>${id?'Perawatan':'Care'}</summary><div class="body">${L(CARE[p.care])}</div></details>
@@ -1075,11 +1227,96 @@ let CATF={errs:{}};
 function vCatalogue(){const id=UI.lang==='id';const E=CATF.errs;const m=DB.catalogueMeta;return phead(t('catalogue'),id?'Katalog internasional':'International catalogue',id?`Versi ${m.version} · ${m.date} · ${m.lang}. Dibuat langsung dari database produk sehingga nama, SKU dan bahan selalu sama dengan website.`:`Version ${m.version} · ${m.date} · ${m.lang}. Built from the product database so names, SKUs and materials always match the website.`)+
  `<section class="sec"><div class="wrap two"><div class="stack" style="gap:16px"><h3>${id?'Isi katalog':"What's inside"}</h3><p class="muted">${id?'Kain, tas & aksesori, fashion, alas kaki, custom & private label, grosir, MOQ & lead time, kemasan & pengiriman, cara memesan.':'Fabrics, bags & accessories, fashion, footwear, custom & private label, wholesale, MOQ & lead time, packaging & shipping, how to order.'}</p><a class="btn ghost arrow" href="#catalogue-view" style="width:max-content">${id?'Lihat katalog digital':'View the digital catalogue'}</a></div>
  <form class="panel" id="catform" novalidate><h3>${t('reqcat')}</h3><div class="fgrid2">${fld('k-name',id?'Nama':'Name',`<input id="k-name" autocomplete="name">`,E.name)}${fld('k-email','Email',`<input id="k-email" type="email" autocomplete="email">`,E.email)}${fld('k-company',id?'Perusahaan (opsional)':'Company (optional)',`<input id="k-company">`)}${fld('k-country',id?'Negara (opsional)':'Country (optional)',`<select id="k-country"><option value=""></option>${COUNTRIES.map(x=>`<option>${x}</option>`).join('')}</select>`)}</div><button class="btn" type="submit" style="width:max-content">${t('reqcat')}</button></form></div></section>`}
-function vCatalogueView(){const id=UI.lang==='id';const m=DB.catalogueMeta;const order=['fabric','bags','accessories','fashion','footwear'];const ps=pub().filter(p=>p.catalogue);
- return`<section class="phead"><div class="wrap stack"><div class="crumb"><a href="#catalogue">${t('catalogue')}</a>/<span>v${esc(m.version)}</span></div><h1>Niken Ecoprint Catalogue</h1><p class="lead">Version ${esc(m.version)} · ${esc(m.date)} · ${esc(m.lang)} · ${ps.length} products</p></div></section>
- <div class="wrap catalogue" style="padding-block:36px 90px"><div class="cpage"><div class="split"><div class="stack" style="gap:14px"><span class="eyebrow">PT. Manna Borneo Persada</span><h2>Leaves tell the story of Borneo</h2><p class="muted">Botanical ecoprint textiles and products from Balikpapan, East Kalimantan. Natural dye from Ulin wood and Borneo leaves; handmade by women artisans.</p></div><div class="ph"><img src="${IMG('fabric-mannequin-2')}" alt=""></div></div>
- ${order.map(cid=>{const list=ps.filter(p=>p.cat===cid);if(!list.length)return'';return`<div><h3 style="margin:18px 0 6px">${esc(catName(cid))}</h3>${list.map(p=>`<div class="cprod"><img src="${IMG(p.images[0])}" alt="${esc(Ltxt(p.name))}" loading="lazy"><div class="stack" style="gap:8px"><b style="font-family:var(--f-display);font-weight:400;font-size:1.25rem">${esc(Ltxt(p.name))}</b><p class="muted small">${esc(Ltxt(p.story))}</p><dl class="spec small"><dt>SKU</dt><dd class="mono">${esc(p.sku)}</dd><dt>Material</dt><dd>${esc(Ltxt(p.material))}</dd><dt>Size</dt><dd>${esc(Ltxt(p.size))}</dd><dt>Patterns</dt><dd>${p.mode==='exact'?'Exact piece':'Representative pattern; varies per piece'}</dd><dt>MOQ</dt><dd>Retail 1 · Wholesale per quotation</dd><dt>Custom</dt><dd>Size, motif and colour on request</dd><dt>Care</dt><dd>${esc(Ltxt(CARE[p.care]))}</dd></dl><button class="link small" type="button" data-act="quote-for" data-v="${p.sku}" style="width:max-content">Wholesale inquiry</button></div></div>`).join('')}</div>`}).join('')}
- <div class="split" style="align-items:start;border-top:1px solid var(--line);padding-top:22px"><div class="stack"><h3>How to order</h3><p class="muted small">Send an inquiry with products, quantities and destination. We reply with a quotation stating currency, shipping basis, MOQ, lead time and payment terms. Samples are available before bulk production.</p></div><div class="stack"><h3>Contact</h3><p class="muted small">${esc(DB.contact.email)} · @${esc(DB.contact.instagram)}</p></div></div></div></div>`}
+/* ---------- printed catalogue (A4, print / save as PDF) ---------- */
+const SITE_URL='https://www.mannaborneo.biz.id/';
+let QRLIB=null;const CV={printed:false};
+const FOB_UNIT={pc:{en:'pc',id:'pcs'},pair:{en:'pair',id:'pasang'},meter:{en:'metre',id:'meter'}};
+const FOB_LABEL=[['Blouse/Tunik',"Women's fashion – blouse / tunic",'Fashion wanita – blus / tunik'],['Shirt',"Men's fashion – shirt",'Fashion pria – kemeja'],['Bomber','Outerwear – ecoprint bomber jacket','Outerwear – jaket bomber ecoprint'],['Tote','Ecoprint tote bag','Tas tote ecoprint'],['Wallet','Ecoprint wallet','Dompet ecoprint'],['Scarf/Pashmina','Ecoprint scarf / pashmina','Syal / pashmina ecoprint'],['Canvas shoes','Ecoprint canvas shoes','Sepatu kanvas ecoprint'],["Women's shoes","Women's leather / ecoprint shoes",'Sepatu kulit / ecoprint wanita'],['Fabric','Ecoprinted fabric','Kain ecoprint']];
+const fobTxt=(f,lang)=>{if(!f||!(+f.usd>0))return'';const u=+f.usd;const k=(lang||UI.lang)==='id'?'id':'en';return`US$${u%1?u.toFixed(2):u.toFixed(0)} / ${(FOB_UNIT[f.unit]||{en:f.unit,id:f.unit})[k]}`};
+const CAT_TERMS={fabric:{en:'MOQ flexible · capacity 300 pcs',id:'MOQ fleksibel · kapasitas 300 pcs'},fashion:{en:'MOQ 1 pc · capacity 100 pcs · custom sizes on request',id:'MOQ 1 pcs · kapasitas 100 pcs · ukuran custom atas permintaan'},bags:{en:'MOQ 1 pc · capacity 200 pcs',id:'MOQ 1 pcs · kapasitas 200 pcs'},accessories:{en:'MOQ 1 pc · made on demand',id:'MOQ 1 pcs · dibuat sesuai permintaan'},footwear:{en:'MOQ 1 pair · custom sizes & models on request',id:'MOQ 1 pasang · ukuran & model custom atas permintaan'}};
+function qr(text,dark,label){
+ if(!window.qrcode){if(!QRLIB)QRLIB=loadScript('vendor/qrcode.js').then(()=>{if(UI.route.startsWith('catalogue-'))render(true)}).catch(()=>{});return'<span class="qr qr-wait"></span>'}
+ const c=qrcode(0,'M');c.addData(text);c.make();const n=c.getModuleCount();let d='';
+ for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(c.isDark(r,k))d+=`M${k} ${r}h1v1h-1z`;
+ return`<svg class="qr" viewBox="-2 -2 ${n+4} ${n+4}" shape-rendering="crispEdges" role="img" aria-label="${esc(label||text)}"><rect x="-2" y="-2" width="${n+4}" height="${n+4}" fill="#fff"/><path d="${d}" fill="${dark||'#203024'}"/></svg>`;
+}
+const CV_AR={};
+function cvMeasure(srcs){const miss=srcs.filter(u=>!(u in CV_AR));if(!miss.length)return true;
+ if(!CV.measuring)CV.measuring=Promise.all(miss.map(u=>new Promise(r=>{const i=new Image();i.onload=()=>{CV_AR[u]=i.naturalWidth/Math.max(1,i.naturalHeight);r()};i.onerror=()=>{CV_AR[u]=.8;r()};i.src=u}))).then(()=>{CV.measuring=null;if(UI.route.startsWith('catalogue-'))render(true)});
+ return false}
+function cvAutoPrint(){
+ if(CV.printed||!document.querySelector('.cvbook')||!window.qrcode)return;CV.printed=true;
+ const go=()=>{const imgs=[...document.querySelectorAll('.cvbook img')];Promise.all(imgs.map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r}))).then(()=>setTimeout(()=>window.print(),400))};
+ if(window.qrcode)go();else (QRLIB||Promise.resolve()).then(()=>setTimeout(go,150));
+}
+function vCatalogueView(){
+ /* printed catalogue: English first (export), Indonesian as secondary line */
+ const ui=UI.lang==='id';const m=DB.catalogueMeta||{};
+ const EN=o=>o&&typeof o==='object'?(o.en||o.id||''):(o||'');const ID=o=>o&&typeof o==='object'?(o.id||o.en||''):(o||'');
+ const B=(en,id)=>`${en}<span class="cv-id">${id}</span>`;            // block bilingual
+ const S=(en,id)=>`${en}<i class="cv-idi"> · ${id}</i>`;               // inline bilingual
+ const catObj=c=>(DB.categories.find(x=>x.id===c)||{}).name||{en:c,id:c};
+ const order=['fabric','fashion','bags','accessories','footwear','home'];
+ const ps=pub().filter(p=>p.catalogue);
+ const cats=[...order,...[...new Set(ps.map(p=>p.cat))].filter(c=>!order.includes(c))].filter(c=>ps.some(p=>p.cat===c));
+ const wa=waNum();const ver=esc(m.version||'1.0');
+ const month=(()=>{try{return new Date(m.date||Date.now()).toLocaleDateString('en-GB',{month:'long',year:'numeric'})}catch(e){return esc(m.date||'')}})();
+ let pg=1;
+ const head=(en,id)=>`<div class="cv-ph"><span class="cv-mark">Niken <i>Ecoprint</i></span><span>${esc(en)}${id&&id!==en?` <i class="cv-idi">· ${esc(id)}</i>`:''}</span></div>`;
+ const foot=()=>`<div class="cv-pf"><span>Catalogue · Katalog v${ver} · mannaborneo.biz.id</span><span>${String(++pg).padStart(2,'0')}</span></div>`;
+ const care=p=>p.care&&CARE[p.care]?EN(CARE[p.care]):'';
+ const card=(p,kind)=>{const ne=EN(p.name),ni=ID(p.name);return`<article class="cv-card ${kind||''}"><div class="cv-img"><img src="${IMG(p.images[0])}" alt="${esc(ne)}"><span class="cv-mode">${p.mode==='exact'?'Exact piece · Barang persis':'Pattern family · Keluarga motif'}</span></div>
+  <div class="cv-body"><div class="cv-top"><div><span class="cv-sku">${esc(p.sku)}</span><h3>${esc(ne)}</h3>${ni&&ni!==ne?`<span class="cv-id xs">${esc(ni)}</span>`:''}<span class="cv-price">${p.fob&&fobTxt(p.fob,'en')?'FOB '+fobTxt(p.fob,'en'):'Price on request'}</span></div><figure class="cv-pqr">${qr(SITE_URL+'#p-'+p.slug,null,'QR '+p.sku)}<figcaption>Details</figcaption></figure></div>
+  <p class="cv-story">${esc(EN(p.story))}</p>
+  <dl><dt>Material</dt><dd>${esc(EN(p.material))}</dd><dt>Size</dt><dd>${esc(EN(p.size))}</dd>${kind&&care(p)?`<dt>Care</dt><dd>${esc(care(p))}</dd>`:''}</dl></div></article>`};
+ /* dynamic layout: landscape photo = full-width row; portraits paired; a lone portrait becomes a feature row */
+ const isLand=p=>(CV_AR[IMG(p.images[0])]||.8)>=1.15;
+ const rowsOf=list=>{const rows=[];let hold=null;list.forEach(p=>{if(isLand(p))rows.push({k:'l',ps:[p]});else if(hold){rows.push({k:'p2',ps:[hold,p]});hold=null}else hold=p});if(hold)rows.push({k:'p1',ps:[hold]});return rows};
+ const rowHtml=r=>`<div class="cv-row ${r.k}">${r.k==='p2'?r.ps.map(p=>card(p)).join(''):card(r.ps[0],r.k==='l'?'wide land':'wide port')}</div>`;
+ const ready=cvMeasure(ps.map(p=>IMG(p.images[0])).concat([IMG(DB.content.heroImg||'hero-forest'),IMG('fabric-mannequin-2')]));
+ const introFoot=foot();
+ const pages=cats.map(cid=>{const list=ps.filter(p=>p.cat===cid);const nm=catObj(cid);const out=[];const terms=CAT_TERMS[cid];
+  const rows=rowsOf(list);
+  for(let i=0;i<rows.length;i+=2){const chunk=rows.slice(i,i+2);out.push(`<section class="cv-page cv-prod">${head(EN(nm),ID(nm))}
+   ${i===0?`<div class="cv-cat"><span class="cv-eye">${String(cats.indexOf(cid)+1).padStart(2,'0')} · ${list.length} ${list.length>1?'products · produk':'product · produk'}</span><h2>${esc(EN(nm))}</h2>${ID(nm)!==EN(nm)?`<span class="cv-id xh">${esc(ID(nm))}</span>`:''}${terms?`<p class="cv-terms">${terms.en}</p><span class="cv-id xs">${terms.id}</span>`:''}</div>`:''}
+   <div class="cv-grid${i===0?' first':''}">${chunk.map(rowHtml).join('')}</div>${foot()}</section>`)}
+  return out.join('')}).join('');
+ const fobRows=FOB_LABEL.map(([k,en,id])=>{const f=(ps.find(p=>p.fob&&p.fob.label===k)||{}).fob;return f&&fobTxt(f,'en')?`<tr><td>${en}<span class="cv-id xs">${id}</span></td><td>${fobTxt(f,'en')}</td></tr>`:''}).join('');
+ const pricePage=fobRows?`<section class="cv-page cv-price-pg">${head('Export prices','Harga ekspor')}
+  <div class="cv-pp"><span class="cv-eye dark">FOB · Official price list · Daftar harga resmi</span><h2>Export price list</h2><span class="cv-id xh">Daftar harga ekspor</span>
+  <p class="cv-lead">FOB prices in US dollars per unit. Shipping basis, port, currency, MOQ and lead time are confirmed in each quotation. Domestic retail prices on request.<span class="cv-id xp">Harga FOB dalam dolar AS per unit. Basis pengiriman, pelabuhan, mata uang, MOQ dan waktu produksi dikonfirmasi di setiap penawaran. Harga eceran dalam negeri atas permintaan.</span></p>
+  <table class="cv-pt"><thead><tr><th>Product · Produk</th><th>FOB</th></tr></thead><tbody>${fobRows}</tbody></table>
+  <div class="cv-note"><b>Important note · Catatan penting</b><p>Ecoprint products are truly one of a kind: every item carries its own motif and colours, so new pieces will vary slightly from the images shown.<span class="cv-id xp">Setiap produk ecoprint memiliki motif dan warna sendiri, sehingga produk berikutnya akan sedikit berbeda dari foto.</span></p></div></div>
+  ${foot()}</section>`:'';
+ const facts=[['Dye','Pewarna','Ulin wood & Borneo leaves','Kayu Ulin & daun Borneo'],['Technique','Teknik','Steamed botanical ecoprint','Ecoprint botanical kukus'],['Made by','Dibuat oleh','Women artisans in Balikpapan','Perajin perempuan di Balikpapan'],['For business','Untuk bisnis','Wholesale · Export · Private label','Grosir · Ekspor · Private label']];
+ const toc=cats.map((c,i)=>`<li><span>${String(i+1).padStart(2,'0')}</span><b>${esc(EN(catObj(c)))}${ID(catObj(c))!==EN(catObj(c))?`<i class="cv-idi"> · ${esc(ID(catObj(c)))}</i>`:''}</b><i></i><em>${ps.filter(p=>p.cat===c).length}</em></li>`).join('');
+ const ht=DB.content.heroTitle;
+ return`<div class="cv-tools"><div class="wrap cv-tools-in"><a class="link small" href="#catalogue">← ${t('catalogue')}</a><div class="cv-tools-t"><b>Niken Ecoprint Catalogue · v${ver}</b><span class="small muted">${ps.length} ${ui?'produk · A4 · Inggris + Indonesia · Tips: pilih “Simpan sebagai PDF” dan aktifkan “Grafik latar belakang”.':'products · A4 · English + Indonesian · Tip: choose “Save as PDF” and turn on “Background graphics”.'}</span></div><button class="btn sm" type="button" data-act="cv-print">${ui?'Cetak / Simpan PDF':'Print / Save PDF'}</button></div></div>
+ ${ready?'':`<div class="cv-wait">${ui?'Menyiapkan katalog…':'Preparing catalogue…'}</div>`}
+ ${ready?`<div class="cvbook">
+ <section class="cv-page cv-cover"><div class="cv-band"></div>
+  <header class="cv-brand"><b>Niken<br><i>Ecoprint</i></b><span>BY PT. MANNA BORNEO PERSADA</span></header>
+  <div class="cv-hero"><img src="${IMG(DB.content.heroImg||'hero-forest')}" alt=""><div class="cv-hero-tx"><span class="cv-eye">Product catalogue · Katalog produk · v${ver} · ${month}</span><h1>Leaves tell<br>the story of Borneo</h1><span class="cv-id xhero">Daun bercerita tentang Borneo</span></div></div>
+  <div class="cv-cfoot"><div class="cv-cfoot-l"><span class="cv-rule"></span><span class="cv-eye dark">Botanical ecoprint<br>Balikpapan · East Kalimantan, Indonesia</span><p class="cv-tag">Discover the story<br>behind each piece.</p><span class="cv-id xtag">Temukan cerita di balik karya.</span><span class="cv-url">mannaborneo.biz.id</span></div>
+  <figure class="cv-qrbox">${qr(SITE_URL,null,'QR mannaborneo.biz.id')}<figcaption>Scan for the full collection<br><i>Scan untuk koleksi lengkap</i></figcaption></figure></div>
+  <div class="cv-band b"></div></section>
+ <section class="cv-page cv-intro">${head('About us','Tentang kami')}
+  <div class="cv-intro-g"><div class="cv-intro-tx"><span class="cv-eye dark">PT. Manna Borneo Persada</span><h2>${esc(EN(ht)||'Leaves tell the story of Borneo')}</h2>${ID(ht)&&ID(ht)!==EN(ht)?`<span class="cv-id xh">${esc(ID(ht))}</span>`:''}
+   <p class="cv-lead">Botanical ecoprint textiles, fashion, footwear and leather goods from Balikpapan, East Kalimantan. Every piece is printed with real Borneo leaves, coloured with 100% natural plant dyes and handcrafted by local women artisans, so no two prints are alike.<span class="cv-id xp">Kain, fashion, alas kaki dan produk kulit ecoprint dari Balikpapan, Kalimantan Timur. Dicetak dengan daun Borneo asli, diwarnai 100% pewarna alami dan dibuat tangan oleh perajin perempuan lokal.</span></p>
+   <dl class="cv-facts">${facts.map(f=>`<div><dt>${f[0]} · ${f[1]}</dt><dd>${f[2]}<span class="cv-id xs">${f[3]}</span></dd></div>`).join('')}</dl></div>
+   <div class="cv-intro-ph"><img src="${IMG('fabric-mannequin-2')}" alt=""></div></div>
+  <div class="cv-intro-b"><div><h3>${S('In this catalogue','Isi katalog')}</h3><ol class="cv-toc">${toc}</ol></div>
+   <div class="cv-legend"><h3>${S('How to read','Cara membaca')}</h3><p><b>Exact piece</b> · one of a kind; the photo is the piece you receive.<span class="cv-id xs">Barang persis · hanya satu; foto adalah barang yang Anda terima.</span></p><p><b>Pattern family</b> · photo shows the motif; leaf placement and colour vary per piece.<span class="cv-id xs">Keluarga motif · foto adalah contoh motif; susunan daun dan warna berbeda.</span></p><p><b>Prices</b> · export FOB prices on each product and on the price list; domestic retail on request.<span class="cv-id xs">Harga · harga ekspor FOB di setiap produk dan daftar harga; eceran atas permintaan.</span></p></div></div>
+  ${introFoot}</section>
+ ${pages}
+ ${pricePage}
+ <section class="cv-page cv-back"><div class="cv-band light"></div>
+  <div class="cv-back-in"><span class="cv-eye">Order & contact · Pemesanan & kontak</span><h2>Let’s create<br>something together.</h2><span class="cv-id xhero">Mari berkarya bersama.</span>
+   <ol class="cv-steps"><li><b>Choose</b>Note the SKU or scan the product QR code.<span class="cv-id xs">Pilih · catat SKU atau scan QR produk.</span></li><li><b>Ask</b>Message us with products, quantity and destination.<span class="cv-id xs">Tanya · kirim produk, jumlah dan tujuan.</span></li><li><b>Quotation</b>We reply with price, MOQ, lead time and shipping.<span class="cv-id xs">Penawaran · harga, MOQ, waktu produksi, ongkir.</span></li><li><b>Production & delivery</b>Samples available before bulk orders.<span class="cv-id xs">Produksi & kirim · sampel sebelum partai besar.</span></li></ol>
+   <div class="cv-contact"><dl>${wa?`<dt>WhatsApp</dt><dd>${esc(phoneTxt())}</dd>`:''}<dt>Instagram</dt><dd>@${esc(DB.contact.instagram||'nikenecoprint')}</dd><dt>Email</dt><dd>${esc(DB.contact.email||'')}</dd><dt>Website</dt><dd>www.mannaborneo.biz.id</dd><dt>Studio</dt><dd>Balikpapan, East Kalimantan, Indonesia</dd></dl>
+   <div class="cv-qrs">${wa?`<figure>${qr('https://wa.me/'+wa,null,'QR WhatsApp')}<figcaption>Chat on WhatsApp</figcaption></figure>`:''}<figure>${qr(SITE_URL,null,'QR website')}<figcaption>Visit the website</figcaption></figure></div></div></div>
+  <div class="cv-back-f"><span class="cv-mark light">Niken <i>Ecoprint</i></span><span>© ${new Date().getFullYear()} PT. Manna Borneo Persada · v${ver}</span></div></section>
+ </div>`:''}`}
 
 /* =========================================================
    ADMIN CMS
@@ -1221,7 +1458,7 @@ function aContent(){const C=DB.content,K=DB.contact;const own=UI.role==='owner';
   ${own?`<button class="btn sm" type="button" data-act="k-save" style="width:max-content">Simpan kontak & legalitas</button>`:''}</div>`}
 function aCatalogue(){const m=DB.catalogueMeta;return`<div class="stack"><span class="eyebrow">Katalog</span><h2>Katalog v${esc(m.version)}</h2><p class="muted small">Pilih produk yang masuk katalog digital. Simpan sebagai versi baru agar buyer tahu tanggal pembaruan.</p></div>
  <div class="panel"><div class="tbl-wrap"><table><thead><tr><th></th><th>SKU</th><th>Produk</th><th>Status</th></tr></thead><tbody>${DB.products.filter(isPublic).map(p=>`<tr><td><input type="checkbox" data-catp="${p.id}" ${p.catalogue?'checked':''} aria-label="Masuk katalog" style="width:auto"></td><td class="mono">${p.sku}</td><td>${esc(p.name.en)}</td><td>${p.status}</td></tr>`).join('')}</tbody></table></div>
- <div class="row"><button class="btn sm" type="button" data-act="cat-save">Simpan sebagai versi baru</button><a class="btn sm ghost" href="#catalogue-view">Preview katalog</a></div><p class="small muted">Ekspor PDF otomatis dijadwalkan pada tahap implementasi (Tahap 5/7).</p></div>`}
+ <div class="row"><button class="btn sm" type="button" data-act="cat-save">Simpan sebagai versi baru</button><a class="btn sm ghost" href="#catalogue-view">Preview katalog</a><a class="btn sm ghost" href="#catalogue-print">Cetak / Simpan PDF</a></div><p class="small muted">Link cetak langsung: <span class="mono">www.mannaborneo.biz.id/#catalogue-print</span> · pilih “Simpan sebagai PDF”, ukuran A4, aktifkan “Grafik latar belakang”.</p></div>`}
 function aReports(){
  const by={};DB.orders.filter(o=>o.pay==='paid').forEach(o=>o.items.forEach(i=>{by[i.sku]=by[i.sku]||{n:i.name,q:0,r:0};by[i.sku].q+=i.qty;by[i.sku].r+=i.unit*i.qty}));
  const it={};DB.inquiries.forEach(i=>it[i.type]=(it[i.type]||0)+1);
@@ -1420,9 +1657,10 @@ function render(keepScroll){
  else if(r.startsWith('p-'))h=vProduct(r.slice(2));
  else if(r==='cart')h=vCart();else if(r==='checkout')h=vCheckout();else if(r.startsWith('pay-'))h=vPay(r.slice(4));else if(r==='order')h=vOrder();
  else if(r==='story')h=vStory();else if(r==='process')h=vProcess();else if(r==='wholesale')h=vWholesale();else if(r==='custom')h=vCustom();
- else if(r==='journal')h=vJournal();else if(r==='contact')h=vContact();else if(r==='faq')h=vFaq();else if(r==='catalogue')h=vCatalogue();else if(r==='catalogue-view')h=vCatalogueView();
+ else if(r==='journal')h=vJournal();else if(r==='contact')h=vContact();else if(r==='faq')h=vFaq();else if(r==='catalogue')h=vCatalogue();else if(r==='catalogue-view'||r==='catalogue-print')h=vCatalogueView();
  else if(r==='inq-done')h=vInqDone();else if(r==='admin')h=vAdmin();else h=vHome();
  $('#view').innerHTML=h;chrome();
+ if(r==='catalogue-print')cvAutoPrint();else CV.printed=false;
  const titles={shop:t('shop'),story:t('story'),process:t('process'),wholesale:t('wholesale'),custom:'Custom & Private Label',contact:t('contact'),cart:t('cart'),checkout:t('checkout'),admin:'Admin CMS',catalogue:t('catalogue'),journal:t('journal'),faq:t('faq')};
  document.title=(titles[r.split('-')[0]]?titles[r.split('-')[0]]+' · ':'')+'Niken Ecoprint';
  heroMount();ambRoute();waFab();
@@ -1582,7 +1820,8 @@ document.addEventListener('click',e=>{
  case'add':case'buynow':{const p=cur();const S=UI.sel[p.id];const q=$('#qty');if(q)S.qty=parseInt(q.value)||1;if(addToCart(p,S)){if(a==='buynow')go('checkout');else{toast((id?'Ditambahkan: ':'Added: ')+Ltxt(p.name));render(true)}}break}
  case'cqty':{const l=DB.cart[+b.dataset.i];const nq=l.qty+(+v);if(nq<1)break;const li=lineInfo({...l,qty:nq});if(!li.ok&&+v>0){toast(id?'Stok tidak cukup.':'Not enough stock.');break}l.qty=nq;save();render(true);break}
  case'rm':DB.cart.splice(+b.dataset.i,1);save();render(true);break;
- case'quote-for':INQ.pre={sku:v,type:'wholesale'};INQ.errs={};go('wholesale');setTimeout(()=>$('#inqform')?.scrollIntoView({behavior:'smooth'}),80);break;
+ case'cv-print':window.print();break;
+case'quote-for':INQ.pre={sku:v,type:'wholesale'};INQ.errs={};go('wholesale');setTimeout(()=>$('#inqform')?.scrollIntoView({behavior:'smooth'}),80);break;
  case'cart-to-inq':{const items=API.quote(DB.cart).items;INQ.pre={type:'export',country:CO.country,sku:items.map(i=>i.p?.sku).join(', '),qty:items.map(i=>i.qty+'× '+(i.label||'')).join(', ')};go('wholesale');break}
  case'pay':{const o=DB.orders.find(x=>x.no===b.dataset.no);const evt=b.dataset.dup?(o.lastEvt||'evt'):uid('evt_');o.lastEvt=o.lastEvt||evt;if(!b.dataset.dup)o.lastEvt=evt;const r=API.payment(o.no,v,evt);if(r.dup)toast(id?'Callback duplikat diabaikan. Tidak ada pembayaran ganda.':'Duplicate callback ignored. No double payment.');else if(v==='paid'&&o.pay==='paid'){DB.cart=DB.cart.filter(l=>!o.res.some(x=>x.pid===l.pid&&x.ref===l.ref));save();toast(o.recon?(id?'Masuk antrean rekonsiliasi.':'Sent to reconciliation queue.'):(id?'Pembayaran terverifikasi.':'Payment verified.'))}render(true);break}
  case'copy':navigator.clipboard?.writeText(v).then(()=>toast(id?'Disalin.':'Copied.'),()=>toast(v));break;
